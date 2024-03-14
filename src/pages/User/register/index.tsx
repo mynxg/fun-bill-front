@@ -14,7 +14,7 @@ import {
 import { FormattedMessage, Helmet, SelectLang, history, useIntl, useModel } from '@umijs/max';
 import { Alert, Tabs, message,Form } from 'antd';
 import { createStyles } from 'antd-style';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
 
@@ -173,16 +173,23 @@ const Register: React.FC = () => {
         }}
       >
         <LoginForm
+          className='register-form'
+          submitter={{
+            searchConfig: {
+                submitText: '注册',
+                resetText: '重置',
+            },
+          }}
           contentStyle={{
             minWidth: 280,
             maxWidth: '75vw',
           }}
         //   logo={<img alt="logo" src="/logo.svg" />}
-          title="注册"
-          subTitle={intl.formatMessage({ id: 'pages.register.registerAccount'})}
+
+          title="用户注册"
+        //   subTitle={intl.formatMessage({ id: 'pages.register.registerAccount'})}
           initialValues={{
             autoLogin: false,
-            name: 'Ant Design',
           }}
           actions={[
             // <FormattedMessage
