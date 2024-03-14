@@ -66,16 +66,16 @@ declare namespace LOGINAPI {
         code?: string;
         msg?: string;
         data?: {
-            token: string;
         };
     };
 
     /**
      * @name 注册参数
      */
-    type registerParams = {
+    type RegisterParams = {
         username?: string;
         password?: string;
+        passwordAgain?: string;
         code?: string;
         userType?: string;
     };

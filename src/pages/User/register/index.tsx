@@ -114,6 +114,13 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (values: LOGINAPI.RegisterParams) => {
     try {
+        // console.log('values=' + JSON.stringify(values));
+        // 用户类型
+        values.userType = 'sys_user';
+        if (values.password !== values.passwordAgain) {
+            message.error('两次输入的密码不一致');
+            return;
+        }
       // 登录
       const msgResult = await register({ ...values, type });
 
@@ -177,7 +184,6 @@ const Register: React.FC = () => {
           submitter={{
             searchConfig: {
                 submitText: '注册',
-                resetText: '重置',
             },
           }}
           contentStyle={{
@@ -279,8 +285,32 @@ const Register: React.FC = () => {
                   },
                 ]}
               />
+              <ProFormText.Password
+                name="passwordAgain"
+                fieldProps={{
+                  size: 'large',
+                  prefix: <LockOutlined />,
+                }}
+                placeholder={intl.formatMessage({
+                  id: '请再次输入密码',
+                  defaultMessage: '请再次输入密码',
+                })}
+                rules={[                    
+                  {
+                    required: true,
+                    message: (
+                      <FormattedMessage
+                        id="pages.login.password.required"
+                        defaultMessage="请再次输入密码"
+                      />
+                    ),
+                    
+                  },
+                ]}
+              />
             </>
           )}
+          
 
           <div
             style={{
