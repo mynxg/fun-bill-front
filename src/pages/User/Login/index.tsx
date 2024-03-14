@@ -192,14 +192,28 @@ const Login: React.FC = () => {
           initialValues={{
             autoLogin: true,
           }}
-          // actions={[
-          //   <FormattedMessage
-          //     key="loginWith"
-          //     id="pages.login.loginWith"
-          //     defaultMessage="其他登录方式"
-          //   />,
-          //   <ActionIcons key="icons" />,
-          // ]}
+          actions={[
+            // <FormattedMessage
+            //   key="loginWith"
+            //   id="pages.login.loginWith"
+            //   defaultMessage="其他登录方式"
+            // />,
+            // <ActionIcons key="icons" />,
+          <a 
+            style={{
+              float: 'right',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              history.push('/user/register');
+            }}
+           >
+            <FormattedMessage
+              id="pages.login.registerAccount"
+              defaultMessage="注册用户"
+            />
+            </a> ,
+          ]}
           onFinish={async (values) => {
             await handleSubmit(values as LOGINAPI.LoginParams);
           }}
@@ -283,8 +297,8 @@ const Login: React.FC = () => {
             </>
           )}
 
-          {code === '500' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
-          {type === 'mobile' && (
+          {/* {code === '500' && loginType === 'mobile' && <LoginMessage content="验证码错误" />} */}
+          {/* {type === 'mobile' && (
             <>
               <ProFormText
                 fieldProps={{
@@ -364,15 +378,15 @@ const Login: React.FC = () => {
                 }}
               />
             </>
-          )}
+          )} */}
           <div
             style={{
               marginBottom: 24,
             }}
           >
-            {/* <ProFormCheckbox noStyle name="autoLogin">
-              <FormattedMessage id="pages.login.rememberMe" defaultMessage="自动登录" />
-            </ProFormCheckbox> */}
+            <ProFormCheckbox noStyle name="autoLogin">
+              <FormattedMessage id="pages.login.rememberMePassword" defaultMessage="记住我" />
+            </ProFormCheckbox>
             <a
               style={{
                 float: 'right',

@@ -140,7 +140,7 @@ const authHeaderInterceptor = (url: string, options: RequestConfig) => {
   //console.log('url.indexOf: ',url.indexOf('/login/') +",", url.indexOf('/login/account'));
 
   // 如果是登录页面，不需要添加token
-  if (url.indexOf('/login/account') !== -1 || url.indexOf('/login/logout') !== -1) {
+  if (url.indexOf('/login/account') !== -1 || url.indexOf('/login/logout') !== -1 || url.indexOf('/register') !== -1) {
     return {
       url: `${url}`,
       options: { ...options, interceptors: true },
