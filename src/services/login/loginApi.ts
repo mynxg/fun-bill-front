@@ -31,3 +31,15 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
     ...(options || {}),
   });
 }
+
+/** 注册接口 */
+export async function register(body: API.LoginParams, options?: { [key: string]: any }) {
+  return request<API.LoginResult>('/api/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
