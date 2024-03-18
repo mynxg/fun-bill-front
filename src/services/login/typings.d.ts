@@ -33,13 +33,13 @@ declare namespace LOGINAPI {
                     status?: string;
                     delFlag?: string;
                     remark?: string;
-                    flag?: false;
-                    admin?: true;
+                    flag?: boolean;
+                    admin?: boolean;
                 },
             ];
             roleIds?: string;
             roleId?: string;
-            admin?: false;
+            admin?: boolean;
         };
     };
 
@@ -55,8 +55,11 @@ declare namespace LOGINAPI {
     type LoginParams = {
         username?: string;
         password?: string;
-        // code?: string;
-        // type?: string;
+        phone?: string;
+        email?: string;
+        code?: string;
+        uuid?: string;
+        type?: string;
     };
 
     /**
@@ -71,12 +74,44 @@ declare namespace LOGINAPI {
 
     /**
      * @name 注册参数
+     * @description 注册参数
+     * @param {string} username - 用户名
+     * @param {string} password - 密码
+     * @param {string} passwordAgain - 确认密码
+     * @param {string} phone - 手机号
+     * @param {string} email - 邮箱
+     * @param {string} code - 验证码
+     * @param {string} userType - 用户类型
      */
     type RegisterParams = {
         username?: string;
         password?: string;
         passwordAgain?: string;
+        phone?: string;
+        email?: string;
         code?: string;
+        uuid?: string;
         userType?: string;
+    };
+
+    /**
+     * @name 验证码图片
+     * @description 获取验证码图片
+     * @returns {string} code - 状态码
+     * @returns {string} msg - 状态信息
+     * @returns {string} data - 返回数据
+     * @returns {string} img - 验证码图片
+     * @returns {string} uuid - 验证码唯一标识
+     * @returns {boolean} captchaEnabled - 是否开启验证码
+     * 
+     */
+    type CaptchaImage = {
+        code?: string;
+        msg?: string;
+        data?: {
+            img: string;
+            captchaEnabled: boolean;
+            uuid: string;
+        };
     };
 }

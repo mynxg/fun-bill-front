@@ -1,6 +1,6 @@
 import { Footer } from '@/components';
 import { getFakeCaptcha } from '@/services/login/login';
-import { login } from '@/services/login/loginApi';
+import { login,getCaptchaImage } from '@/services/login/loginApi';
 import {
   AlipayCircleOutlined,
   LockOutlined,
@@ -14,11 +14,12 @@ import {
   ProFormCaptcha,
   ProFormCheckbox,
   ProFormText,
+  ProForm,
 } from '@ant-design/pro-components';
 import { FormattedMessage, Helmet, SelectLang, history, useIntl, useModel } from '@umijs/max';
-import { Alert, Tabs, message } from 'antd';
+import { Alert, Tabs, message,Form,Input } from 'antd';
 import { createStyles } from 'antd-style';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
 
@@ -116,8 +117,28 @@ const Login: React.FC = () => {
     }
   };
 
+   // 验证码
+   const [codeUrl, setCodeUrl] = useState('');
+   const [codeCaptcha, setCodeCaptcha] = useState('');
+   const [uuid, setUuid] = useState('');
+  //  const [captchaData, setCaptchaData] = useState('');
+   
+   // 初始化验证码
+   useEffect(() => {
+     refreshCaptcha();
+   }, []);
+ 
+   // 刷新验证码
+   const refreshCaptcha = async () => {
+     const result = await getCaptchaImage();
+     setUuid(result.data?.uuid);
+     setCodeUrl("data:image/png;base64," + result.data?.img);
+   };
+
   const handleSubmit = async (values: LOGINAPI.LoginParams) => {
     try {
+      values.code = codeCaptcha;
+      values.uuid = uuid;
       // 登录
       const msgResult = await login({ ...values, type });
 
@@ -129,7 +150,7 @@ const Login: React.FC = () => {
         });
         message.success(defaultLoginSuccessMessage);
 
-        console.log('token=' + msgResult.data?.token);
+        //console.log('token=' + msgResult.data?.token);
 
         // 保存token
         setToken(msgResult.data?.token + '');
@@ -144,8 +165,8 @@ const Login: React.FC = () => {
         return;
       } else if (code === '500') {
         const defaultLoginFailureMessage = intl.formatMessage({
-          id: msgResult.msg + '',
-          defaultMessage: '登录失败，请重试！',
+          id: '登录失败，请重试！',
+          defaultMessage: ''+msgResult.msg,
         });
         message.error(defaultLoginFailureMessage);
       }
@@ -209,7 +230,7 @@ const Login: React.FC = () => {
             }}
            >
             <FormattedMessage
-              id="pages.login.registerAccount"
+              id="pages.register.registerAccount"
               defaultMessage="注册用户"
             />
             </a> ,
@@ -294,6 +315,33 @@ const Login: React.FC = () => {
                   },
                 ]}
               />
+              <Form.Item  
+                  name="code"
+                  rules={[
+                    {
+                      required: false,
+                      message: '请输入验证码',
+                    },
+                  ]}
+              >
+              <Input
+                name='code'
+                size="large"
+                autoComplete="off"
+                placeholder="请输入验证码"
+                prefix={<LockOutlined />}
+                style={{ width: '63%', marginRight: '10px'}}
+                onChange={codeCaptcha => setCodeCaptcha(codeCaptcha.target.value)}
+              />
+               <img
+              style={{ cursor: 'pointer' ,marginLeft: '10px',borderRadius: '5%'}}
+              width={100}
+              height={40}
+              src={codeUrl}
+              onClick={refreshCaptcha}
+              alt="验证码"
+              />
+            </Form.Item >           
             </>
           )}
 

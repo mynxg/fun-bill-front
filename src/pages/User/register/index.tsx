@@ -1,6 +1,6 @@
 import { Footer } from '@/components';
 import { getFakeCaptcha } from '@/services/login/login';
-import { register } from '@/services/login/loginApi';
+import { register,getCaptchaImage } from '@/services/login/loginApi';
 import {
   LockOutlined,
   UserOutlined,
@@ -12,7 +12,7 @@ import {
   ProFormText,
 } from '@ant-design/pro-components';
 import { FormattedMessage, Helmet, SelectLang, history, useIntl, useModel } from '@umijs/max';
-import { Alert, Tabs, message,Form } from 'antd';
+import { Alert, Tabs, message,Form,Input } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
@@ -96,35 +96,44 @@ const RegisterMessage: React.FC<{
 const Register: React.FC = () => {
   const [userRegisterState, setUserRegisterState] = useState<LOGINAPI.RegisterResult>({});
   const [type, setType] = useState<string>('account');
-  const { initialState, setInitialState } = useModel('@@initialState');
+
   const { styles } = useStyles();
   const intl = useIntl();
 
-//   const fetchUserInfo = async () => {
-//     const userInfo = await initialState?.fetchUserInfo?.();
-//     if (userInfo) {
-//       flushSync(() => {
-//         setInitialState((s) => ({
-//           ...s,
-//           currentUser: userInfo,
-//         }));
-//       });
-//     }
-//   };
+     // 验证码
+     const [codeUrl, setCodeUrl] = useState('');
+     const [codeCaptcha, setCodeCaptcha] = useState('');
+     const [uuid, setUuid] = useState('');
+    //  const [captchaData, setCaptchaData] = useState('');
+     
+     // 初始化验证码
+     useEffect(() => {
+       refreshCaptcha();
+     }, []);
+   
+     // 刷新验证码
+     const refreshCaptcha = async () => {
+       const result = await getCaptchaImage();
+       setUuid(result.data?.uuid);
+       setCodeUrl("data:image/png;base64," + result.data?.img);
+     };
 
   const handleSubmit = async (values: LOGINAPI.RegisterParams) => {
     try {
+      values.code = codeCaptcha;
+      values.uuid = uuid;
         // console.log('values=' + JSON.stringify(values));
         // 用户类型
         values.userType = 'sys_user';
-        if (values.password !== values.passwordAgain) {
-            message.error('两次输入的密码不一致');
-            return;
-        }
-      // 登录
-      const msgResult = await register({ ...values, type });
+          if (values.password !== values.passwordAgain) {
+              message.error('两次输入的密码不一致');
+              return;
+          }
+        
+        console.log('values=' + JSON.stringify(values));
+        const msgResult = await register({ ...values });
 
-      const code = msgResult.code + '';
+        const code = msgResult.code + '';
       if (code === '200') {
         const defaultRegisterSuccessMessage = intl.formatMessage({
           id: 'pages.register.success',
@@ -304,10 +313,36 @@ const Register: React.FC = () => {
                         defaultMessage="请再次输入密码"
                       />
                     ),
-                    
                   },
                 ]}
               />
+              <Form.Item  
+                  name="code"
+                  rules={[
+                    {
+                      required: false,
+                      message: '请输入验证码',
+                    },
+                  ]}
+              >
+              <Input
+                name='code'
+                size="large"
+                autoComplete="off"
+                placeholder="请输入验证码"
+                prefix={<LockOutlined />}
+                style={{ width: '63%', marginRight: '10px'}}
+                onChange={codeCaptcha => setCodeCaptcha(codeCaptcha.target.value)}
+              />
+               <img
+              style={{ cursor: 'pointer' ,marginLeft: '10px',borderRadius: '5%'}}
+              width={100}
+              height={40}
+              src={codeUrl}
+              onClick={refreshCaptcha}
+              alt="验证码"
+              />
+            </Form.Item >  
             </>
           )}
           
