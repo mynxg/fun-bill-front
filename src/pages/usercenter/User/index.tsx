@@ -9,8 +9,8 @@ import { Alert, Button, Drawer, Modal, message,Spin  } from 'antd';
 
 import React, { useEffect, useRef, useState } from 'react';
 
-import CreateModal from "@/components/Modals/CreateModal";
-import UpdateModal from "@/components/Modals/UpdateModal";
+import CreateModal from "./components/CreateModal";
+import UpdateModal from "./components/UpdateModal";
 
 import {
     addUserByUsingPOST,
