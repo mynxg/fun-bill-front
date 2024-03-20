@@ -1,5 +1,6 @@
 import { AvatarDropdown, AvatarName, Footer } from '@/components';
-import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
+// import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
+import { currentUser as queryCurrentUser } from '@/services/login/loginApi';
 import { getToken } from '@/utils/auth';
 import type { RequestConfig } from '@@/plugin-request/request';
 import { LinkOutlined } from '@ant-design/icons';
@@ -18,9 +19,9 @@ const loginPath = '/user/login';
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
+  currentUser?: LOGINAPI.CurrentUser;
   loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  fetchUserInfo?: () => Promise<LOGINAPI.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
     try {

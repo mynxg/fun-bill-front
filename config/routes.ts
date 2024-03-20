@@ -60,7 +60,46 @@ export default [
     name: 'list.table-list',
     icon: 'table',
     path: '/list',
-    component: './TableList',
+    component: './User/UserManager',
+  },
+  {
+    path: '/usercenter',
+    name: 'user', // 用户中心
+    icon: 'crown',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/usercenter',
+        redirect: '/usercenter/user',
+      },
+      {
+        path: '/usercenter/user',
+        name: 'list', // 用户列表
+        component: './usercenter/User',
+      },
+    ],
+  },
+  {
+    path: '/test',
+    name: 'test',
+    icon: 'crown',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/test',
+        redirect: '/test/Test',
+      },
+      {
+        path: '/test/user',
+        name: '用户1',
+        component: './test/User',
+      },
+      {
+        path: '/test/Test',
+        name: '用户2',
+        component: './test/Test',
+      },
+    ],
   },
   {
     path: '/',
