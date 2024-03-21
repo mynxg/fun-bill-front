@@ -79,18 +79,18 @@ declare namespace UserEntityAPI {
     type UserVO = {
         avatar?: string;
         createBy?: string;
-        createTime?: string;
+        createTime?: Date;
         delFlag?: string;
         email?: string;
         loginIp?: string;
-        loginTime?: string;
+        loginTime?: Date;
         nickName?: string;
         photoNumber?: string;
         remark?: string;
         sex?: string;
         status?: string;
         updateBy?: string;
-        updateTime?: String;
+        updateTime?: string;
         userId?: number;
         userName?: string;
         userType?: string;

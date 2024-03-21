@@ -5,7 +5,7 @@ import {
     ProDescriptions,
     ProTable,
 } from '@ant-design/pro-components';
-import { Alert, Button, Drawer, Modal, message,Spin  } from 'antd';
+import { Button, Drawer, Modal, message,Spin  } from 'antd';
 
 import React, { useEffect, useRef, useState,useCallback } from 'react';
 
@@ -20,14 +20,14 @@ import {
     listUserVOByPageUsingGET,
 } from "@/services/user/userController";
 import { useModel } from "@umijs/max";
-import { history } from "@@/core/history";
 
 import { USERCOLUMN, UPDATEUSERCOLUMN, USERPAGESIZE } from "@/constant/user";
-import { set } from 'lodash';
+
+import { USERENTITYCOLUMN } from '@/constant/user';
 
 /**
  * 用户管理
- * @returns 
+ * @returns
  */
 const UserManager: React.FC = () => {
 
@@ -36,7 +36,6 @@ const UserManager: React.FC = () => {
   * @zh-CN 新建窗口的弹窗
   *  */
     const [createModalOpen, handleModalOpen] = useState<boolean>(false);
-    const [createTaskModalOpen, handleTaskModalOpen] = useState<boolean>(false);
 
     const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
     const [showDetail, setShowDetail] = useState<boolean>(false);
@@ -49,8 +48,6 @@ const UserManager: React.FC = () => {
     const [formValue, setFormValue] = useState<UserEntityAPI.UserVO[]>([]);
     const [total, setTotal] = useState<number>(0)
     const [isLoading, setIsLoading] = useState(true);
-    const { initialState } = useModel('@@initialState');
-
 
     //获取用户信息
     const getFormInfo = async (pageNum = 1, pageSize = USERPAGESIZE) => {
@@ -71,13 +68,13 @@ const UserManager: React.FC = () => {
         handleReadModalOpen(true);
         setCurrentRow(record);
       }, [handleReadModalOpen, setCurrentRow]);
-      
+
       //点击修改
       const updateClickStatus = useCallback((record:UserEntityAPI.UserVO) => {
         handleUpdateModalOpen(true);
         setCurrentRow(record);
       }, [handleUpdateModalOpen, setCurrentRow]);
-      
+
 
       //点击添加
     const handleAdd = async (fields: UserEntityAPI.userAddRquestParams) => {
@@ -300,20 +297,17 @@ const UserManager: React.FC = () => {
                     await handleAdd(values)
                 }} visible={createModalOpen} file={false} />
 
-            <Drawer width={640} 
-                placement="right" 
-                closable={false} 
-                onClose={ ()=> { 
+            <Drawer width={640}
+                placement="right"
+                closable={false}
+                onClose={ ()=> {
                     setCurrentRow(undefined);
                     handleReadModalOpen(false)}
-                } 
+                }
                 open={readModalOpen}>
-                    <ReadModal userEntityItem={currentRow}  onCancel={() => { handleReadModalOpen(false)} }
-                visible={readModalOpen}/>   
+                    <ReadModal EntityItem={currentRow} EntityColumns={USERENTITYCOLUMN}/>
+
             </Drawer>
-            {/* <CreateModal columns={TASKCOLUMN} onCancel={()=>{handleTaskModalOpen(false)}} onSubmit={async (values:USERTESTAPI.TaskVO)=>{
-          await handleTaskAdd(values)
-          }} visible={createTaskModalOpen} file={true}/> */}
 
         </PageContainer>
     );

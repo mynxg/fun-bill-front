@@ -1,34 +1,49 @@
 import React, { useState } from 'react';
 import type { DescriptionsProps } from 'antd';
+import {ProColumns} from "@ant-design/pro-components";
+import {ProDescriptions} from "@ant-design/pro-descriptions";
 import { Avatar, Col, Divider, Drawer, List, Row,Descriptions} from 'antd';
+import { USERENTITYCOLUMN } from '@/constant/user';
 
 export type Props = {
-    userEntityItem: UserEntityAPI.UserVO;
+    EntityItem: UserEntityAPI.UserVO;
+    EntityColumns: ProColumns<UserEntityAPI.UserVO>[];
     visible: boolean;
   };
 
+
 const ReadModal: React.FC<Props> = (props) => {
-    const {userEntityItem,visible,} = props;
+    const {EntityItem,EntityColumns} = props;
     //描述组件：用于展示用户信息
     let items: DescriptionsProps['items'] = [];
-    if(userEntityItem){
-    items = [
-        {
-          key: '1',
-          label: 'UserName',
-          children: userEntityItem.userName,
-        },
-        {
-          key: '2',
-          label: 'Telephone',
-          children:  userEntityItem.photoNumber,
-        },
-    ];
-}
+//     if(userEntityItem){
+//     items = [
+//         {
+//           key: '1',
+//           label: 'UserName',
+//           children: userEntityItem.userName,
+//         },
+//         {
+//           key: '2',
+//           label: '手机号码',
+//           children:  userEntityItem.photoNumber,
+//         },
+//         {
+//             key: '2',
+//             label: '性别',
+//             children:  userEntityItem.sex,
+//           },
+//           {
+//             key: '2',
+//             label: 'nickName',
+//             children:  userEntityItem.nickName,
+//           },
+//     ];
+// }
 
   return (
     <>
-         <Descriptions title="User Info" layout="vertical" items={items} />
+      <ProDescriptions dataSource={EntityItem} columns={EntityColumns}/>
     </>
   );
 };
