@@ -7,10 +7,11 @@ import {
 } from '@ant-design/pro-components';
 import { Alert, Button, Drawer, Modal, message,Spin  } from 'antd';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState,useCallback } from 'react';
 
 import CreateModal from "./components/CreateModal";
 import UpdateModal from "./components/UpdateModal";
+import ReadModal from "./components/ReadModal";
 
 import {
     addUserByUsingPOST,
@@ -40,7 +41,10 @@ const UserManager: React.FC = () => {
     const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
     const [showDetail, setShowDetail] = useState<boolean>(false);
     const actionRef = useRef<ActionType>();
-    const [currentRow, setCurrentRow] = useState<UserEntityAPI.UserUpdateRequestParams>();
+    const [currentRow, setCurrentRow] = useState<UserEntityAPI.UserVO>();
+
+    const [readModalOpen, handleReadModalOpen] = useState<boolean>(false);
+
     //分页
     const [formValue, setFormValue] = useState<UserEntityAPI.UserVO[]>([]);
     const [total, setTotal] = useState<number>(0)
@@ -48,6 +52,7 @@ const UserManager: React.FC = () => {
     const { initialState } = useModel('@@initialState');
 
 
+    //获取用户信息
     const getFormInfo = async (pageNum = 1, pageSize = USERPAGESIZE) => {
         const res = await listUserVOByPageUsingGET({
             pageNum: pageNum,
@@ -61,6 +66,20 @@ const UserManager: React.FC = () => {
         setIsLoading(false);
     }
 
+    //点击详情
+    const readClickStatus = useCallback((record:UserEntityAPI.UserVO) => {
+        handleReadModalOpen(true);
+        setCurrentRow(record);
+      }, [handleReadModalOpen, setCurrentRow]);
+      
+      //点击修改
+      const updateClickStatus = useCallback((record:UserEntityAPI.UserVO) => {
+        handleUpdateModalOpen(true);
+        setCurrentRow(record);
+      }, [handleUpdateModalOpen, setCurrentRow]);
+      
+
+      //点击添加
     const handleAdd = async (fields: UserEntityAPI.userAddRquestParams) => {
         const hide = message.loading('正在添加');
         try {
@@ -80,9 +99,10 @@ const UserManager: React.FC = () => {
             return false;
         }
     };
+
     /**
       *  Delete node
-      * @zh-CN 删除节点
+      * @zh-CN 删除用户
       *
       * @param selectedRow
       */
@@ -105,12 +125,14 @@ const UserManager: React.FC = () => {
         }
     };
 
+    //初始化
     useEffect(() => {
         console.log("useEffect");
         getFormInfo();
         console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);
 
+    //如果网络请求数据还没拿到，就先 加载中  转圈
     if (isLoading) {
         return <Spin />
     }
@@ -144,7 +166,7 @@ const UserManager: React.FC = () => {
         }
     };
 
-    const columns: ProColumns<UserEntityAPI.UserUpdateRequestParams>[] = [
+    const columns: ProColumns<UserEntityAPI.UserVO>[] = [
         ...USERCOLUMN,
         {
             title: '操作',
@@ -156,7 +178,10 @@ const UserManager: React.FC = () => {
                     type={"link"}
                     key="detail"
                     onClick={() => {
-                        history.push(`/receive/record?childrenId=${record?.id}`)
+                        // handleModalOpen(true);
+                        // setCurrentRow(record);
+                        readClickStatus(record);
+                        // history.push(`/receive/record?childrenId=${record?.id}`)
                     }}
                 >
                     详情
@@ -164,8 +189,9 @@ const UserManager: React.FC = () => {
                 <a
                     key="modify"
                     onClick={() => {
-                        handleUpdateModalOpen(true);
-                        setCurrentRow(record);
+                        // handleUpdateModalOpen(true);
+                        // setCurrentRow(record);
+                        updateClickStatus(record);
                     }}
                 >
                     修改
@@ -273,6 +299,18 @@ const UserManager: React.FC = () => {
                 onSubmit={async (values: UserEntityAPI.UserUpdateRequestParams) => {
                     await handleAdd(values)
                 }} visible={createModalOpen} file={false} />
+
+            <Drawer width={640} 
+                placement="right" 
+                closable={false} 
+                onClose={ ()=> { 
+                    setCurrentRow(undefined);
+                    handleReadModalOpen(false)}
+                } 
+                open={readModalOpen}>
+                    <ReadModal userEntityItem={currentRow}  onCancel={() => { handleReadModalOpen(false)} }
+                visible={readModalOpen}/>   
+            </Drawer>
             {/* <CreateModal columns={TASKCOLUMN} onCancel={()=>{handleTaskModalOpen(false)}} onSubmit={async (values:USERTESTAPI.TaskVO)=>{
           await handleTaskAdd(values)
           }} visible={createTaskModalOpen} file={true}/> */}

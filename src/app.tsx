@@ -59,9 +59,10 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // 顶部右侧的渲染
     avatarProps: {
       // src: initialState?.currentUser?.user?.avatar,
+      src: "./logo.png",
       title: <AvatarName />,
       render: (_, avatarChildren) => {
-        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
+        return <AvatarDropdown menu={true}>{avatarChildren}</AvatarDropdown>;
       },
     },
     //水印
