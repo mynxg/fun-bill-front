@@ -1,7 +1,8 @@
 
 import { useLocation, useIntl, FormattedMessage, Helmet, SelectLang, history, } from '@umijs/max';
 import React, { useState } from 'react';
-import { Avatar, Col, Divider, Drawer, List, Row, Tabs, Descriptions, } from 'antd';
+import type { DescriptionsProps } from 'antd';
+import { Avatar, Col, Divider, Drawer, List, Row, Tabs, Descriptions,Button } from 'antd';
 import {
     ProCard,
     ProFormText,
@@ -9,6 +10,7 @@ import {
     ProFormCaptcha,
     ProFormCheckbox,
     ProForm,
+    ProFormTextArea,
 } from '@ant-design/pro-components';
 import {
     AlipayCircleOutlined,
@@ -17,20 +19,11 @@ import {
     TaobaoCircleOutlined,
     UserOutlined,
     WeiboCircleOutlined,
+    MailOutlined,
+    PhoneOutlined,
+    YuqueOutlined,
 } from '@ant-design/icons';
-import type { DescriptionsProps } from 'antd';
 
-interface DescriptionItemProps {
-    title: string;
-    content: React.ReactNode;
-}
-
-const DescriptionItem = ({ title, content }: DescriptionItemProps) => (
-    <div className="site-description-item-profile-wrapper">
-        <p className="site-description-item-profile-p-label">{title}:</p>
-        {content}
-    </div>
-);
 
 const CenterPage: React.FC = () => {
 
@@ -85,22 +78,38 @@ const CenterPage: React.FC = () => {
             </ProCard>
             <ProCard title="基本信息" headerBordered>
                 <LoginForm
-                    className='register-form'
+
                     submitter={{
                         searchConfig: {
                             submitText: '保存',
-                            
                         },
-
+                        render: (props, dom) => [
+                            ...dom,
+                            // <Button
+                            //     key="reset"
+                            //     onClick={() => {
+                            //         props.reset();
+                            //     }}
+                            // >
+                            //     Reset
+                            // </Button>,
+                            <Button
+                                key="submit"
+                                type="primary"
+                                onClick={() => {
+                                    props.submit();
+                                    console.log(props);
+                                }}
+                            >
+                                保存
+                            </Button>,
+                        ],
                     }}
                     contentStyle={{
                         minWidth: 280,
                         maxWidth: '75vw',
                     }}
-                    //   logo={<img alt="logo" src="/logo.svg" />}
 
-                    // title="用户注册"
-                    //   subTitle={intl.formatMessage({ id: 'pages.register.registerAccount'})}
                     initialValues={{
                         autoLogin: false,
                     }}
@@ -141,44 +150,110 @@ const CenterPage: React.FC = () => {
                     {type === 'account' && (
                         <>
                             <ProFormText
-                                name="username"
+                                name="name"
                                 fieldProps={{
                                     size: 'large',
                                     prefix: <UserOutlined />,
                                 }}
                                 placeholder={intl.formatMessage({
-                                    id: 'pages.login.username.placeholder',
-                                    defaultMessage: '用户名: admin or user',
+                                    id: 'pages.usercenter.baseInfo.name',
+                                    defaultMessage: '姓名',
                                 })}
                                 rules={[
                                     {
                                         required: true,
                                         message: (
                                             <FormattedMessage
-                                                id="pages.login.username.required"
-                                                defaultMessage="请输入用户名!"
+                                                id="pages.usercenter.baseInfo.name.required"
+                                                defaultMessage="请输入姓名!"
                                             />
                                         ),
                                     },
                                 ]}
                             />
-                            <ProFormText.Password
-                                name="password"
+                            <ProFormText
+                                name="email"
                                 fieldProps={{
                                     size: 'large',
-                                    prefix: <LockOutlined />,
+                                    prefix: <MailOutlined />,
                                 }}
                                 placeholder={intl.formatMessage({
-                                    id: 'pages.login.password.placeholder',
-                                    defaultMessage: '密码: ant.design',
+                                    id: 'pages.usercenter.baseInfo.email',
+                                    defaultMessage: '邮箱',
                                 })}
                                 rules={[
                                     {
                                         required: true,
                                         message: (
                                             <FormattedMessage
-                                                id="pages.login.password.required"
-                                                defaultMessage="请输入密码！"
+                                                id="pages.usercenter.baseInfo.email.required"
+                                                defaultMessage="请输入邮箱!"
+                                            />
+                                        ),
+                                    },
+                                ]}
+                            />
+                            <ProFormText
+                                name="profile"
+                                fieldProps={{
+                                    size: 'large',
+                                    prefix: <UserOutlined />,
+                                }}
+                                placeholder={intl.formatMessage({
+                                    id: 'pages.usercenter.baseInfo.profile',
+                                    defaultMessage: '个人简介',
+                                })}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: (
+                                            <FormattedMessage
+                                                id="pages.usercenter.baseInfo.profile.required"
+                                                defaultMessage="请输入个人简介!"
+                                            />
+                                        ),
+                                    },
+                                ]}
+                            />
+                            <ProFormText
+                                name="phone"
+                                fieldProps={{
+                                    size: 'large',
+                                    prefix: <PhoneOutlined />,
+                                }}
+                                placeholder={intl.formatMessage({
+                                    id: 'pages.usercenter.baseInfo.phone',
+                                    defaultMessage: '手机号',
+                                })}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: (
+                                            <FormattedMessage
+                                                id="pages.usercenter.baseInfo.phone.required"
+                                                defaultMessage="请输入手机号!"
+                                            />
+                                        ),
+                                    },
+                                ]}
+                            />
+                            <ProFormTextArea
+                                name="note"
+                                fieldProps={{
+                                    size: 'large',
+                                    prefix: <YuqueOutlined />,
+                                }}
+                                placeholder={intl.formatMessage({
+                                    id: 'pages.usercenter.baseInfo.note',
+                                    defaultMessage: '备注',
+                                })}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: (
+                                            <FormattedMessage
+                                                id="pages.usercenter.baseInfo.note.required"
+                                                defaultMessage="请输入备注!"
                                             />
                                         ),
                                     },
@@ -191,7 +266,7 @@ const CenterPage: React.FC = () => {
                     {type === 'updatePassword' && (
                         <>
                             <ProFormText
-                                name="username"
+                                name="password"
                                 fieldProps={{
                                     size: 'large',
                                     prefix: <LockOutlined />,
@@ -213,7 +288,7 @@ const CenterPage: React.FC = () => {
                                 ]}
                             />
                             <ProFormText.Password
-                                name="password"
+                                name="newPassword"
                                 fieldProps={{
                                     size: 'large',
                                     prefix: <LockOutlined />,
@@ -228,14 +303,14 @@ const CenterPage: React.FC = () => {
                                         message: (
                                             <FormattedMessage
                                                 id="pages.login.password.required"
-                                                defaultMessage="请输入密码！"
+                                                defaultMessage="请输入新密码！"
                                             />
                                         ),
                                     },
                                 ]}
                             />
                             <ProFormText.Password
-                                name="passwordAgain"
+                                name="newPasswordAgain"
                                 fieldProps={{
                                     size: 'large',
                                     prefix: <LockOutlined />,
@@ -250,7 +325,7 @@ const CenterPage: React.FC = () => {
                                         message: (
                                             <FormattedMessage
                                                 id="pages.login.password.required"
-                                                defaultMessage="请再次输入密码"
+                                                defaultMessage="请再次输入新密码"
                                             />
                                         ),
                                     },
