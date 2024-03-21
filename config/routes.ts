@@ -97,28 +97,6 @@ export default [
     ],
   },
   {
-    path: '/test',
-    name: 'test',
-    icon: 'crown',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/test',
-        redirect: '/test/Test',
-      },
-      {
-        path: '/test/user',
-        name: '用户1',
-        component: './test/User',
-      },
-      {
-        path: '/test/Test',
-        name: '用户2',
-        component: './test/Test',
-      },
-    ],
-  },
-  {
     path: '/',
     redirect: '/welcome',
   },
