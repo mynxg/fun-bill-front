@@ -49,11 +49,14 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+  // --------------------用户管理 start----------------
   'menu.user': '用户管理',
   'menu.user.list': '用户列表',
   'menu.user.add': '添加用户',
   'menu.user.update': '修改用户',
   'menu.user.delete': '删除用户',
+  // --------------------用户管理 end----------------
+  // --------------------角色管理 start----------------
   'menu.role': '角色管理',
   'menu.role.list': '角色列表',
   'menu.role.add': '添加角色',
@@ -64,6 +67,8 @@ export default {
   'menu.permission.add': '添加权限',
   'menu.permission.update': '修改权限',
   'menu.permission.delete': '删除权限',
+  // --------------------角色管理 end----------------
+  // --------------------部门管理--------------------
   'menu.menu': '菜单管理',
   'menu.menu.list': '菜单列表',
   'menu.menu.add': '添加菜单',
@@ -74,5 +79,12 @@ export default {
   'menu.department.add': '添加部门',
   'menu.department.update': '修改部门',
   'menu.department.delete': '删除部门',
-  
+  // --------------------登录日志--------------------
+  'menu.logininfo': '登录日志',
+  'menu.logininfo.list': '登录日志列表',
+  'menu.logininfo.add': '添加登录日志',
+  'menu.logininfo.update': '修改登录日志',
+  'menu.logininfo.delete': '删除登录日志',
+  // --------------------登录日志--------------------
+
 };

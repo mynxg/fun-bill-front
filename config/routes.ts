@@ -80,6 +80,23 @@ export default [
     ],
   },
   {
+    path: '/monitor',
+    name: 'logininfo', // 日志中心
+    icon: 'crown',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/monitor',
+        redirect: '/monitor/logininfo',
+      },
+      {
+        path: '/monitor/logininfo',
+        name: 'list', // 日志列表
+        component: './Admin/Logininfo',
+      },
+    ],
+  },
+  {
     path: '/test',
     name: 'test',
     icon: 'crown',

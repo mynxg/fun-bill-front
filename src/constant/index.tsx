@@ -1,6 +1,14 @@
 import {ProColumns} from "@ant-design/pro-components";
+import * as loginInfo from "./loginInfo";
+import * as userConstant from "./user";
+export default {
+  loginInfo,
+  userConstant,
+};
+// 图片logo
 export const SYSTEM_LOGO = "https://avatars.githubusercontent.com/u/103118339?v=4";
 export const PAGESIZE = 3;
+// 用户分页大小
 export const USERPAGESIZE = 6;
 export const NEWSAVATAR = "https://hzh-1318734603.cos.ap-shanghai.myqcloud.com/%E6%96%B0%E9%97%BB.jpg";
 
