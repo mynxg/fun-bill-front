@@ -67,7 +67,13 @@ export default {
   //旧密码是必填项！
   'pages.usercenter.security.oldPassword.required': '旧密码是必填项！',
   'pages.usercenter.security.passwordMessage.required': '密码是必填项！',
-  // -----------------个人中心 end--------------------
+  //-----------------个人中心 end--------------------
+  // -----------------修改个人信息 start--------------------
+  "pages.usercenter.baseInfo.note": "备注",
+  "pages.usercenter.baseInfo.noteMessage": "请输入备注!",
+
+  //-----------------个人中心 end--------------------
+  
   'pages.welcome.link': '欢迎使用',
   'pages.welcome.alertMessage': '更快更强的重型组件，已经发布。',
   'pages.404.subTitle': '抱歉，您访问的页面不存在。',
