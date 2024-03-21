@@ -55,7 +55,7 @@ declare namespace LOGINAPI {
     type LoginParams = {
         username?: string;
         password?: string;
-        phone?: string;
+        phoneNumber?: string;
         email?: string;
         code?: string;
         uuid?: string;
@@ -78,7 +78,7 @@ declare namespace LOGINAPI {
      * @param {string} username - 用户名
      * @param {string} password - 密码
      * @param {string} passwordAgain - 确认密码
-     * @param {string} phone - 手机号
+     * @param {string} phoneNumber - 手机号
      * @param {string} email - 邮箱
      * @param {string} code - 验证码
      * @param {string} userType - 用户类型
@@ -87,7 +87,7 @@ declare namespace LOGINAPI {
         username?: string;
         password?: string;
         passwordAgain?: string;
-        phone?: string;
+        phoneNumber?: string;
         email?: string;
         code?: string;
         uuid?: string;

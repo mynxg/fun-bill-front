@@ -32,7 +32,7 @@ declare namespace UserEntityAPI {
         userName?: string;
         userType?: string;
         nickName?: string;
-        photoNumber?: string;
+        phoneNumber?: string;
         email?: string;
     }
 
@@ -85,7 +85,7 @@ declare namespace UserEntityAPI {
         loginIp?: string;
         loginTime?: Date;
         nickName?: string;
-        photoNumber?: string;
+        phoneNumber?: string;
         remark?: string;
         sex?: string;
         status?: string;
@@ -110,7 +110,7 @@ declare namespace UserEntityAPI {
       * @property {string} userName - 用户名
       * @property {string} userType - 用户类型
       * @property {string} nickName - 昵称
-      * @property {string} photoNumber - 手机号
+      * @property {string} phoneNumber - 手机号
       * @property {string} email - 邮箱
       * @property {string} avatar - 头像
       * @property {string} createBy - 创建者
@@ -121,7 +121,7 @@ declare namespace UserEntityAPI {
         userName?: string;
         userType?: string;
         nickName?: string;
-        photoNumber?: string;
+        phoneNumber?: string;
         email?: string;
         avatar?: string;
         // createBy?: string;
@@ -160,7 +160,7 @@ declare namespace UserEntityAPI {
         userName?: string;
         userType?: string;
         nickName?: string;
-        photoNumber?: string;
+        phoneNumber?: string;
         email?: string;
         avatar?: string;
         // createBy?: string;

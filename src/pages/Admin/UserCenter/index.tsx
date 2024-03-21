@@ -241,7 +241,7 @@ const CenterPage: React.FC = () => {
                                 name="note"
                                 fieldProps={{
                                     size: 'large',
-                                    prefix: <YuqueOutlined />,
+                                    // prefix: <YuqueOutlined />,
                                 }}
                                 placeholder={intl.formatMessage({
                                     id: 'pages.usercenter.baseInfo.note',
