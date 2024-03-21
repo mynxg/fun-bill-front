@@ -97,6 +97,16 @@ export default [
     ],
   },
   {
+    path: '/account/center',
+    name: '个人中心',
+    icon: 'smile',
+    component: './Admin/UserCenter',
+  },
+  // {
+  //   path: '/account/UserCenter',
+  //   redirect: '/account/UserCenter',
+  // },
+  {
     path: '/',
     redirect: '/welcome',
   },

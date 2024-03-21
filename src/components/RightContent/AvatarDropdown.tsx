@@ -6,7 +6,7 @@ import { Spin } from 'antd';
 import { createStyles } from 'antd-style';
 import { stringify } from 'querystring';
 import type { MenuInfo } from 'rc-menu/lib/interface';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
 
@@ -75,6 +75,13 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
         loginOut();
         return;
       }
+      if (key === 'center') {
+        const userData = initialState?.currentUser?.user;
+        history.push(`/account/${key}`,{userData});
+        return;
+      }
+      console.log('key', key);
+      console.log('initialState:', initialState);
       history.push(`/account/${key}`);
     },
     [setInitialState],
