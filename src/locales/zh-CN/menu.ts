@@ -87,4 +87,12 @@ export default {
   'menu.logininfo.delete': '删除登录日志',
   // --------------------登录日志--------------------
 
+  // --------------------账单管理 start--------------------
+  'menu.bill': '账单管理',
+  'menu.bill.expenses.list': '账单支出',
+  'menu.bill.expenses.add': '添加账单',
+  'menu.bill.expenses.update': '修改账单',
+  'menu.bill.expenses.delete': '删除账单',
+  // --------------------账单管理 end--------------------
+
 };

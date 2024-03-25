@@ -98,6 +98,23 @@ export default [
     // menu: false,
   },
   {
+    path: '/bill',
+    name: 'bill', // 账单管理
+    icon: 'crown',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/bill',
+        redirect: '/bill/list',
+      },
+      {
+        path: '/bill/list',
+        name: 'expenses.list', // 账单列表
+        component: './Bill/Expense',
+      },
+    ],
+  },
+  {
     path: '/account/center',
     name: '个人中心',
     icon: 'smile',
