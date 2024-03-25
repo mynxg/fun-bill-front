@@ -72,13 +72,13 @@ const CenterPage: React.FC = () => {
 
     return (
         <ProCard split="vertical">
-            <ProCard title="个人信息" colSpan="30%">
+            <ProCard title="个人信息" colSpan="30%"  style={{ backgroundColor: '#fff', borderRadius: '15px', margin: '10px' }}>
                 <Descriptions items={items} column={1} />
 
             </ProCard>
             <ProCard title="基本信息" headerBordered>
                 <LoginForm
-
+  
                     submitter={{
                         searchConfig: {
                             submitText: '保存',
@@ -108,6 +108,7 @@ const CenterPage: React.FC = () => {
                     contentStyle={{
                         minWidth: 280,
                         maxWidth: '75vw',
+                        
                     }}
 
                     initialValues={{
