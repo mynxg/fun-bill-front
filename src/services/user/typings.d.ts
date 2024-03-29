@@ -172,6 +172,20 @@ declare namespace UserEntityAPI {
         sex?: string;
       };
 
+     /**
+      * 修改密码请求参数
+      * @name UpdatePasswordRequestParams
+      * @description 修改密码请求参数
+      * @typedef UpdatePasswordRequestParams
+      * @property {string} oldPassword - 旧密码
+      * @property {string} newPassword - 新密码
+      */ 
+    type UpdatePasswordRequestParams = {
+        oldPassword?: string;
+        newPassword?: string;
+        newPasswordAgain?: string;
+    };
+
     /**
      * --------------------------------------example----------------------------------------------------
      */

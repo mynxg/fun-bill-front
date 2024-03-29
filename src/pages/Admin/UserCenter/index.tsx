@@ -1,8 +1,9 @@
 
 import { useLocation, useIntl, FormattedMessage, Helmet, SelectLang, history, } from '@umijs/max';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import type { DescriptionsProps } from 'antd';
-import { Avatar, Col, Divider, Drawer, List, Row, Tabs, Descriptions,Button } from 'antd';
+import { Avatar, Col, Divider, Drawer, List, Row, Tabs, Descriptions, Button, message } from 'antd';
+import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {
     ProCard,
     ProFormText,
@@ -24,6 +25,8 @@ import {
     YuqueOutlined,
 } from '@ant-design/icons';
 
+import { updateProfileByUsingPOST, updateUserPasswordByUsingPOST } from '@/services/user/userController';
+import user from 'mock/user';
 
 const CenterPage: React.FC = () => {
 
@@ -67,18 +70,92 @@ const CenterPage: React.FC = () => {
 
     ];
 
+    const actionRef = useRef<ActionType>();
+    //tab切换框的状态
     const [type, setType] = useState<string>('account');
     const intl = useIntl();
 
+    //修改个人信息
+    const handleUpdateProfile = async (fields: UserEntityAPI.UserUpdateRequestParams) => {
+
+        const hide = message.loading('正在修改');
+        try {
+            const msgResult = await updateProfileByUsingPOST({
+                ...fields,
+            });
+
+            if (msgResult?.code === 200) {
+                
+                const defaultLoginSuccessMessage = intl.formatMessage({
+                    id: '修改成功',
+                    defaultMessage: '修改成功',
+                });
+                actionRef?.current?.reload()
+                  //页面重新加载
+                  window.location.reload();
+                message.success('修改成功');
+                return true;
+            }else {
+                hide();
+                message.error(msgResult.msg);
+                return false;
+            }
+    
+          
+        } catch (error: any) {
+            hide();
+            message.error("修改失败", error?.message);
+            return false;
+        }
+    };
+
+    //修改个人密码
+    const handleUpdatePassword = async (fields: UserEntityAPI.UpdatePasswordRequestParams) => {
+        const hide = message.loading('正在修改');
+        try {
+            if (fields.newPassword !== fields.newPasswordAgain) {
+                message.error('两次密码不一致');
+                return false;
+            }
+
+            const msgResult = await updateUserPasswordByUsingPOST({
+                oldPassword: fields.oldPassword,
+                newPassword: fields.newPassword,
+                newPasswordAgain: fields.newPasswordAgain,
+            });
+
+            if (msgResult.code === 200) {
+                message.success('密码修改成功');
+                actionRef?.current?.reload();
+                hide();
+                message.success('密码修改成功');
+                //页面重新加载
+                window.location.reload();
+                return true;
+            } else {
+                hide();
+                message.error(msgResult.msg);
+                return false;
+            }
+
+        } catch (error: any) {
+            hide();
+            message.error("修改失败", error?.message);
+            return false;
+        }
+    };
+
+
+
     return (
         <ProCard split="vertical">
-            <ProCard title="个人信息" colSpan="30%"  style={{ backgroundColor: '#fff', borderRadius: '15px', margin: '10px' }}>
+            <ProCard title="个人信息" colSpan="30%" style={{ backgroundColor: '#fff', borderRadius: '15px', margin: '10px' }}>
                 <Descriptions items={items} column={1} />
 
             </ProCard>
             <ProCard title="基本信息" headerBordered>
                 <LoginForm
-  
+                    syncToInitialValues 
                     submitter={{
                         searchConfig: {
                             submitText: '保存',
@@ -97,8 +174,13 @@ const CenterPage: React.FC = () => {
                                 key="submit"
                                 type="primary"
                                 onClick={() => {
-                                    props.submit();
-                                    console.log(props);
+                                    //props.submit();
+                                    if (type === 'updatePassword') {
+                                        handleUpdatePassword(props.form?.getFieldsValue());
+                                        return;
+                                    }
+                                    console.log(props.form?.getFieldsValue());
+                                    handleUpdateProfile(props.form?.getFieldsValue());
                                 }}
                             >
                                 保存
@@ -108,22 +190,19 @@ const CenterPage: React.FC = () => {
                     contentStyle={{
                         minWidth: 280,
                         maxWidth: '75vw',
-                        
+
                     }}
 
                     initialValues={{
+                        nickName: userData?.nickName,
+                        email: userData?.email,
+                        phoneNumber: userData?.phoneNumber,
+                        remark: userData?.remark,
                         autoLogin: false,
                     }}
-                    actions={[
-                        // <FormattedMessage
-                        //   key="loginWith"
-                        //   id="pages.login.loginWith"
-                        //   defaultMessage="其他登录方式"
-                        // />,
-                        // <ActionIcons key="icons" />,
-                    ]}
                     onFinish={async (values) => {
                         // await handleSubmit(values as LOGINAPI.RegisterParams);
+                        console.log("submit",values);
                     }}
                 >
                     <Tabs
@@ -151,7 +230,7 @@ const CenterPage: React.FC = () => {
                     {type === 'account' && (
                         <>
                             <ProFormText
-                                name="name"
+                                name="nickName"
                                 fieldProps={{
                                     size: 'large',
                                     prefix: <UserOutlined />,
@@ -194,7 +273,7 @@ const CenterPage: React.FC = () => {
                                     },
                                 ]}
                             />
-                            <ProFormText
+                            {/* <ProFormText
                                 name="profile"
                                 fieldProps={{
                                     size: 'large',
@@ -215,9 +294,9 @@ const CenterPage: React.FC = () => {
                                         ),
                                     },
                                 ]}
-                            />
+                            /> */}
                             <ProFormText
-                                name="phone"
+                                name="phoneNumber"
                                 fieldProps={{
                                     size: 'large',
                                     prefix: <PhoneOutlined />,
@@ -239,7 +318,7 @@ const CenterPage: React.FC = () => {
                                 ]}
                             />
                             <ProFormTextArea
-                                name="note"
+                                name="remark"
                                 fieldProps={{
                                     size: 'large',
                                     // prefix: <YuqueOutlined />,
@@ -266,8 +345,8 @@ const CenterPage: React.FC = () => {
 
                     {type === 'updatePassword' && (
                         <>
-                            <ProFormText
-                                name="password"
+                            <ProFormText.Password
+                                name="oldPassword"
                                 fieldProps={{
                                     size: 'large',
                                     prefix: <LockOutlined />,

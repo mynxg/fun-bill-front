@@ -61,6 +61,34 @@ export async function updateUserByUsingPOST(
   });
 }
 
+/** updateUser POST /api/user/update */
+export async function updateUserPasswordByUsingPOST(
+  body: UserEntityAPI.UpdatePasswordRequestParams,
+  options?: { [key: string]: any },
+) {
+  return request<UserEntityAPI.BaseResponse>('/api/profile/updatePwd', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+export async function updateProfileByUsingPOST(
+  body: UserEntityAPI.UserUpdateRequestParams,
+  options?: { [key: string]: any },
+) {
+  return request<UserEntityAPI.BaseResponse>('/api/profile/update', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
 
 
 
