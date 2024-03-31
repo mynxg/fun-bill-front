@@ -148,16 +148,16 @@ export default [
         name: 'income.list', // 账单收入管理
         component: './Bill/income',
       },
-      // {
-      //   path: '/bill/category',
-      //   name: 'category.list', // 分类列表
-      //   component: './Bill/Category',
-      // },
-      // {
-      //   path: '/bill/setting',
-      //   name: 'setting.list', // 设置列表
-      //   component: './Bill/Setting',
-      // },
+      {
+        path: '/bill/book',
+        name: 'book.list', // 账本列表
+        component: './Bill/BillBook',
+      },
+      {
+        path: '/bill/category',
+        name: 'category.list', // 分类列表
+        component: './Bill/BillCategory',
+      },
     ],
   },
   {
