@@ -22,6 +22,7 @@ export const LOGININFOENTITYCOLUMN: ProColumns<LoginInfoEntityAPI.LoginInfoVO>[]
       title: 'id',
       key: "text",
       dataIndex: 'infoId',
+      valueType: 'index',
       ellipsis: true,
       copyable: true,
     },
