@@ -28,31 +28,7 @@ export const BASEADDCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         valueType: 'index',
     },
     {
-        title: '账本id',
-        dataIndex: 'bookId',
-        hideInTable: false,
-        valueType: 'text',
-    },
-    {
-        title: '账本名称',
-        dataIndex: 'bookName',
-        valueType: 'text',
-
-    },
-    {
-        title: '用户id',
-        dataIndex: 'userId',
-        hideInTable: false,
-        valueType: 'text',
-    },
-    {
-        title: '账单分类',
-        dataIndex: 'categoryId',
-        hideInTable: false,
-        valueType: 'text',
-    },
-    {
-        title: '账单支出名称',
+        title: '账单名称',
         dataIndex: 'title',
         valueType: 'text',
         formItemProps: {
@@ -72,6 +48,30 @@ export const BASEADDCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
                 message: "请输入金额",
             }]
         }
+    },
+    {
+        title: '账本id',
+        dataIndex: 'bookId',
+        hideInTable: true,
+        valueType: 'text',
+    },
+    {
+        title: '账本名称',
+        dataIndex: 'bookName',
+        hideInTable: true,
+        valueType: 'text',
+    },
+    {
+        title: '用户id',
+        dataIndex: 'userId',
+        hideInTable: true,
+        valueType: 'text',
+    },
+    {
+        title: '账单分类',
+        dataIndex: 'categoryId',
+        hideInTable: false,
+        valueType: 'text',
     },
     // {
     //     title: '图片地址',
@@ -107,25 +107,7 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         valueType: 'index',
     },
     {
-        title: '账本分类',
-        dataIndex: 'bookId',
-        hideInTable: false,
-        valueType: 'text',
-    },
-    // {
-    //     title: '用户id',
-    //     dataIndex: 'userId',
-    //     hideInTable: false,
-    //     valueType: 'text',
-    // },
-    {
-        title: '账单分类',
-        dataIndex: 'categoryId',
-        hideInTable: false,
-        valueType: 'text',
-    },
-    {
-        title: '账单支出名称',
+        title: '账单名称',
         dataIndex: 'title',
         valueType: 'text',
         formItemProps: {
@@ -145,6 +127,24 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
                 message: "请输入金额",
             }]
         }
+    },
+    {
+        title: '账本分类',
+        dataIndex: 'bookId',
+        hideInTable: false,
+        valueType: 'text',
+    },
+    // {
+    //     title: '用户id',
+    //     dataIndex: 'userId',
+    //     hideInTable: false,
+    //     valueType: 'text',
+    // },
+    {
+        title: '账单分类',
+        dataIndex: 'categoryId',
+        hideInTable: false,
+        valueType: 'text',
     },
     {
         title: '图片地址',
@@ -179,6 +179,28 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         title: '账单id',
         dataIndex: 'billId',
         valueType: 'index',
+    },
+    {
+        title: '账单名称',
+        dataIndex: 'title',
+        valueType: 'text',
+        formItemProps: {
+            rules: [{
+                required: true,
+                message: "请输入账单名称",
+            }]
+        }
+    },
+    {
+        title: '金额',
+        dataIndex: 'amount',
+        valueType: 'money',
+        formItemProps: {
+            rules: [{
+                required: true,
+                message: "请输入金额",
+            }]
+        }
     },
     {
         title: '账本id',
@@ -230,28 +252,6 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
                 status: 'Success',
             },
 
-        }
-    },
-    {
-        title: '账单支出名称',
-        dataIndex: 'title',
-        valueType: 'text',
-        formItemProps: {
-            rules: [{
-                required: true,
-                message: "请输入账单名称",
-            }]
-        }
-    },
-    {
-        title: '金额',
-        dataIndex: 'amount',
-        valueType: 'money',
-        formItemProps: {
-            rules: [{
-                required: true,
-                message: "请输入金额",
-            }]
         }
     },
     {

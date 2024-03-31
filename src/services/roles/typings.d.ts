@@ -84,8 +84,9 @@ declare namespace RoleEntityAPI {
      */
     type RoleVO = {
         roleId?: number;
-        roleKey: string;
         roleName: string;
+        roleKey: string;
+       
         roleSort: number;
         status?: string;
         dataScope?: string;

@@ -136,18 +136,18 @@ export default [
     routes: [
       {
         path: '/bill',
-        redirect: '/bill/list',
+        redirect: '/bill/expenses',
       },
       {
-        path: '/bill/list',
-        name: 'expenses.list', // 账单列表
+        path: '/bill/expenses',
+        name: 'expenses.list', // 账单支出管理
         component: './Bill/Expense',
       },
-      // {
-      //   path: '/bill/record',
-      //   name: 'record.list', // 记账列表
-      //   component: './Bill/Record',
-      // },
+      {
+        path: '/bill/income',
+        name: 'income.list', // 账单收入管理
+        component: './Bill/income',
+      },
       // {
       //   path: '/bill/category',
       //   name: 'category.list', // 分类列表
