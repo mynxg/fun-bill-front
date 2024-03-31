@@ -89,11 +89,22 @@ export default {
   // --------------------登录日志--------------------
 
   // --------------------账单管理 start--------------------
+
   'menu.bill': '账单管理',
+  'menu.bill.bookCategory': '账本管理',
+  'menu.bill.Category': '账单分类管理',
+  'menu.bill.expenses': '账单支出管理',
   'menu.bill.expenses.list': '账单支出',
-  'menu.bill.expenses.add': '添加账单',
-  'menu.bill.expenses.update': '修改账单',
-  'menu.bill.expenses.delete': '删除账单',
+  'menu.bill.expenses.add': '添加账单支出',
+  'menu.bill.expenses.update': '修改账单支出',
+  'menu.bill.expenses.delete': '删除账单支出',
+
+  'menu.bill.income': '账单收入管理',
+  'menu.bill.income.list': '账单收入',
+  'menu.bill.income.add': '添加账单收入',
+  'menu.bill.income.update': '修改账单收入',
+  'menu.bill.income.delete': '删除账单收入',
   // --------------------账单管理 end--------------------
+  
 
 };

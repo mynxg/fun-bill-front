@@ -143,6 +143,21 @@ export default [
         name: 'expenses.list', // 账单列表
         component: './Bill/Expense',
       },
+      // {
+      //   path: '/bill/record',
+      //   name: 'record.list', // 记账列表
+      //   component: './Bill/Record',
+      // },
+      // {
+      //   path: '/bill/category',
+      //   name: 'category.list', // 分类列表
+      //   component: './Bill/Category',
+      // },
+      // {
+      //   path: '/bill/setting',
+      //   name: 'setting.list', // 设置列表
+      //   component: './Bill/Setting',
+      // },
     ],
   },
   {
