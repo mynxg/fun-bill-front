@@ -62,6 +62,8 @@ declare namespace BILLENTITYAPI {
 
         billBookCategory?: billBookCategoryEntity;
         billCategory?: BillCategoryEntity;
+        // billCategorys?: BillCategoryEntity[];
+        // billBookCategorys?: billBookCategoryEntity[];
     }
 
     type billBookCategoryEntity = {
@@ -125,7 +127,7 @@ declare namespace BILLENTITYAPI {
         amount?: number;
         remark?: string;
         photoUrl?: string;
- 
+
         //delFlag?: string;
         createBy?: string;
         createTime?: date;
@@ -161,7 +163,7 @@ declare namespace BILLENTITYAPI {
         amount?: number;
         remark?: string;
         photoUrl?: string;
- 
+
         //delFlag?: string;
         createBy?: string;
         createTime?: date;

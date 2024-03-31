@@ -34,13 +34,19 @@ export const BASEADDCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         valueType: 'text',
     },
     {
+        title: '账本名称',
+        dataIndex: 'bookName',
+        valueType: 'text',
+
+    },
+    {
         title: '用户id',
         dataIndex: 'userId',
         hideInTable: false,
         valueType: 'text',
     },
     {
-        title: '分类id',
+        title: '账单分类',
         dataIndex: 'categoryId',
         hideInTable: false,
         valueType: 'text',
@@ -73,21 +79,6 @@ export const BASEADDCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
     //     hideInTable: true,
     //     valueType: 'text',
     // },
-    // {
-    //     title: '角色',
-    //     dataIndex: 'admin',
-    //     hideInForm: true,
-    //     valueEnum: {
-    //         'true': {
-    //             text: '超级管理员',
-    //             status: 'Success',
-    //         },
-    //         'false': {
-    //             text: '用户',
-    //             status: 'Success',
-    //         },
-    //     },
-    // },
     {
         title: '账单创建时间',
         dataIndex: 'billTime',
@@ -116,19 +107,19 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         valueType: 'index',
     },
     {
-        title: '账本id',
+        title: '账本分类',
         dataIndex: 'bookId',
         hideInTable: false,
         valueType: 'text',
     },
+    // {
+    //     title: '用户id',
+    //     dataIndex: 'userId',
+    //     hideInTable: false,
+    //     valueType: 'text',
+    // },
     {
-        title: '用户id',
-        dataIndex: 'userId',
-        hideInTable: false,
-        valueType: 'text',
-    },
-    {
-        title: '分类id',
+        title: '账单分类',
         dataIndex: 'categoryId',
         hideInTable: false,
         valueType: 'text',
@@ -161,21 +152,6 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         hideInTable: false,
         valueType: 'text',
     },
-    // {
-    //     title: '角色',
-    //     dataIndex: 'admin',
-    //     hideInForm: true,
-    //     valueEnum: {
-    //         'true': {
-    //             text: '超级管理员',
-    //             status: 'Success',
-    //         },
-    //         'false': {
-    //             text: '用户',
-    //             status: 'Success',
-    //         },
-    //     },
-    // },
     {
         title: '账单创建时间',
         dataIndex: 'billTime',
@@ -200,7 +176,7 @@ copyable: true,
 */
 export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
     {
-        title: 'id',
+        title: '账单id',
         dataIndex: 'billId',
         valueType: 'index',
     },
@@ -217,10 +193,44 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         valueType: 'text',
     },
     {
-        title: '分类id',
+        title: '分类分类',
         dataIndex: 'categoryId',
         hideInTable: false,
         valueType: 'text',
+        valueEnum: {
+            // array.forEach(element => {
+                
+            // });
+            1: {
+                text: '餐饮',
+                status: 'Success',
+            },
+            2: {
+                text: '交通',
+                status: 'Success',
+            },
+            3: {
+                text: '购物',
+                status: 'Success',
+            },
+            4: {
+                text: '娱乐',
+                status: 'Success',
+            },
+            5: {
+                text: '学习',
+                status: 'Success',
+            },
+            6: {
+                text: '医疗',
+                status: 'Success',
+            },
+            7: {
+                text: '其他',
+                status: 'Success',
+            },
+
+        }
     },
     {
         title: '账单支出名称',
@@ -250,21 +260,6 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         hideInTable: false,
         valueType: 'text',
     },
-    // {
-    //     title: '角色',
-    //     dataIndex: 'admin',
-    //     hideInForm: true,
-    //     valueEnum: {
-    //         'true': {
-    //             text: '超级管理员',
-    //             status: 'Success',
-    //         },
-    //         'false': {
-    //             text: '用户',
-    //             status: 'Success',
-    //         },
-    //     },
-    // },
     {
         title: '账单创建时间',
         dataIndex: 'billTime',

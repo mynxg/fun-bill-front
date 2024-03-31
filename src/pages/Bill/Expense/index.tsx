@@ -58,7 +58,7 @@ const BillExpensesManager: React.FC = () => {
         const res = await listBillExpenseVOByPageUsingGET({
             pageNum: pageNum,
             pageSize: pageSize,
-            // userId: 'userId',
+            id: 'userId',
             // userType: 'sys_user',
         })
         setTotal(res?.total || 0)

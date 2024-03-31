@@ -21,9 +21,8 @@ import {
 } from "@/services/user/userController";
 import { useModel } from "@umijs/max";
 
-import { USERCOLUMN, UPDATEUSERCOLUMN, USERPAGESIZE } from "@/constant/user";
+import { USERCOLUMN, UPDATEUSERCOLUMN, USERPAGESIZE,USERENTITYCOLUMN } from "@/constant/user";
 
-import { USERENTITYCOLUMN } from '@/constant/user';
 
 /**
  * 用户管理
