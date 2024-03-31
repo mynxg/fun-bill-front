@@ -54,7 +54,7 @@ const UserManager: React.FC = () => {
         const res = await listUserVOByPageUsingGET({
             pageNum: pageNum,
             pageSize: pageSize,
-            userId: 'userId',
+            userId: "userId",
             userType: 'sys_user',
         })
         setTotal(res?.total || 0)
@@ -251,7 +251,10 @@ const UserManager: React.FC = () => {
                 })}
                 columns={columns}
                 rowSelection={{
-                    onChange: () => {
+                    onChange: (e) => {
+                        console.log("rowSelection")
+                        // setSelectedRows(selectedRowKeys);
+                        console.log(e);
                     },
                 }}
             />

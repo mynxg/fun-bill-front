@@ -102,6 +102,22 @@ export const USERCOLUMN: ProColumns<UserEntityAPI.UserVO>[] = [
     },
   },
   {
+    title: '状态',
+    dataIndex: 'status',
+    hideInTable: true,
+    valueType: 'text',
+    valueEnum: {
+      '0': {
+        text: '正常',
+        status: 'Success',
+      },
+      '1': {
+        text: '禁用',
+        status: 'Success',
+      },
+    },
+  },
+  {
     title: '手机号码',
     dataIndex: 'phoneNumber',
     hideInTable: true,
@@ -168,6 +184,16 @@ export const UPDATEUSERCOLUMN: ProColumns<UserEntityAPI.UserUpdateRequestParams>
     dataIndex: 'sex',
     hideInTable: false,
     valueType: 'text',
+    valueEnum: {
+      '0': {
+        text: '男',
+        status: 'Success',
+      },
+      '1': {
+        text: '女',
+        status: 'Success',
+      },
+    },
   },
   {
     title: '角色',
@@ -201,6 +227,16 @@ export const UPDATEUSERCOLUMN: ProColumns<UserEntityAPI.UserUpdateRequestParams>
     dataIndex: 'status',
     hideInTable: true,
     valueType: 'text',
+    valueEnum: {
+      '0': {
+        text: '正常',
+        status: 'Success',
+      },
+      '1': {
+        text: '禁用',
+        status: 'Success',
+      },
+    },
   },
   {
     title: '备注',
