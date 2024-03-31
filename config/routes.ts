@@ -77,6 +77,37 @@ export default [
         name: 'list', // 用户列表
         component: './Admin/User',
       },
+      {
+        path: '/usercenter/role',
+        name: 'role', // 角色列表
+        component: './Admin/Roles',
+      },
+      // {
+      //   path: '/usercenter/menu',
+      //   name: 'menu', // 菜单列表
+      //   component: './Admin/Menu',
+      // },
+      // {
+      //   path: '/usercenter/dept',
+      //   name: 'dept', // 部门列表
+      //   component: './Admin/Dept',
+      // },
+      // {
+      //   path: '/usercenter/post',
+      //   name: 'post', // 岗位列表
+      //   component: './Admin/Post',
+      // },
+      // {
+      //   path: '/usercenter/dict',
+      //   name: 'dict', // 字典列表
+      //   component: './Admin/Dict',
+      // },
+      // {
+      //   path: '/usercenter/notice',
+      //   name: 'notice', // 通知列表
+      //   component: './Admin/Notice',
+      // },
+
     ],
   },
   {
