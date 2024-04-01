@@ -93,10 +93,10 @@ const BillBookManager: React.FC = () => {
             });
             if (reusltStr.code !== 200) {
                 hide();
-                message.success(reusltStr.msg || '添加失败');
+                message.error(reusltStr.msg || '添加失败');
                 return false;
             }
-            
+
             hide();
             await getFormInfo();
             actionRef?.current?.reload()
@@ -125,7 +125,7 @@ const BillBookManager: React.FC = () => {
             });
             if (resultStr.code !== 200) {
                 hide();
-                message.success(resultStr.msg || '删除失败');
+                message.error(resultStr.msg || '删除失败');
                 return false;
             }
 

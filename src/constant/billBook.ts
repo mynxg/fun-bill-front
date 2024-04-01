@@ -153,7 +153,7 @@ export const ENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
     },
     {
         title: '创建时间',
-        dataIndex: 'billTime',
+        dataIndex: 'createTime',
         hideInTable: true,
         valueType: 'dateTime',
     },

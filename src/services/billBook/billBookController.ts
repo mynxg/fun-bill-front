@@ -33,7 +33,7 @@ export async function deleteByUsingPOST(
     body: BILLBOOKENTITYAPI.DeleteRequestParams,
     options?: { [key: string]: any },
 ) {
-    return request<BILLBOOKENTITYAPI.BaseResponse>('/api/bill/book/del', {
+    return request<BILLBOOKENTITYAPI.BaseResponse>('/api/bill/book/delete', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
