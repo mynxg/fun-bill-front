@@ -13,13 +13,13 @@ export type Props = {
 
 
 /**
- * 用户详情组件
- * @param props  用户详情组件
+ * 账本详情组件
+ * @param props  账本详情组件
  * @returns     
  */
 const ReadModal: React.FC<Props> = (props) => {
     const {EntityItem,EntityColumns} = props;
-    //描述组件：用于展示用户信息
+    //描述组件：用于展示账本信息
     let items: DescriptionsProps['items'] = [];
 //     if(userEntityItem){
 //     items = [

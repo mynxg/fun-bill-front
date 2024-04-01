@@ -6,18 +6,29 @@ export const BASEPAGESIZE = 6;
 export const NEWSAVATAR = "https://hzh-1318734603.cos.ap-shanghai.myqcloud.com/%E6%96%B0%E9%97%BB.jpg";
 
 
-
+/**
+ * 账本
+ * @name BILLBOOKCATEGORYAPI
+ * @description 账本分类  列表头部展示、预览、编辑、删除表单展示字段
+ * @typedef BILLBOOKCATEGORYAPI
+ */
 export const BASEADDCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
     {
         title: 'id',
-        dataIndex: 'bookId',
+        dataIndex: 'id',
         valueType: 'index',
     },
     {
         title: '账本名称',
         dataIndex: 'bookName',
-        hideInTable: true,
+        hideInTable: false,
         valueType: 'text',
+    },
+    {
+        title: '备注',
+        dataIndex: 'remark',
+        hideInTable: false,
+        valueType: 'textarea',
     },
     {
         title: '用户id',
@@ -26,9 +37,9 @@ export const BASEADDCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         valueType: 'text',
     },
     {
-        title: '账单分类',
-        dataIndex: 'categoryId',
-        hideInTable: false,
+        title: '账本分类',
+        dataIndex: 'bookCategoryId',
+        hideInTable: true,
         valueType: 'text',
     },
     {
@@ -38,23 +49,29 @@ export const BASEADDCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         valueType: 'text',
     },
     {
-        title: '账单创建时间',
-        dataIndex: 'billTime',
-        hideInTable: true,
+        title: '创建时间',
+        sorter: true,
+        dataIndex: 'createTime',
         valueType: 'dateTime',
+        hideInForm: true,
     },
-    // {
-    //     title: '创建时间',
-    //     sorter: true,
-    //     dataIndex: 'createTime',
-    //     valueType: 'dateTime',
-    //     hideInForm: true,
-    // },
     {
-        title: '备注',
-        dataIndex: 'remark',
-        hideInTable: true,
-        valueType: 'textarea',
+        title: '创建人',
+        dataIndex: 'createBy',
+        hideInTable: false,
+        valueType: 'text',
+    },
+    {
+        title: '修改时间',
+        dataIndex: 'updateTime',
+        hideInTable: false,
+        valueType: 'text',
+    },
+    {
+        title: '修改人',
+        dataIndex: 'updateBy',
+        hideInTable: false,
+        valueType: 'text',
     },
 ]
 
@@ -67,18 +84,19 @@ export const UPDATECOLUMN: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[] =
     {
         title: '账本名称',
         dataIndex: 'bookName',
-        hideInTable: true,
+        hideInTable: false,
         valueType: 'text',
     },
     {
         title: '用户id',
         dataIndex: 'userId',
-        hideInTable: true,
+        // hideInTable: true,
+        hideInForm: true,
         valueType: 'text',
     },
     {
-        title: '账单分类',
-        dataIndex: 'categoryId',
+        title: '账本分类',
+        dataIndex: 'bookCategoryId',
         hideInTable: false,
         valueType: 'text',
     },
@@ -87,13 +105,6 @@ export const UPDATECOLUMN: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[] =
         dataIndex: 'photoUrl',
         hideInTable: true,
         valueType: 'text',
-    },
-    {
-        title: '账单创建时间',
-        dataIndex: 'billTime',
-        hideInTable: true,
-        valueType: 'dateTime',
-
     },
     {
         title: '备注',
@@ -119,7 +130,7 @@ export const ENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
     {
         title: '账本名称',
         dataIndex: 'bookName',
-        hideInTable: true,
+        hideInTable: false,
         valueType: 'text',
     },
     {
@@ -129,9 +140,9 @@ export const ENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         valueType: 'text',
     },
     {
-        title: '账单分类',
-        dataIndex: 'categoryId',
-        hideInTable: false,
+        title: '账本分类',
+        dataIndex: 'bookCategoryId',
+        hideInTable: true,
         valueType: 'text',
     },
     {
@@ -141,7 +152,7 @@ export const ENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         valueType: 'text',
     },
     {
-        title: '账单创建时间',
+        title: '创建时间',
         dataIndex: 'billTime',
         hideInTable: true,
         valueType: 'dateTime',

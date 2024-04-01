@@ -3,6 +3,12 @@ import React from 'react';
 import {Form,Modal} from "antd";
 import {ProColumns, ProTable} from "@ant-design/pro-table/lib";
 import MyUploadFile from "@/components/UploadFile";
+
+/**
+ * 账本创建组件
+ * @param props  账本创建组件
+ * @returns
+ */
 export type Props = {
   columns: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[];
   onCancel: () => void;

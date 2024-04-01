@@ -3,7 +3,11 @@ import React, {useEffect, useRef} from 'react';
 import {Modal} from "antd";
 import {ProColumns, ProTable} from "@ant-design/pro-table/lib";
 import {ProFormInstance} from "@ant-design/pro-form";
-
+/**
+ * 账本更新组件
+ * @param props  账本更新组件
+ * @returns
+ */
 export type Props = {
   values: BILLBOOKENTITYAPI.UpdateRequestParams;
   columns: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[];

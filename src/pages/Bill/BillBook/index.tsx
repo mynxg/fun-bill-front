@@ -31,6 +31,9 @@ import {
 
 /**
  * 账本管理
+ * @name BillBookManager
+ * @description 账本管理
+ * @typedef BillBookManager
  * @returns
  */
 const BillBookManager: React.FC = () => {
@@ -53,7 +56,7 @@ const BillBookManager: React.FC = () => {
     const [total, setTotal] = useState<number>(0)
     const [isLoading, setIsLoading] = useState(true);
 
-    //获取用户信息
+    //获取账本列表信息
     const getFormInfo = async (pageNum = 1, pageSize = BASEPAGESIZE) => {
         const res = await listByPageUsingGET({
             pageNum: pageNum,
@@ -102,7 +105,7 @@ const BillBookManager: React.FC = () => {
     };
 
     /**
-      *  Delete node
+     * 
       * @zh-CN 删除用户
       *
       * @param selectedRow
@@ -112,7 +115,7 @@ const BillBookManager: React.FC = () => {
         if (!selectedRow) return true;
         try {
             await deleteByUsingPOST({
-                billId: selectedRow.billId,
+                bookId: selectedRow.bookId,
             });
             hide();
             await getFormInfo();
@@ -128,9 +131,9 @@ const BillBookManager: React.FC = () => {
 
     //初始化
     useEffect(() => {
-        console.log("useEffect");
+        // console.log("useEffect");
         getFormInfo();
-        console.log("构造函数执行完，formValue状态变化后：", formValue)
+        // console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);
 
     //如果网络请求数据还没拿到，就先 加载中  转圈
@@ -139,7 +142,6 @@ const BillBookManager: React.FC = () => {
     }
 
     /**
-     * @en-US Update node
      * @zh-CN 更新用户
      *
      * @param fields
@@ -233,7 +235,7 @@ const BillBookManager: React.FC = () => {
                         await getFormInfo(pageNum, pageSize);
                     },
                 }}
-                headerTitle={'用户信息'}
+                headerTitle={'账本信息'}
                 actionRef={actionRef}
                 rowKey="key"
                 search={{
@@ -247,7 +249,7 @@ const BillBookManager: React.FC = () => {
                             handleModalOpen(true);
                         }}
                     >
-                        <PlusOutlined /> 新建用户
+                        <PlusOutlined /> 新建账本
                     </Button>,
                 ]}
                 request={async () => ({
