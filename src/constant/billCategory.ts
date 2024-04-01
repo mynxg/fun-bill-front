@@ -126,7 +126,7 @@ export const ENTITYCOLUMN: ProColumns<BILLCATEGORYENTITYAPI.BillCategoryVO>[] = 
     },
     {
         title: '账单创建时间',
-        dataIndex: 'billTime',
+        dataIndex: 'createTime',
         hideInTable: true,
         valueType: 'dateTime',
     },

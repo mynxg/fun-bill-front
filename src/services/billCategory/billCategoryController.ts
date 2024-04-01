@@ -33,7 +33,7 @@ export async function deleteByUsingPOST(
     body: BILLCATEGORYENTITYAPI.DeleteRequestParams,
     options?: { [key: string]: any },
 ) {
-    return request<BILLCATEGORYENTITYAPI.BaseResponse>('/api/bill/category/del', {
+    return request<BILLCATEGORYENTITYAPI.BaseResponse>('/api/bill/category/delete', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
