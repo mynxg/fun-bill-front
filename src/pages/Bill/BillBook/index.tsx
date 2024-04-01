@@ -87,10 +87,16 @@ const BillBookManager: React.FC = () => {
     const handleAdd = async (fields: BILLBOOKENTITYAPI.AddRquestParams) => {
         const hide = message.loading('正在添加');
         try {
-            await addByUsingPOST({
+            const reusltStr = await addByUsingPOST({
                 ...fields,
                 // userType: 'sys_user',
             });
+            if (reusltStr.code !== 200) {
+                hide();
+                message.success(reusltStr.msg || '添加失败');
+                return false;
+            }
+            
             hide();
             await getFormInfo();
             actionRef?.current?.reload()
@@ -106,7 +112,7 @@ const BillBookManager: React.FC = () => {
 
     /**
      * 
-      * @zh-CN 删除用户
+      * @zh-CN 删除账本
       *
       * @param selectedRow
       */
@@ -114,9 +120,15 @@ const BillBookManager: React.FC = () => {
         const hide = message.loading('正在删除');
         if (!selectedRow) return true;
         try {
-            await deleteByUsingPOST({
+            const resultStr = await deleteByUsingPOST({
                 bookId: selectedRow.bookId,
             });
+            if (resultStr.code !== 200) {
+                hide();
+                message.success(resultStr.msg || '删除失败');
+                return false;
+            }
+
             hide();
             await getFormInfo();
             actionRef?.current?.reload()
@@ -142,7 +154,7 @@ const BillBookManager: React.FC = () => {
     }
 
     /**
-     * @zh-CN 更新用户
+     * @zh-CN 更新账本
      *
      * @param fields
      */
@@ -152,10 +164,15 @@ const BillBookManager: React.FC = () => {
         }
         const hide = message.loading('更新中');
         try {
-            await updateByUsingPOST({
+            const resultStr = await updateByUsingPOST({
                 userId: currentRow.bookId,
                 ...fields,
             });
+            if (resultStr.code !== 200) {
+                hide();
+                message.success(resultStr.msg || '更新失败');
+                return false;
+            }
             hide();
             message.success('更新成功');
             handleUpdateModalOpen(false);
