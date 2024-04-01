@@ -53,7 +53,7 @@ const BillCategoryManager: React.FC = () => {
     const [total, setTotal] = useState<number>(0)
     const [isLoading, setIsLoading] = useState(true);
 
-    //获取用户信息
+    //获取账单分类信息
     const getFormInfo = async (pageNum = 1, pageSize = BASEPAGESIZE) => {
         const res = await listByPageUsingGET({
             pageNum: pageNum,
@@ -84,10 +84,15 @@ const BillCategoryManager: React.FC = () => {
     const handleAdd = async (fields: BILLCATEGORYENTITYAPI.AddRquestParams) => {
         const hide = message.loading('正在添加');
         try {
-            await addByUsingPOST({
+            const resultStr = await addByUsingPOST({
                 ...fields,
                 // userType: 'sys_user',
             });
+            if (resultStr.code !== 200) {
+                message.error(resultStr.msg || "添加失败");
+                return false;
+            }
+            
             hide();
             await getFormInfo();
             actionRef?.current?.reload()
@@ -103,7 +108,7 @@ const BillCategoryManager: React.FC = () => {
 
     /**
       *  Delete node
-      * @zh-CN 删除用户
+      * @zh-CN 删除账单分类
       *
       * @param selectedRow
       */
@@ -111,9 +116,13 @@ const BillCategoryManager: React.FC = () => {
         const hide = message.loading('正在删除');
         if (!selectedRow) return true;
         try {
-            await deleteByUsingPOST({
-                billId: selectedRow.billId,
+            const resultStr = await deleteByUsingPOST({
+                categoryId: selectedRow.categoryId,
             });
+            if (resultStr.code !== 200) {
+                message.error(resultStr.msg || "删除失败");
+                return false;
+            }
             hide();
             await getFormInfo();
             actionRef?.current?.reload()
@@ -140,7 +149,7 @@ const BillCategoryManager: React.FC = () => {
 
     /**
      * @en-US Update node
-     * @zh-CN 更新用户
+     * @zh-CN 更新账单分类
      *
      * @param fields
      */
@@ -150,10 +159,15 @@ const BillCategoryManager: React.FC = () => {
         }
         const hide = message.loading('更新中');
         try {
-            await updateByUsingPOST({
+            const resultStr = await updateByUsingPOST({
                 categoryId: currentRow.categoryId,
                 ...fields,
             });
+            if (resultStr.code !== 200) {
+                message.error(resultStr.msg ||'更新失败');
+                return false;
+            }
+
             hide();
             message.success('更新成功');
             handleUpdateModalOpen(false);
@@ -233,7 +247,7 @@ const BillCategoryManager: React.FC = () => {
                         await getFormInfo(pageNum, pageSize);
                     },
                 }}
-                headerTitle={'用户信息'}
+                headerTitle={'账单分类信息'}
                 actionRef={actionRef}
                 rowKey="key"
                 search={{
@@ -247,7 +261,7 @@ const BillCategoryManager: React.FC = () => {
                             handleModalOpen(true);
                         }}
                     >
-                        <PlusOutlined /> 新建用户
+                        <PlusOutlined /> 新建账单分类
                     </Button>,
                 ]}
                 request={async () => ({
