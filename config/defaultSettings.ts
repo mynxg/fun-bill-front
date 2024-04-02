@@ -9,7 +9,8 @@ const Settings: ProLayoutProps & {
 } = {
   navTheme: 'light',
   // 拂晓蓝
-  colorPrimary: '#1890ff',
+  // colorPrimary: '#1890ff',
+  colorPrimary: "#52C41A",
   layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,
