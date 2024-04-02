@@ -149,7 +149,7 @@ const authHeaderInterceptor = (url: string, options: RequestConfig) => {
     };
   } else {
     const token = getToken();
-    console.log('url, token: ', url, token);
+    // console.log('url, token: ', url, token);
     let authHeader = {};
     // 如果token存在，就添加到请求头
     if (token) {
