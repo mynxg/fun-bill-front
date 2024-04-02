@@ -116,6 +116,38 @@ export default [
     ],
   },
   {
+    path: '/bill',
+    name: 'bill', // 账单管理
+    icon: 'crown',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/bill/book',
+        name: 'book.list', // 账本列表
+        component: './Bill/BillBook',
+      },
+      {
+        path: '/bill/category',
+        name: 'category.list', // 分类列表
+        component: './Bill/BillCategory',
+      },
+      {
+        path: '/bill',
+        redirect: '/bill/expenses',
+      },
+      {
+        path: '/bill/expenses',
+        name: 'expenses.list', // 账单支出管理
+        component: './Bill/Expense',
+      },
+      {
+        path: '/bill/income',
+        name: 'income.list', // 账单收入管理
+        component: './Bill/income',
+      },
+    ],
+  },
+  {
     path: '/monitor',
     name: 'logininfo', // 日志中心
     icon: 'crown',
@@ -132,38 +164,6 @@ export default [
       },
     ],
     // menu: false,
-  },
-  {
-    path: '/bill',
-    name: 'bill', // 账单管理
-    icon: 'crown',
-    access: 'canAdmin',
-    routes: [
-      {
-        path: '/bill',
-        redirect: '/bill/expenses',
-      },
-      {
-        path: '/bill/expenses',
-        name: 'expenses.list', // 账单支出管理
-        component: './Bill/Expense',
-      },
-      {
-        path: '/bill/income',
-        name: 'income.list', // 账单收入管理
-        component: './Bill/income',
-      },
-      {
-        path: '/bill/book',
-        name: 'book.list', // 账本列表
-        component: './Bill/BillBook',
-      },
-      {
-        path: '/bill/category',
-        name: 'category.list', // 分类列表
-        component: './Bill/BillCategory',
-      },
-    ],
   },
   {
     path: '/account/center',
