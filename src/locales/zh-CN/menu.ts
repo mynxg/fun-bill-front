@@ -56,6 +56,7 @@ export default {
   'menu.user.update': '修改用户',
   'menu.user.delete': '删除用户',
   'menu.user.role': '角色管理',
+  'menu.user.config': '参数配置',
   // --------------------用户管理 end----------------
   // --------------------角色管理 start----------------
   'menu.role': '角色管理',

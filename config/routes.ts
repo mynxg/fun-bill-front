@@ -82,6 +82,11 @@ export default [
         name: 'role', // 角色列表
         component: './Admin/Roles',
       },
+      {
+        path: '/usercenter/config',
+        name: 'config', // 配置列表
+        component: './Admin/Config',
+      },
       // {
       //   path: '/usercenter/menu',
       //   name: 'menu', // 菜单列表

@@ -71,32 +71,17 @@ export const BASECOLUMN: ProColumns<ConfigEntityAPI.ConfigVO>[] = [
         }
     },
     {
-        title: '配置类型',
+        title: '系统内置',
         dataIndex: 'configType',
         valueType: 'text',
         valueEnum: {
-            '0': {
-                text: '正常',
+            'Y': {
+                text: '是',
                 status: 'Success',
             },
-            '1': {
-                text: '禁用',
-                status: 'Success',
-            },
-        },
-    },
-    {
-        title: '删除标志',
-        dataIndex: 'delFlag',
-        valueType: 'text',
-        valueEnum: {
-            '0': {
-                text: '正常',
-                status: 'Success',
-            },
-            '1': {
-                text: '删除',
-                status: 'Success',
+            'N': {
+                text: '否',
+                status: 'Error',
             },
         },
     },
@@ -109,21 +94,29 @@ export const BASECOLUMN: ProColumns<ConfigEntityAPI.ConfigVO>[] = [
         title: '创建人',
         dataIndex: 'createBy',
         valueType: 'text',
+        hideInForm: true,
+        hideInTable: true,
     },
     {
         title: '创建时间',
         dataIndex: 'createTime',
         valueType: 'dateTime',
+        hideInForm: true,
+        hideInTable: true,
     },
     {
         title: '修改人',
         dataIndex: 'updateBy',
         valueType: 'text',
+        hideInForm: true,
+        hideInTable: true,
     },
     {
         title: '修改时间',
         dataIndex: 'updateTime',
         valueType: 'dateTime',
+        hideInForm: true,
+        hideInTable: true,
     },
     // {
     //     title: '操作',
@@ -180,33 +173,17 @@ export const UPDATECOLUMN: ProColumns<ConfigEntityAPI.UpdateRequestParams>[] = [
         }
     },
     {
-        title: '配置类型',
+        title: '系统内置',
         dataIndex: 'configType',
         valueType: 'text',
         valueEnum: {
-            '0': {
-                text: '正常',
+            'Y': {
+                text: '是',
                 status: 'Success',
             },
-            '1': {
-                text: '禁用',
-                status: 'Success',
-            },
-        },
-    },
-    {
-        title: '删除标志',
-        dataIndex: 'delFlag',
-        valueType: 'text',
-        hideInForm: true,
-        valueEnum: {
-            '0': {
-                text: '正常',
-                status: 'Success',
-            },
-            '1': {
-                text: '删除',
-                status: 'Success',
+            'N': {
+                text: '否',
+                status: 'Error',
             },
         },
     },
@@ -281,32 +258,17 @@ export const BASEADDCOLUMN: ProColumns<ConfigEntityAPI.ConfigVO>[] = [
         }
     },
     {
-        title: '配置类型',
+        title: '系统内置',
         dataIndex: 'configType',
         valueType: 'text',
         valueEnum: {
-            '0': {
-                text: '正常',
+            'Y': {
+                text: '是',
                 status: 'Success',
             },
-            '1': {
-                text: '禁用',
-                status: 'Success',
-            },
-        },
-    },
-    {
-        title: '删除标志',
-        dataIndex: 'delFlag',
-        valueType: 'text',
-        valueEnum: {
-            '0': {
-                text: '正常',
-                status: 'Success',
-            },
-            '1': {
-                text: '删除',
-                status: 'Success',
+            'N': {
+                text: '否',
+                status: 'Fail',
             },
         },
     },
@@ -319,20 +281,28 @@ export const BASEADDCOLUMN: ProColumns<ConfigEntityAPI.ConfigVO>[] = [
         title: '创建人',
         dataIndex: 'createBy',
         valueType: 'text',
+        hideInForm: true,
+        hideInTable: true,
     },
     {
         title: '创建时间',
         dataIndex: 'createTime',
         valueType: 'dateTime',
+        hideInForm: true,
+        hideInTable: true,
     },
     {
         title: '修改人',
         dataIndex: 'updateBy',
         valueType: 'text',
+        hideInForm: true,
+        hideInTable: true,
     },
     {
         title: '修改时间',
         dataIndex: 'updateTime',
         valueType: 'dateTime',
+        hideInForm: true,
+        hideInTable: true,
     },
 ]
