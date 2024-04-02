@@ -82,8 +82,8 @@ export default {
   'menu.department.update': '修改部门',
   'menu.department.delete': '删除部门',
   // --------------------登录日志--------------------
-  'menu.logininfo': '登录日志',
-  'menu.logininfo.list': '登录日志列表',
+  'menu.logininfo': '日志管理',
+  'menu.logininfo.list': '登录日志',
   'menu.logininfo.add': '添加登录日志',
   'menu.logininfo.update': '修改登录日志',
   'menu.logininfo.delete': '删除登录日志',
@@ -92,8 +92,8 @@ export default {
   // --------------------账单管理 start--------------------
 
   'menu.bill': '账单管理',
-  'menu.bill.book.list': '账本管理',
-  'menu.bill.category.list': '账单分类管理',
+  'menu.bill.book.list': '账本',
+  'menu.bill.category.list': '账单分类',
   'menu.bill.expenses': '账单支出管理',
   'menu.bill.expenses.list': '账单支出',
   'menu.bill.expenses.add': '添加账单支出',
