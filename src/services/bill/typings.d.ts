@@ -24,12 +24,13 @@ declare namespace BILLENTITYAPI {
         amount?: number;
         remark?: string;
         photoUrl?: string;
-        billTime?: date;
+        billTime?: Date;
         delFlag?: string;
         createBy?: string;
-        createTime?: date;
+        createTime?: Date;
         updateBy?: string;
-        updateTime?: date;
+        updateTime?: Date;
+
 
         pageSize?: number;
         pageNum?: number;
@@ -53,12 +54,12 @@ declare namespace BILLENTITYAPI {
         amount?: number;
         remark?: string;
         photoUrl?: string;
-        billTime?: date;
+        billTime?: Date;
         delFlag?: string;
         createBy?: string;
-        createTime?: date;
+        createTime?: Date;
         updateBy?: string;
-        updateTime?: date;
+        updateTime?: Date;
 
         billBookCategory?: billBookCategoryEntity;
         billCategory?: BillCategoryEntity;
@@ -71,9 +72,9 @@ declare namespace BILLENTITYAPI {
         bookCategoryName?: string;
         remark?: string;
         createBy?: string;
-        createTime?: date;
+        createTime?: Date;
         updateBy?: string;
-        updateTime?: date;
+        updateTime?: Date;
     }
 
     type BillCategoryEntity = {
@@ -81,9 +82,9 @@ declare namespace BILLENTITYAPI {
         categoryName?: string;
         remark?: string;
         createBy?: string;
-        createTime?: date;
+        createTime?: Date;
         updateBy?: string;
-        updateTime?: date;
+        updateTime?: Date;
     }
 
     /**
@@ -130,9 +131,9 @@ declare namespace BILLENTITYAPI {
 
         //delFlag?: string;
         createBy?: string;
-        createTime?: date;
+        createTime?: Date;
         updateBy?: string;
-        updateTime?: date;
+        updateTime?: Date;
     }
 
     /**
@@ -166,9 +167,9 @@ declare namespace BILLENTITYAPI {
 
         //delFlag?: string;
         createBy?: string;
-        createTime?: date;
+        createTime?: Date;
         updateBy?: string;
-        updateTime?: date;
+        updateTime?: Date;
     };
 
 }
