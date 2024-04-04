@@ -34,51 +34,57 @@ export const BASEENTITYCOLUMN: ProColumns<UserRankEntityAPI.UserRankVO>[] = [
         dataIndex: 'billAmount',
         hideInTable: false,
         valueType: 'text',
+        sorter: (a, b) => a.billAmount - b.billAmount,
     },
     {
         title: '总账单条数',
         dataIndex: 'billCount',
         hideInTable: false,
         valueType: 'text',
+        sorter: (a, b) => a.billCount - b.billCount,
     },
     {
         title: '总收入',
         dataIndex: 'totalIncome',
         hideInTable: false,
         valueType: 'text',
+        sorter: (a, b) => a.totalIncome - b.totalIncome,
     },
     {
         title: '总支出',
         dataIndex: 'totalExpense',
         hideInTable: false,
         valueType: 'text',
+        sorter: (a, b) => a.totalExpense - b.totalExpense,
     },
     {
         title: '支出次数',
         dataIndex: 'expenseCount',
         hideInTable: false,
         valueType: 'text',
+        sorter: (a, b) => a.expenseCount - b.expenseCount,
     },
     {
         title: '登录次数',
         dataIndex: 'loginCount',
         hideInTable: false,
         valueType: 'text',
+        sorter: (a, b) => a.loginCount - b.loginCount,
     },
     {
         title: '最后登录时间',
         dataIndex: 'loginTime',
         hideInTable: false,
         valueType: 'dateTime',
-        sorter: true,
+        // sorter: true,
         fieldProps: {
             format: 'YYYY.MM.DD HH:mm:ss',
         },
         //增加一个时间排序，排序的字段是loginTime，排序的方式是升序，降序
-        // sorter: {
-        //     compare: (a, b) => a.loginTime - b.loginTime,
-        //     multiple: 3,
-        // },
+        sorter: {
+            compare: (a, b) => a.loginTime - b.loginTime,
+            // multiple: 3,
+        },
     },
     {
         title: '创建时间',
