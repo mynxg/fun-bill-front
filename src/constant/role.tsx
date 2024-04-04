@@ -38,6 +38,7 @@ export const RULECOLUMN: ProColumns<RoleEntityAPI.RoleVO>[] = [
         title: '角色排序',
         dataIndex: 'roleSort',
         valueType: 'text',
+        sorter: (a, b) => a.roleSort - b.roleSort,
         formItemProps: {
             rules: [{
                 required: true,
@@ -108,6 +109,7 @@ export const RULECOLUMN: ProColumns<RoleEntityAPI.RoleVO>[] = [
         title: '创建时间',
         dataIndex: 'createTime',
         valueType: 'dateTime',
+        sorter: (a, b) => a.createTime - b.createTime,
     },
     {
         title: '修改人',
@@ -118,6 +120,7 @@ export const RULECOLUMN: ProColumns<RoleEntityAPI.RoleVO>[] = [
         title: '修改时间',
         dataIndex: 'updateTime',
         valueType: 'dateTime',
+        sorter: (a, b) => a.updateTime - b.updateTime,
     },
     // {
     //     title: '操作',
