@@ -6,7 +6,7 @@ export const PAGESIZE = 3;
 export const USERPAGESIZE = 6;
 export const NEWSAVATAR = "https://hzh-1318734603.cos.ap-shanghai.myqcloud.com/%E6%96%B0%E9%97%BB.jpg";
 
-export const USERCOLUMN: ProColumns<UserEntityAPI.UserVO>[] = [
+export const BASEENTITYCOLUMN: ProColumns<UserEntityAPI.UserVO>[] = [
   {
     title: 'id',
     dataIndex: 'userId',
@@ -134,13 +134,14 @@ export const USERCOLUMN: ProColumns<UserEntityAPI.UserVO>[] = [
     dataIndex: 'loginTime',
     hideInTable: true,
     valueType: 'text',
+    sorter: (a, b) => a.loginTime - b.loginTime,
   },
   {
     title: '创建时间',
-    sorter: true,
     dataIndex: 'createTime',
     valueType: 'dateTime',
     hideInForm: true,
+    sorter: (a, b) => a.createTime - b.createTime,
   },
   {
     title: '备注',

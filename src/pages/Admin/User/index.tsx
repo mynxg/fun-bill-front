@@ -21,7 +21,7 @@ import {
 } from "@/services/user/userController";
 import { useModel } from "@umijs/max";
 
-import { USERCOLUMN, UPDATEUSERCOLUMN, USERPAGESIZE,USERENTITYCOLUMN } from "@/constant/user";
+import { BASEENTITYCOLUMN, UPDATEUSERCOLUMN, USERPAGESIZE,USERENTITYCOLUMN } from "@/constant/user";
 
 
 /**
@@ -163,7 +163,7 @@ const UserManager: React.FC = () => {
     };
 
     const columns: ProColumns<UserEntityAPI.UserVO>[] = [
-        ...USERCOLUMN,
+        ...BASEENTITYCOLUMN,
         {
             title: '操作',
             dataIndex: 'option',
