@@ -106,6 +106,13 @@ export default {
   'menu.bill.income.update': '修改账单收入',
   'menu.bill.income.delete': '删除账单收入',
   // --------------------账单管理 end--------------------
-  
+  // --------------------报表管理 start--------------------
+  'menu.report': '报表管理',
+  'menu.report.userRank': '用户排行',
+  'menu.report.userRank.list': '用户排行列表',
+  'menu.report.userRank.add': '添加用户排行',
+  'menu.report.userRank.update': '修改用户排行',
+  'menu.report.userRank.delete': '删除用户排行',
+  // --------------------报表管理 end--------------------  
 
 };

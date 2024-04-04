@@ -166,6 +166,28 @@ export default [
     // menu: false,
   },
   {
+    path: '/report',
+    name: 'report', // 报表中心
+    icon: 'crown',
+    access: 'canAdmin',
+    routes: [
+      {
+        path: '/report',
+        redirect: '/report/userRank',
+      },
+      {
+        path: '/report/userRank',
+        name: 'userRank', // 用户排行
+        component: './Report/UserRank',
+      },
+      // {
+      //   path: '/report/billRank',
+      //   name: 'billRank', // 账单排行
+      //   component: './Report/BillRank',
+      // },
+    ],
+  },
+  {
     path: '/account/center',
     name: '个人中心',
     icon: 'smile',
