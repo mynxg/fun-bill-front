@@ -19,7 +19,7 @@ import {
 import { useModel } from "@umijs/max";
 
 // 列表 表格列，分页大小
-import { BASEENTITYCOLUMN , BASEPAGESIZE } from "@/constant/report/userRank";
+import { BASEENTITYCOLUMN ,READNTITYCOLUMN,BASEPAGESIZE } from "@/constant/report/userRank";
 
 /**
  * 用户排行管理
@@ -70,7 +70,7 @@ const UserRankManager: React.FC = () => {
 
     //初始化
     useEffect(() => {
-        getFormInfo(1, BASEPAGESIZE,{});
+        getFormInfo();
     }, []);
 
     //如果网络请求数据还没拿到，就先 加载中  转圈
@@ -186,7 +186,7 @@ const UserRankManager: React.FC = () => {
                     handleReadModalOpen(false)}
                 }
                 open={readModalOpen}>
-                    <ReadModal EntityItem={currentRow} EntityColumns={BASEENTITYCOLUMN}/>
+                    <ReadModal EntityItem={currentRow} EntityColumns={READNTITYCOLUMN}/>
 
             </Drawer>
 
