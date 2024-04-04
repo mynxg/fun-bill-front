@@ -21,7 +21,7 @@ export const NEWSAVATAR = "https://hzh-1318734603.cos.ap-shanghai.myqcloud.com/%
 // updateBy?: string;
 // updateTime?: date;
 
-export const BASEADDCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
+export const BASEENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
     {
         title: 'id',
         dataIndex: 'billId',
@@ -42,6 +42,7 @@ export const BASEADDCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         title: '金额',
         dataIndex: 'amount',
         valueType: 'money',
+        sorter: (a, b) => a.amount - b.amount,
         formItemProps: {
             rules: [{
                 required: true,
@@ -82,20 +83,54 @@ export const BASEADDCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
     {
         title: '账单创建时间',
         dataIndex: 'billTime',
-        hideInTable: true,
-        valueType: 'dateTime',
+        hideInTable: false,
+        valueType: 'date',
+        sorter: (a, b) => new Date(b.billTime) - new Date(a.billTime),
+        fieldProps: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+        },
     },
-    // {
-    //     title: '创建时间',
-    //     sorter: true,
-    //     dataIndex: 'createTime',
-    //     valueType: 'dateTime',
-    //     hideInForm: true,
-    // },
+    {
+        title: '创建时间',
+        dataIndex: 'createTime',
+        hideInTable: true,
+        hideInForm: true,
+        valueType: 'date',
+        sorter: (a, b) => a.createTime - b.createTime,
+        fieldProps: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+        },
+    },
+    {
+        title: '创建人',
+        dataIndex: 'createBy',
+        hideInTable: true,
+        hideInForm: true,
+        valueType: 'text',
+    },
+    {
+        title: '修改时间',
+        dataIndex: 'updateTime',
+        hideInTable: true,
+        hideInForm: true,
+        valueType: 'date',
+        sorter: (a, b) => a.updateTime - b.updateTime,
+        fieldProps: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+        },
+    },
+    {
+        title: '修改人',
+        dataIndex: 'updateBy',
+        hideInTable: true,
+        hideInForm: true,
+        valueType: 'text',
+    },
     {
         title: '备注',
         dataIndex: 'remark',
         hideInTable: true,
+        hideInForm: true,
         valueType: 'textarea',
     },
 ]
@@ -157,12 +192,45 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         dataIndex: 'billTime',
         hideInTable: true,
         valueType: 'dateTime',
-
+        fieldProps: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+        },
     },
+    // {
+    //     title: '创建时间',
+    //     dataIndex: 'createTime',
+    //     hideInTable: true,
+    //     hideInForm: true,
+    //     valueType: 'dateTime',
+    //     sorter: (a, b) => a.createTime.localeCompare(b.createTime),
+    // },
+    // {
+    //     title: '创建人',
+    //     dataIndex: 'createBy',
+    //     hideInTable: true,
+    //     hideInForm: true,
+    //     valueType: 'text',
+    // },
+    // {
+    //     title: '修改时间',
+    //     dataIndex: 'updateTime',
+    //     hideInTable: true,
+    //     hideInForm: true,
+    //     valueType: 'text',
+    //     sorter: (a, b) => a.updateTime - b.updateTime,
+    // },
+    // {
+    //     title: '修改人',
+    //     dataIndex: 'updateBy',
+    //     hideInTable: true,
+    //     hideInForm: true,
+    //     valueType: 'text',
+    // },
     {
         title: '备注',
         dataIndex: 'remark',
         hideInTable: true,
+        hideInForm: false,
         valueType: 'textarea',
     },
 ]
@@ -221,7 +289,7 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         valueType: 'text',
         valueEnum: {
             // array.forEach(element => {
-                
+
             // });
             1: {
                 text: '餐饮',
@@ -264,6 +332,12 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         title: '账单创建时间',
         dataIndex: 'billTime',
         hideInTable: true,
+        valueType: 'dateTime',
+    },
+    {
+        title: '创建时间',
+        dataIndex: 'createTime',
+        hideInTable: false,
         valueType: 'dateTime',
     },
     {

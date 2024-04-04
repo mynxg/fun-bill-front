@@ -23,7 +23,7 @@ import { useModel } from "@umijs/max";
 
 import { 
     ENTITYCOLUMN, 
-    BASEADDCOLUMN, 
+    BASEENTITYCOLUMN, 
     UPDATECOLUMN, 
     BASEPAGESIZE 
 } from "@/constant/billCategory";
@@ -182,7 +182,7 @@ const BillCategoryManager: React.FC = () => {
     };
 
     const columns: ProColumns<BILLCATEGORYENTITYAPI.BillCategoryVO>[] = [
-        ...BASEADDCOLUMN,
+        ...BASEENTITYCOLUMN,
         {
             title: '操作',
             dataIndex: 'option',

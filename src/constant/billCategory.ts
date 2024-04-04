@@ -6,7 +6,7 @@ export const BASEPAGESIZE = 6;
 export const NEWSAVATAR = "https://hzh-1318734603.cos.ap-shanghai.myqcloud.com/%E6%96%B0%E9%97%BB.jpg";
 
 
-export const BASEADDCOLUMN: ProColumns<BILLCATEGORYENTITYAPI.BillCategoryVO>[] = [
+export const BASEENTITYCOLUMN: ProColumns<BILLCATEGORYENTITYAPI.BillCategoryVO>[] = [
     {
         title: 'id',
         dataIndex: 'categoryId',
@@ -23,25 +23,46 @@ export const BASEADDCOLUMN: ProColumns<BILLCATEGORYENTITYAPI.BillCategoryVO>[] =
             }]
         }
     },
-    
-    // {
-    //     title: '账单分类',
-    //     dataIndex: 'categoryId',
-    //     hideInTable: false,
-    //     valueType: 'text',
-    // },
-
+    {
+        title: '账单分类',
+        dataIndex: 'categoryId',
+        hideInTable: true,
+        hideInForm: true,
+        valueType: 'text',
+    },
     {
         title: '创建时间',
-        sorter: true,
         dataIndex: 'createTime',
         valueType: 'dateTime',
         hideInForm: true,
+        sorter: (a, b) => a.createTime - b.createTime,
+    },
+    {
+        title: '创建人',
+        dataIndex: 'createBy',
+        hideInTable: false,
+        valueType: 'text',
+        hideInForm: true,
+    },
+    {
+        title: '修改时间',
+        dataIndex: 'updateTime',
+        valueType: 'text',
+        hideInTable: true,
+        hideInForm: true,
+        sorter: (a, b) => a.updateTime - b.updateTime,
+    },
+    {
+        title: '修改人',
+        dataIndex: 'updateBy',
+        hideInTable: true,
+        hideInForm: true,
+        valueType: 'text',
     },
     {
         title: '备注',
         dataIndex: 'remark',
-        hideInTable: true,
+        hideInTable: false,
         valueType: 'textarea',
     },
 ]

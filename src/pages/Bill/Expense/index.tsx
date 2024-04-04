@@ -23,7 +23,7 @@ import { useModel } from "@umijs/max";
 
 import { 
     ENTITYCOLUMN, 
-    BASEADDCOLUMN, 
+    BASEENTITYCOLUMN, 
     UPDATECOLUMN, 
     BASEPAGESIZE 
 } from "@/constant/bill";
@@ -58,7 +58,7 @@ const BillExpensesManager: React.FC = () => {
         const res = await listBillExpenseVOByPageUsingGET({
             pageNum: pageNum,
             pageSize: pageSize,
-            id: 'userId',
+            // id: 'userId',
             // userType: 'sys_user',
         })
         setTotal(res?.total || 0)
@@ -168,7 +168,7 @@ const BillExpensesManager: React.FC = () => {
     };
 
     const columns: ProColumns<BILLENTITYAPI.BillVO>[] = [
-        ...BASEADDCOLUMN,
+        ...BASEENTITYCOLUMN,
         {
             title: '操作',
             dataIndex: 'option',

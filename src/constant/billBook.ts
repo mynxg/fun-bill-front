@@ -12,7 +12,7 @@ export const NEWSAVATAR = "https://hzh-1318734603.cos.ap-shanghai.myqcloud.com/%
  * @description 账本分类  列表头部展示、预览、编辑、删除表单展示字段
  * @typedef BILLBOOKCATEGORYAPI
  */
-export const BASEADDCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
+export const BASEENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
     {
         title: 'id',
         dataIndex: 'id',
@@ -50,10 +50,10 @@ export const BASEADDCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
     },
     {
         title: '创建时间',
-        sorter: true,
         dataIndex: 'createTime',
         valueType: 'dateTime',
         hideInForm: true,
+        sorter: (a, b) => a.createTime - b.createTime,
     },
     {
         title: '创建人',
@@ -66,6 +66,7 @@ export const BASEADDCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         dataIndex: 'updateTime',
         hideInTable: false,
         valueType: 'text',
+        sorter: (a, b) => a.updateTime - b.updateTime,
     },
     {
         title: '修改人',

@@ -23,7 +23,7 @@ import { useModel } from "@umijs/max";
 
 import { 
     ENTITYCOLUMN, 
-    BASEADDCOLUMN, 
+    BASEENTITYCOLUMN, 
     UPDATECOLUMN, 
     BASEPAGESIZE 
 } from "@/constant/billBook";
@@ -187,7 +187,7 @@ const BillBookManager: React.FC = () => {
     };
 
     const columns: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
-        ...BASEADDCOLUMN,
+        ...BASEENTITYCOLUMN,
         {
             title: '操作',
             dataIndex: 'option',
