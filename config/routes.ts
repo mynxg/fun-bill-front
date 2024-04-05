@@ -119,7 +119,7 @@ export default [
     path: '/bill',
     name: 'bill', // 账单管理
     icon: 'crown',
-    access: 'canAdmin',
+    // access: 'canAdmin',
     routes: [
       {
         path: '/bill/book',
@@ -151,7 +151,7 @@ export default [
     path: '/monitor',
     name: 'logininfo', // 日志中心
     icon: 'crown',
-    access: 'canAdmin',
+    // access: 'canAdmin',
     routes: [
       {
         path: '/monitor',
@@ -169,7 +169,7 @@ export default [
     path: '/report',
     name: 'report', // 报表中心
     icon: 'crown',
-    access: 'canAdmin',
+    // access: 'canAdmin',
     routes: [
       {
         path: '/report',
