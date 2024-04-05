@@ -40,7 +40,6 @@ import {
 const BillBookManager: React.FC = () => {
 
     /**
-  * @en-US Pop-up window of new window
   * @zh-CN 新建窗口的弹窗
   *  */
     const [createModalOpen, handleModalOpen] = useState<boolean>(false);
@@ -144,9 +143,7 @@ const BillBookManager: React.FC = () => {
 
     //初始化
     useEffect(() => {
-        // console.log("useEffect");
         getFormInfo();
-        // console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);
 
     //如果网络请求数据还没拿到，就先 加载中  转圈

@@ -168,6 +168,14 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         valueType: 'index',
     },
     {
+        title: '账单id',
+        dataIndex: 'billId',
+        valueType: 'text',
+        fieldProps: {
+            disabled: true,
+        }
+    },
+    {
         title: '账单名称',
         dataIndex: 'title',
         valueType: 'text',
@@ -196,12 +204,15 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         valueType: 'text',
         valueEnum: valueEnumBillBook,
     },
-    // {
-    //     title: '用户id',
-    //     dataIndex: 'userId',
-    //     hideInTable: false,
-    //     valueType: 'text',
-    // },
+    {
+        title: '用户id',
+        dataIndex: 'userId',
+        hideInTable: false,
+        valueType: 'text',
+        fieldProps: {
+            disabled: true,
+        }
+    },
     {
         title: '账单分类',
         dataIndex: 'categoryId',
@@ -224,36 +235,72 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
             format: 'YYYY-MM-DD HH:mm:ss',
         },
     },
-    // {
-    //     title: '创建时间',
-    //     dataIndex: 'createTime',
-    //     hideInTable: true,
-    //     hideInForm: true,
-    //     valueType: 'dateTime',
-    //     sorter: (a, b) => a.createTime.localeCompare(b.createTime),
-    // },
-    // {
-    //     title: '创建人',
-    //     dataIndex: 'createBy',
-    //     hideInTable: true,
-    //     hideInForm: true,
-    //     valueType: 'text',
-    // },
-    // {
-    //     title: '修改时间',
-    //     dataIndex: 'updateTime',
-    //     hideInTable: true,
-    //     hideInForm: true,
-    //     valueType: 'text',
-    //     sorter: (a, b) => a.updateTime - b.updateTime,
-    // },
-    // {
-    //     title: '修改人',
-    //     dataIndex: 'updateBy',
-    //     hideInTable: true,
-    //     hideInForm: true,
-    //     valueType: 'text',
-    // },
+    {
+        title: '备注',
+        dataIndex: 'remark',
+        hideInTable: true,
+        hideInForm: false,
+        valueType: 'textarea',
+    },
+]
+
+export const ADDCOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
+    {
+        title: 'id',
+        dataIndex: 'billId',
+        valueType: 'index',
+    },
+    {
+        title: '账单名称',
+        dataIndex: 'title',
+        valueType: 'text',
+        formItemProps: {
+            rules: [{
+                required: true,
+                message: "请输入账单名称",
+            }]
+        }
+    },
+    {
+        title: '金额',
+        dataIndex: 'amount',
+        valueType: 'money',
+        formItemProps: {
+            rules: [{
+                required: true,
+                message: "请输入金额",
+            }]
+        }
+    },
+    {
+        title: '账本名称',
+        dataIndex: 'bookId',
+        hideInTable: false,
+        valueType: 'text',
+        valueEnum: valueEnumBillBook,
+    },
+    {
+        title: '账单分类',
+        dataIndex: 'categoryId',
+        hideInTable: false,
+        valueType: 'text',
+        valueEnum: valueEnumBillCategory,
+    },
+    {
+        title: '图片地址',
+        dataIndex: 'photoUrl',
+        hideInTable: false,
+        valueType: 'text',
+    },
+    {
+        title: '账单创建时间',
+        dataIndex: 'billTime',
+        hideInTable: true,
+        valueType: 'dateTime',
+        fieldProps: {
+            format: 'YYYY-MM-DD HH:mm:ss',
+        },
+    },
     {
         title: '备注',
         dataIndex: 'remark',

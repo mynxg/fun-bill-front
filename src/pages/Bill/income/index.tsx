@@ -5,9 +5,9 @@ import {
     ProDescriptions,
     ProTable,
 } from '@ant-design/pro-components';
-import { Button, Drawer, Modal, message,Spin  } from 'antd';
+import { Button, Drawer, Modal, message, Spin } from 'antd';
 
-import React, { useEffect, useRef, useState,useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 import CreateModal from "./components/CreateModal";
 import UpdateModal from "./components/UpdateModal";
@@ -21,24 +21,24 @@ import {
 } from "@/services/bill/billIncomeController";
 import { useModel } from "@umijs/max";
 
-import { 
-    ENTITYCOLUMN, 
-    BASEENTITYCOLUMN, 
-    UPDATECOLUMN, 
-    BASEPAGESIZE 
+import {
+    ENTITYCOLUMN,
+    BASEENTITYCOLUMN,
+    UPDATECOLUMN,
+    ADDCOLUMN,
+    BASEPAGESIZE
 } from "@/constant/bill";
 
 
 /**
- * 账单支出管理
+ * 账单收入管理
  * @returns
  */
 const BillExpensesManager: React.FC = () => {
 
     /**
-  * @en-US Pop-up window of new window
-  * @zh-CN 新建窗口的弹窗
-  *  */
+     * @zh-CN 创建弹窗
+     */
     const [createModalOpen, handleModalOpen] = useState<boolean>(false);
 
     const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
@@ -68,19 +68,19 @@ const BillExpensesManager: React.FC = () => {
     }
 
     //点击详情
-    const readClickStatus = useCallback((record:BILLENTITYAPI.BillVO) => {
+    const readClickStatus = useCallback((record: BILLENTITYAPI.BillVO) => {
         handleReadModalOpen(true);
         setCurrentRow(record);
-      }, [handleReadModalOpen, setCurrentRow]);
+    }, [handleReadModalOpen, setCurrentRow]);
 
-      //点击修改
-      const updateClickStatus = useCallback((record:BILLENTITYAPI.BillVO) => {
+    //点击修改
+    const updateClickStatus = useCallback((record: BILLENTITYAPI.BillVO) => {
         handleUpdateModalOpen(true);
         setCurrentRow(record);
-      }, [handleUpdateModalOpen, setCurrentRow]);
+    }, [handleUpdateModalOpen, setCurrentRow]);
 
 
-      //点击添加
+    //点击添加
     const handleAdd = async (fields: BILLENTITYAPI.AddRquestParams) => {
         const hide = message.loading('正在添加');
         try {
@@ -102,8 +102,7 @@ const BillExpensesManager: React.FC = () => {
     };
 
     /**
-      *  Delete node
-      * @zh-CN 删除用户
+      * @zh-CN 删除账单
       *
       * @param selectedRow
       */
@@ -128,9 +127,7 @@ const BillExpensesManager: React.FC = () => {
 
     //初始化
     useEffect(() => {
-        console.log("useEffect");
         getFormInfo();
-        console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);
 
     //如果网络请求数据还没拿到，就先 加载中  转圈
@@ -140,7 +137,7 @@ const BillExpensesManager: React.FC = () => {
 
     /**
      * @en-US Update node
-     * @zh-CN 更新用户
+     * @zh-CN 更新账单
      *
      * @param fields
      */
@@ -222,6 +219,10 @@ const BillExpensesManager: React.FC = () => {
         ...UPDATECOLUMN,
     ];
 
+    const addColumn: ProColumns<BILLENTITYAPI.AddRquestParams>[] = [
+        ...ADDCOLUMN,
+    ];
+
     return (
         <PageContainer>
             <ProTable<BILLENTITYAPI.BillVO, BILLENTITYAPI.PageParams>
@@ -233,7 +234,7 @@ const BillExpensesManager: React.FC = () => {
                         await getFormInfo(pageNum, pageSize);
                     },
                 }}
-                headerTitle={'用户信息'}
+                headerTitle={'账单收入信息'}
                 actionRef={actionRef}
                 rowKey="key"
                 search={{
@@ -247,7 +248,7 @@ const BillExpensesManager: React.FC = () => {
                             handleModalOpen(true);
                         }}
                     >
-                        <PlusOutlined /> 新建用户
+                        <PlusOutlined /> 新建收入账单
                     </Button>,
                 ]}
                 request={async () => ({
@@ -296,7 +297,7 @@ const BillExpensesManager: React.FC = () => {
                     />
                 )}
             </Drawer>
-            <CreateModal columns={updateColumn} onCancel={() => { handleModalOpen(false) }}
+            <CreateModal columns={addColumn} onCancel={() => { handleModalOpen(false) }}
                 onSubmit={async (values: BILLENTITYAPI.UpdateRequestParams) => {
                     await handleAdd(values)
                 }} visible={createModalOpen} file={false} />
@@ -304,12 +305,13 @@ const BillExpensesManager: React.FC = () => {
             <Drawer width={640}
                 placement="right"
                 closable={false}
-                onClose={ ()=> {
+                onClose={() => {
                     setCurrentRow(undefined);
-                    handleReadModalOpen(false)}
+                    handleReadModalOpen(false)
+                }
                 }
                 open={readModalOpen}>
-                    <ReadModal EntityItem={currentRow} EntityColumns={ENTITYCOLUMN}/>
+                <ReadModal EntityItem={currentRow} EntityColumns={ENTITYCOLUMN} />
 
             </Drawer>
 

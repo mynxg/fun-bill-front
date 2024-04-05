@@ -25,6 +25,7 @@ import {
     ENTITYCOLUMN, 
     BASEENTITYCOLUMN, 
     UPDATECOLUMN, 
+    ADDCOLUMN,
     BASEPAGESIZE 
 } from "@/constant/bill";
 
@@ -238,6 +239,10 @@ const BillExpensesManager: React.FC = () => {
         ...UPDATECOLUMN,
     ];
 
+    const addColumn: ProColumns<BILLENTITYAPI.AddRquestParams>[] = [
+        ...ADDCOLUMN,
+    ];
+
     return (
         <PageContainer>
             <ProTable<BILLENTITYAPI.BillVO, BILLENTITYAPI.PageParams>
@@ -312,7 +317,7 @@ const BillExpensesManager: React.FC = () => {
                     />
                 )}
             </Drawer>
-            <CreateModal columns={updateColumn} onCancel={() => { handleModalOpen(false) }}
+            <CreateModal columns={addColumn} onCancel={() => { handleModalOpen(false) }}
                 onSubmit={async (values: BILLENTITYAPI.UpdateRequestParams) => {
                     await handleAdd(values)
                 }} visible={createModalOpen} file={false} />

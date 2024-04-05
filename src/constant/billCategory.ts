@@ -67,6 +67,17 @@ export const UPDATECOLUMN: ProColumns<BILLCATEGORYENTITYAPI.UpdateRequestParams>
         valueType: 'index',
     },
     {
+        title: '账单id',
+        dataIndex: 'categoryId',
+        valueType: 'digit',
+        hideInForm: false,
+        fieldProps: {
+            disabled: true,
+            //加粗
+            style: { fontWeight: 'bold' }
+        },
+    },
+    {
         title: '账单分类名称',
         dataIndex: 'categoryName',
         valueType: 'text',
@@ -92,6 +103,37 @@ export const UPDATECOLUMN: ProColumns<BILLCATEGORYENTITYAPI.UpdateRequestParams>
     },
 ]
 
+export const ADDCOLUMN: ProColumns<BILLCATEGORYENTITYAPI.UpdateRequestParams>[] = [
+    {
+        title: 'id',
+        dataIndex: 'categoryId',
+        valueType: 'index',
+    },
+    {
+        title: '账单分类名称',
+        dataIndex: 'categoryName',
+        valueType: 'text',
+        formItemProps: {
+            rules: [{
+                required: true,
+                message: "请输入账单名称",
+            }]
+        }
+    },
+    // {
+    //     title: '创建时间',
+    //     sorter: true,
+    //     dataIndex: 'createTime',
+    //     valueType: 'dateTime',
+    //     hideInForm: true,
+    // },
+    {
+        title: '备注',
+        dataIndex: 'remark',
+        hideInTable: true,
+        valueType: 'textarea',
+    },
+]
 /**
  * title: '文本',
 key: 'text',

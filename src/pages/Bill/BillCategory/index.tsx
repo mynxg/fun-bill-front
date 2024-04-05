@@ -25,24 +25,26 @@ import {
     ENTITYCOLUMN, 
     BASEENTITYCOLUMN, 
     UPDATECOLUMN, 
+    ADDCOLUMN,
     BASEPAGESIZE 
 } from "@/constant/billCategory";
 
 
 /**
- * 账单支出管理
+ * 账单分类管理
  * @returns
  */
 const BillCategoryManager: React.FC = () => {
 
     /**
-  * @en-US Pop-up window of new window
-  * @zh-CN 新建窗口的弹窗
-  *  */
+     * 创建弹窗
+     */
     const [createModalOpen, handleModalOpen] = useState<boolean>(false);
 
     const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
     const [showDetail, setShowDetail] = useState<boolean>(false);
+
+    //当前行
     const actionRef = useRef<ActionType>();
     const [currentRow, setCurrentRow] = useState<BILLCATEGORYENTITYAPI.BillCategoryVO>();
 
@@ -89,6 +91,7 @@ const BillCategoryManager: React.FC = () => {
                 // userType: 'sys_user',
             });
             if (resultStr.code !== 200) {
+                hide();
                 message.error(resultStr.msg || "添加失败");
                 return false;
             }
@@ -137,9 +140,7 @@ const BillCategoryManager: React.FC = () => {
 
     //初始化
     useEffect(() => {
-        console.log("useEffect");
         getFormInfo();
-        console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);
 
     //如果网络请求数据还没拿到，就先 加载中  转圈
@@ -236,6 +237,11 @@ const BillCategoryManager: React.FC = () => {
         ...UPDATECOLUMN,
     ];
 
+    //增加账单分类基本列
+    const addColumn: ProColumns<BILLCATEGORYENTITYAPI.UpdateRequestParams>[] = [
+        ...ADDCOLUMN,
+    ];
+
     return (
         <PageContainer>
             <ProTable<BILLCATEGORYENTITYAPI.BillCategoryVO, BILLCATEGORYENTITYAPI.PageParams>
@@ -310,7 +316,7 @@ const BillCategoryManager: React.FC = () => {
                     />
                 )}
             </Drawer>
-            <CreateModal columns={updateColumn} onCancel={() => { handleModalOpen(false) }}
+            <CreateModal columns={addColumn} onCancel={() => { handleModalOpen(false) }}
                 onSubmit={async (values: BILLCATEGORYENTITYAPI.UpdateRequestParams) => {
                     await handleAdd(values)
                 }} visible={createModalOpen} file={false} />
