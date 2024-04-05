@@ -16,20 +16,22 @@ const resultStr = await listByPageUsingGET({
     pageSize: 10,
 });
 
+//账本分类枚举
 const valueEnumBillBookCategory = {
 };
 
+//遍历账本分类列表
 resultStr.data?.map((item) => {
-    console.log(item)
 
     valueEnumBillBookCategory[item.bookCategoryId] = {
+        id: item.bookCategoryId,
         text: item.bookCategoryName,
         status: 'Success',
     }
 })
 
 /**
- * 基本列
+ * 列表展示 基本列
  */
 export const BASEENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
     {
@@ -59,8 +61,9 @@ export const BASEENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         title: '账本分类',
         dataIndex: 'bookCategoryId',
         hideInTable: false,
-        valueType: 'text',
+        valueType: 'select',
         valueEnum: valueEnumBillBookCategory,
+        defaultFilteredValue: ['1'],
     },
     {
         title: '图片地址',
@@ -96,11 +99,25 @@ export const BASEENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
     }
 ]
 
+/**
+ * 修改基本列
+ */
 export const UPDATECOLUMN: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[] = [
     {
         title: 'id',
         dataIndex: 'bookId',
         valueType: 'index',
+    },
+    {
+        title: '账本id',
+        dataIndex: 'bookId',
+        valueType: 'digit',
+        hideInForm: false,
+        fieldProps: {
+            disabled: true,
+            //加粗
+            style: { fontWeight: 'bold' }
+        }
     },
     {
         title: '账本名称',
@@ -119,7 +136,45 @@ export const UPDATECOLUMN: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[] =
         title: '账本分类',
         dataIndex: 'bookCategoryId',
         hideInTable: false,
+        valueType: 'select',
+        valueEnum: valueEnumBillBookCategory,
+    },
+    {
+        title: '图片地址',
+        dataIndex: 'photoUrl',
+        hideInTable: true,
         valueType: 'text',
+    },
+    {
+        title: '备注',
+        dataIndex: 'remark',
+        hideInTable: true,
+        valueType: 'textarea',
+    },
+]
+
+/**
+ * 添加基本列
+ */
+export const ADDCOLUMN: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[] = [
+    {
+        title: '账本名称',
+        dataIndex: 'bookName',
+        hideInTable: false,
+        valueType: 'text',
+    },
+    {
+        title: '用户id',
+        dataIndex: 'userId',
+        hideInTable: true,
+        hideInForm: true,
+        valueType: 'text',
+    },
+    {
+        title: '账本分类',
+        dataIndex: 'bookCategoryId',
+        hideInTable: false,
+        valueType: 'select',
         valueEnum: valueEnumBillBookCategory,
     },
     {
@@ -165,7 +220,7 @@ export const ENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         title: '账本分类',
         dataIndex: 'bookCategoryId',
         hideInTable: false,
-        valueType: 'text',
+        valueType: 'select',
         valueEnum: valueEnumBillBookCategory,
     },
     {

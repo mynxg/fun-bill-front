@@ -25,6 +25,7 @@ import {
     ENTITYCOLUMN, 
     BASEENTITYCOLUMN, 
     UPDATECOLUMN, 
+    ADDCOLUMN,
     BASEPAGESIZE 
 } from "@/constant/billBook";
 
@@ -164,6 +165,7 @@ const BillBookManager: React.FC = () => {
         }
         const hide = message.loading('更新中');
         try {
+            console.log("fields", fields);
             const resultStr = await updateByUsingPOST({
                 userId: currentRow.bookId,
                 ...fields,
@@ -241,6 +243,10 @@ const BillBookManager: React.FC = () => {
         ...UPDATECOLUMN,
     ];
 
+    const addColumn: ProColumns<BILLBOOKENTITYAPI.AddRquestParams>[] = [
+        ...ADDCOLUMN,
+    ];
+
     return (
         <PageContainer>
             <ProTable<BILLBOOKENTITYAPI.BillBookVO, BILLBOOKENTITYAPI.PageParams>
@@ -315,7 +321,7 @@ const BillBookManager: React.FC = () => {
                     />
                 )}
             </Drawer>
-            <CreateModal columns={updateColumn} onCancel={() => { handleModalOpen(false) }}
+            <CreateModal columns={addColumn} onCancel={() => { handleModalOpen(false) }}
                 onSubmit={async (values: BILLBOOKENTITYAPI.UpdateRequestParams) => {
                     await handleAdd(values)
                 }} visible={createModalOpen} file={false} />
