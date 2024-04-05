@@ -1,7 +1,49 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { useModel } from '@umijs/max';
-import { Card, theme } from 'antd';
-import React from 'react';
+import { FormattedMessage, Helmet, SelectLang, history, useIntl, useModel } from '@umijs/max';
+import { Card, theme, Tabs } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { createStyles } from 'antd-style';
+import { ProCard } from '@ant-design/pro-components';
+import MyBar from './Chart/MyBar';
+import MyChar from './Chart/MyChar';
+import MyUser from './Chart/MyUser';
+
+
+const useStyles = createStyles(({ token }) => {
+  return {
+    action: {
+      marginLeft: '8px',
+      color: 'rgba(0, 0, 0, 0.2)',
+      fontSize: '24px',
+      verticalAlign: 'middle',
+      cursor: 'pointer',
+      transition: 'color 0.3s',
+      '&:hover': {
+        color: token.colorPrimaryActive,
+      },
+    },
+    lang: {
+      width: 42,
+      height: 42,
+      lineHeight: '42px',
+      position: 'fixed',
+      right: 16,
+      borderRadius: token.borderRadius,
+      ':hover': {
+        backgroundColor: token.colorBgTextHover,
+      },
+    },
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      overflow: 'auto',
+      backgroundImage:
+        "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
+      backgroundSize: '100% 100%',
+    },
+  };
+});
 
 /**
  * 每个单独的卡片，为了复用样式抽成了组件
@@ -85,7 +127,12 @@ const InfoCard: React.FC<{
 
 const Welcome: React.FC = () => {
   const { token } = theme.useToken();
-  const { initialState } = useModel('@@initialState');
+  const [type, setType] = useState<string>('account');
+  const { initialState, setInitialState } = useModel('@@initialState');
+  const { styles } = useStyles();
+  const intl = useIntl();
+
+
   return (
     <PageContainer>
       <Card
@@ -108,6 +155,8 @@ const Welcome: React.FC = () => {
               "url('https://gw.alipayobjects.com/mdn/rms_a9745b/afts/img/A*BuFmQqsB2iAAAAAAAAAAAAAAARQnAQ')",
           }}
         >
+
+
           <div
             style={{
               fontSize: '20px',
@@ -126,9 +175,47 @@ const Welcome: React.FC = () => {
               width: '65%',
             }}
           >
-            Ant Design Pro 是一个整合了 umi，Ant Design 和 ProComponents
-            的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
+            趣记账系统，是一个基于 Ant Design 设计体系的 React UI 组件库，后台管理。
           </p>
+          <Tabs
+            activeKey={type}
+            onChange={setType}
+
+            items={[
+              {
+                key: 'account',
+                label: intl.formatMessage({
+                  id: '用户数据统计',
+                  defaultMessage: '用户数据统计',
+                }),
+              },
+              {
+                key: 'mobile',
+                label: intl.formatMessage({
+                  id: '图表',
+                  defaultMessage: '图表',
+                }),
+              },
+            ]}
+          />
+          {type === 'account' && (
+            <div style={{ marginTop: 24 }}>
+              {/* <AccountLogin /> */}
+              {/* <MyChar /> */}
+            </div>
+          )}
+          {type === 'mobile' && (
+            <div
+              style={{
+                marginTop: 24,
+              }}
+            >
+              {/* <MobileLogin /> */}
+            </div>
+          )}
+
+          {/* <MyUser /> */}
+          <MyUser />
           <div
             style={{
               display: 'flex',
@@ -141,8 +228,13 @@ const Welcome: React.FC = () => {
               href="https://umijs.org/docs/introduce/introduce"
               title="了解 umi"
               desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
-            />
-            <InfoCard
+            >
+                {/* <Card >
+                  <MyBar />
+                </Card> */}
+              </InfoCard>
+
+            {/* <InfoCard
               index={2}
               title="了解 ant design"
               href="https://ant.design"
@@ -153,7 +245,7 @@ const Welcome: React.FC = () => {
               title="了解 Pro Components"
               href="https://procomponents.ant.design"
               desc="ProComponents 是一个基于 Ant Design 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
-            />
+            /> */}
           </div>
         </div>
       </Card>
