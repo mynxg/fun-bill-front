@@ -82,12 +82,18 @@ const BillExpensesManager: React.FC = () => {
 
       //点击添加
     const handleAdd = async (fields: BILLENTITYAPI.AddRquestParams) => {
+        console.log(fields);
         const hide = message.loading('正在添加');
         try {
-            await addByUsingPOST({
+            const resultStr = await addByUsingPOST({
                 ...fields,
                 // userType: 'sys_user',
             });
+            if (resultStr.code !== 200) {
+                hide();
+                message.error(resultStr.msg);
+                return false;
+            }
             hide();
             await getFormInfo();
             actionRef?.current?.reload()
@@ -111,9 +117,14 @@ const BillExpensesManager: React.FC = () => {
         const hide = message.loading('正在删除');
         if (!selectedRow) return true;
         try {
-            await deleteByUsingPOST({
+            const resultStr =await deleteByUsingPOST({
                 billId: selectedRow.billId,
             });
+            if (resultStr.code !== 200) {
+                hide();
+                message.error(resultStr.msg);
+                return false;
+            }
             hide();
             await getFormInfo();
             actionRef?.current?.reload()
@@ -128,9 +139,9 @@ const BillExpensesManager: React.FC = () => {
 
     //初始化
     useEffect(() => {
-        console.log("useEffect");
+        // console.log("useEffect");
         getFormInfo();
-        console.log("构造函数执行完，formValue状态变化后：", formValue)
+        // console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);
 
     //如果网络请求数据还没拿到，就先 加载中  转圈
@@ -150,10 +161,15 @@ const BillExpensesManager: React.FC = () => {
         }
         const hide = message.loading('更新中');
         try {
-            await updateByUsingPOST({
+            const resultStr = await updateByUsingPOST({
                 userId: currentRow.billId,
                 ...fields,
             });
+            if (resultStr.code !== 200) {
+                hide();
+                message.error(resultStr.msg);
+                return false;
+            }
             hide();
             message.success('更新成功');
             handleUpdateModalOpen(false);
@@ -233,7 +249,7 @@ const BillExpensesManager: React.FC = () => {
                         await getFormInfo(pageNum, pageSize);
                     },
                 }}
-                headerTitle={'用户信息'}
+                headerTitle={'支出信息'}
                 actionRef={actionRef}
                 rowKey="key"
                 search={{
@@ -247,7 +263,7 @@ const BillExpensesManager: React.FC = () => {
                             handleModalOpen(true);
                         }}
                     >
-                        <PlusOutlined /> 新建用户
+                        <PlusOutlined /> 新建支出账单
                     </Button>,
                 ]}
                 request={async () => ({

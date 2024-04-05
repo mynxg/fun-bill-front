@@ -6,20 +6,44 @@ export const PAGESIZE = 3;
 export const BASEPAGESIZE = 6;
 export const NEWSAVATAR = "https://hzh-1318734603.cos.ap-shanghai.myqcloud.com/%E6%96%B0%E9%97%BB.jpg";
 
-// billId?: number;
-// bookId?: number;
-// userId?: number;
-// categoryId?: number;
-// title?: string;
-// amount?: number;
-// remark?: string;
-// photoUrl?: string;
-// billTime?: date;
-// delFlag?: string;
-// createBy?: string;
-// createTime?: date;
-// updateBy?: string;
-// updateTime?: date;
+
+import { listByPageUsingGET } from '@/services/billCategory/billCategoryController';
+import { listByPageUsingGET as listByPageBillBookUsingGET } from '@/services/billBook/billBookController';
+
+const resultStr = await listByPageUsingGET({
+    pageNum: 1,
+    pageSize: 10,
+})
+
+const resultBillBookStr = await listByPageBillBookUsingGET({
+    pageNum: 1,
+    pageSize: 10,
+})
+
+const valueEnumBillCategory = {
+}
+
+resultStr.data?.map((item) => {
+    console.log(item)
+
+    valueEnumBillCategory[item.categoryId] = {
+        text: item.categoryName,
+        status: 'Success',
+    }
+})
+
+const valueEnumBillBook = {
+}
+
+resultBillBookStr.data?.map((item) => {
+    console.log(item)
+
+    valueEnumBillBook[item.bookId] = {
+        text: item.bookName,
+        status: 'Success',
+    }
+})
+
 
 export const BASEENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
     {
@@ -50,17 +74,18 @@ export const BASEENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
             }]
         }
     },
+    // {
+    //     title: '账本id',
+    //     dataIndex: 'bookId',
+    //     hideInTable: true,
+    //     valueType: 'text',
+    // },
     {
-        title: '账本id',
+        title: '账本名称',
         dataIndex: 'bookId',
         hideInTable: true,
         valueType: 'text',
-    },
-    {
-        title: '账本名称',
-        dataIndex: 'bookName',
-        hideInTable: true,
-        valueType: 'text',
+        valueEnum: valueEnumBillBook,
     },
     {
         title: '用户id',
@@ -73,6 +98,7 @@ export const BASEENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         dataIndex: 'categoryId',
         hideInTable: false,
         valueType: 'text',
+        valueEnum: valueEnumBillCategory,
     },
     // {
     //     title: '图片地址',
@@ -164,10 +190,11 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         }
     },
     {
-        title: '账本分类',
+        title: '账本名称',
         dataIndex: 'bookId',
         hideInTable: false,
         valueType: 'text',
+        valueEnum: valueEnumBillBook,
     },
     // {
     //     title: '用户id',
@@ -180,6 +207,7 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         dataIndex: 'categoryId',
         hideInTable: false,
         valueType: 'text',
+        valueEnum: valueEnumBillCategory,
     },
     {
         title: '图片地址',
@@ -271,10 +299,11 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         }
     },
     {
-        title: '账本id',
+        title: '账本名称',
         dataIndex: 'bookId',
         hideInTable: false,
         valueType: 'text',
+        valueEnum: valueEnumBillBook,
     },
     {
         title: '用户id',
@@ -283,44 +312,11 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         valueType: 'text',
     },
     {
-        title: '分类分类',
+        title: '账单分类',
         dataIndex: 'categoryId',
         hideInTable: false,
         valueType: 'text',
-        valueEnum: {
-            // array.forEach(element => {
-
-            // });
-            1: {
-                text: '餐饮',
-                status: 'Success',
-            },
-            2: {
-                text: '交通',
-                status: 'Success',
-            },
-            3: {
-                text: '购物',
-                status: 'Success',
-            },
-            4: {
-                text: '娱乐',
-                status: 'Success',
-            },
-            5: {
-                text: '学习',
-                status: 'Success',
-            },
-            6: {
-                text: '医疗',
-                status: 'Success',
-            },
-            7: {
-                text: '其他',
-                status: 'Success',
-            },
-
-        }
+        valueEnum: valueEnumBillCategory,
     },
     {
         title: '图片地址',

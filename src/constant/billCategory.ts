@@ -24,13 +24,6 @@ export const BASEENTITYCOLUMN: ProColumns<BILLCATEGORYENTITYAPI.BillCategoryVO>[
         }
     },
     {
-        title: '账单分类',
-        dataIndex: 'categoryId',
-        hideInTable: true,
-        hideInForm: true,
-        valueType: 'text',
-    },
-    {
         title: '创建时间',
         dataIndex: 'createTime',
         valueType: 'dateTime',
@@ -84,14 +77,6 @@ export const UPDATECOLUMN: ProColumns<BILLCATEGORYENTITYAPI.UpdateRequestParams>
             }]
         }
     },
-    
-    // {
-    //     title: '账单分类',
-    //     dataIndex: 'categoryId',
-    //     hideInTable: false,
-    //     valueType: 'text',
-    // },
-
     {
         title: '创建时间',
         sorter: true,
@@ -132,18 +117,11 @@ export const ENTITYCOLUMN: ProColumns<BILLCATEGORYENTITYAPI.BillCategoryVO>[] = 
         }
     },
     
-    // {
-    //     title: '账单分类',
-    //     dataIndex: 'categoryId',
-    //     hideInTable: false,
-    //     valueType: 'text',
-    // },
-
     {
-        title: '备注',
-        dataIndex: 'remark',
-        hideInTable: true,
-        valueType: 'textarea',
+        title: '账单分类id',
+        dataIndex: 'categoryId',
+        hideInTable: false,
+        valueType: 'text',
     },
     {
         title: '账单创建时间',
