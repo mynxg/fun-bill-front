@@ -91,3 +91,62 @@ export async function listByPageLoginCountRankUsingGET(
     ...(options || {}),
   });
 }
+
+//--------------------------------------------------统计---------------------------------------------------------
+//queryRegisterCount
+export async function queryRegisterCountUsingGET(
+  params: UserRankEntityAPI.BaseRequestPageParams,
+  options?: { [key: string]: any },
+): Promise<UserRankEntityAPI.UserRegisterResponse> {
+  return request<UserRankEntityAPI.UserRegisterResponse>('/api/user/rank/queryRegisterCount', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: params,
+    ...(options || {}),
+  });
+}
+
+//activeCount
+export async function listByQueryActiveCountUsingGET(
+  params: UserRankEntityAPI.BaseRequestPageParams,
+  options?: { [key: string]: any },
+): Promise<UserRankEntityAPI.UserActivityResponse> {
+  return request<UserRankEntityAPI.UserActivityResponse>('/api/user/rank/activeCount', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: params,
+    ...(options || {}),
+  });
+}
+//genderCount
+export async function queryGenderCountUsingGET(
+  params: UserRankEntityAPI.BaseRequestPageParams,
+  options?: { [key: string]: any },
+): Promise<UserRankEntityAPI.UserGenderCountResponse> {
+  return request<UserRankEntityAPI.UserGenderCountResponse>('/api/user/rank/genderCount', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: params,
+    ...(options || {}),
+  });
+}
+//registerCount
+export async function listByQueryRegisterCounttUsingGET(
+  params: UserRankEntityAPI.BaseRequestPageParams,
+  options?: { [key: string]: any },
+): Promise<UserRankEntityAPI.UserRegisterCountResponse> {
+  return request<UserRankEntityAPI.UserRegisterCountResponse>('/api/user/rank/registerCount', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: params,
+    ...(options || {}),
+  });
+}

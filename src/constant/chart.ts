@@ -1,3 +1,25 @@
+import { ProColumns } from "@ant-design/pro-components";
+import type { DescriptionsProps } from 'antd';
+import { Image } from 'antd';
+
+// export const SYSTEM_LOGO = "https://avatars.githubusercontent.com/u/103118339?v=4";
+// export const PAGESIZE = 3;
+// export const BASEPAGESIZE = 6;
+// export const NEWSAVATAR = "https://hzh-1318734603.cos.ap-shanghai.myqcloud.com/%E6%96%B0%E9%97%BB.jpg";
+
+
+import { queryRegisterCountUsingGET,
+  listByQueryActiveCountUsingGET,
+  queryGenderCountUsingGET,
+  listByQueryRegisterCounttUsingGET
+ } from "@/services/report/userRank/userRankController";
+
+//获取账本分类列表
+const resultStr = await queryGenderCountUsingGET({
+    pageNum: 1,
+    pageSize: 10,
+});
+
 export const pieData = [
   {
     type: '北京',
@@ -105,3 +127,26 @@ export const pieData4 = [
     value: 255,
   },
 ];
+
+export const genderData: { type: string; value: number }[] = [];
+
+//集合中放对象
+resultStr.data?.map((item) => {
+  genderData.push({
+    type: item.gender == '1' ? '男' : '女',
+    value: item.genderCount,
+  });
+});
+
+// export const pieData5 = genderData;
+
+// export const pieData5 = [
+//   {
+//     type: '女',
+//     value: 230,
+//   },
+//   {
+//     type: '女',
+//     value: 230,
+//   },
+// ];

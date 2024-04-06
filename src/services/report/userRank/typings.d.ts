@@ -45,8 +45,7 @@ declare namespace UserRankEntityAPI {
         loginCount?: number,
         createTime?: Date,
         updateTime?: Date,
-    }
-
+    }; ''
     /**
      * 基本求参数
      */
@@ -76,4 +75,77 @@ declare namespace UserRankEntityAPI {
         loginTime?: Date,
     }
 
+    /**
+    * 基本请求响应参数  ----------------------------------统计---------------------------------------
+    */
+    type UserRegisterResponse = {
+        data?: UserRegisterVO;
+        total?: number;
+        code?: number;
+        msg?: string;
+    }
+
+    //用户注册量
+    /**
+     * 用户注册量
+     * @param {number} loginInfoCount 登录次数数量
+     * @param {number} totalUser 总用户
+     * @param {number} monthRegistrations 月注册量
+     * @param {number} monthPercentage 月注册量百分比
+     * @param {number} lastMonthRegistrations 上月注册量
+     * @param {number} lastMonthPercentage 上月注册量百分比
+     * @
+     */
+    type UserRegisterVO = {
+        loginInfoCount?: number;
+        totalUser?: number;
+        monthRegistrations?: number;
+        monthPercentage?: number;
+        lastMonthRegistrations?: number;
+        lastMonthPercentage?: number;
+    }
+
+
+    type UserActivityResponse = {
+        data?: UserActivityVO[];
+        total?: number;
+        code?: number;
+        msg?: string;
+    }
+
+    //用户活跃度
+    type UserActivityVO = {
+        userId?: number;
+        userName?: string;
+        loginTime?: Date;
+        lastLoginDays?: number;
+        activeStatus?: string;
+    }
+
+    type UserGenderCountResponse = {
+        data?: UserGenderCountVO[];
+        total?: number;
+        code?: number;
+        msg?: string;
+    }
+
+    //用户性别统计
+    type UserGenderCountVO = {
+        gender?: string;
+        genderCount?: number;
+    }
+
+    //UserRegisterCount
+    type UserRegisterCountResponse = {
+        data?: UserRegisterCountVO[];
+        total?: number;
+        code?: number;
+        msg?: string;
+    }
+
+    //用户注册量统计
+    type UserRegisterCountVO = {
+        createTime?: Date;
+        registerCount?: number;
+    }
 }
