@@ -81,7 +81,7 @@ export const LOGININFOENTITYCOLUMN: ProColumns<LoginInfoEntityAPI.LoginInfoVO>[]
       dataIndex: 'loginTime',
       hideInTable: false,
       valueType: 'date',
-      sorter: (a, b) => a.loginTime - b.loginTime,
+      sorter: (a, b) => new Date(a.loginTime) - new Date(b.loginTime),
       fieldProps: {
         format: 'YYYY.MM.DD HH:mm:ss',
       },

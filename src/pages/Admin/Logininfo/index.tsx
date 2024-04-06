@@ -170,7 +170,7 @@ const LoginInfoManager: React.FC = () => {
                     },
                 }}
             />
-    
+
                 {/* 详情弹窗 */}
             <Drawer width={640}
                 placement="right"
