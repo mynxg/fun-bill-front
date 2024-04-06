@@ -4,9 +4,8 @@ import { Card, theme, Tabs } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { createStyles } from 'antd-style';
 import { ProCard } from '@ant-design/pro-components';
-import MyBar from './Chart/MyBar';
-import MyChar from './Chart/MyChar';
-import MyUser from './Chart/MyUser';
+import MyChart from './Chart/MyChart';
+import MyUserChart from './Chart/MyUserChart';
 
 
 const useStyles = createStyles(({ token }) => {
@@ -200,8 +199,7 @@ const Welcome: React.FC = () => {
           />
           {type === 'account' && (
             <div style={{ marginTop: 24 }}>
-              {/* <AccountLogin /> */}
-              {/* <MyChar /> */}
+              <MyUserChart />
             </div>
           )}
           {type === 'mobile' && (
@@ -210,12 +208,13 @@ const Welcome: React.FC = () => {
                 marginTop: 24,
               }}
             >
-              {/* <MobileLogin /> */}
+        
+              <MyChart />
             </div>
           )}
 
           {/* <MyUser /> */}
-          <MyUser />
+          
           <div
             style={{
               display: 'flex',
@@ -223,16 +222,13 @@ const Welcome: React.FC = () => {
               gap: 16,
             }}
           >
-            <InfoCard
+            {/* <InfoCard
               index={1}
               href="https://umijs.org/docs/introduce/introduce"
               title="了解 umi"
               desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
-            >
-                {/* <Card >
-                  <MyBar />
-                </Card> */}
-              </InfoCard>
+            /> */}
+       
 
             {/* <InfoCard
               index={2}

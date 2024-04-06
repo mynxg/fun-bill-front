@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import { Pie } from '@ant-design/plots';
 import {genderData} from '@/constant/chart';
 
-
-
-const DemoChar: React.FC = () => {
+const GenderChar: React.FC = () => {
   const config = {
     data: genderData,
     angleField: 'value',
@@ -26,5 +24,5 @@ const DemoChar: React.FC = () => {
   };
   return <Pie {...config} />;
 };
-export default DemoChar;
+export default GenderChar;
 

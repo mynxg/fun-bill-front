@@ -5,9 +5,11 @@ import { ProCard, StatisticCard } from '@ant-design/pro-components';
 import RcResizeObserver from 'rc-resize-observer';
 import { useEffect, useState } from 'react';
 import { getCurrentDate } from '@/utils/DateUtil';
-import DemoChar from './DemoChar';
+import GenderChar from './GenderChar';
+import UserActivity from './UserActivity';
+import RegisterChart from './RegisterChart';
 
-const MyChar: React.FC = () => {
+const MyChart: React.FC = () => {
   const [responsive, setResponsive] = useState(false);
 
   // const [data, setData] = useState<UserRankEntityAPI.BaseResponsePageVO[]>([]);
@@ -36,24 +38,17 @@ const MyChar: React.FC = () => {
         <ProCard split="horizontal">
           <ProCard split="horizontal">
             <ProCard split="vertical">
-            <StatisticCard
+              <StatisticCard
                 title="用户性别分布"
                 chart={
-                  <DemoChar />
+                  <GenderChar />
                 }
               />
               <StatisticCard
-                statistic={{
-                  title: '用户数量',
-                  value: 234,
-                  //   description: (
-                  //     <Statistic
-                  //       title="较本月平均流量"
-                  //       value="8.04%"
-                  //       trend="down"
-                  //     />
-                  //   ),
-                }}
+                title="用户注册量"
+                chart={
+                  <RegisterChart />
+                }
               />
               {/* <StatisticCard
                               statistic={{
@@ -64,7 +59,7 @@ const MyChar: React.FC = () => {
                                   //   ),
                               }}
                           /> */}
-              
+
             </ProCard>
             <ProCard split="vertical">
               {/* <StatisticCard
@@ -102,15 +97,15 @@ const MyChar: React.FC = () => {
 
 
 
-        {/* <StatisticCard
-                  title="用户登录次数排行"
-                  chart={
-                      <MyLoginCountRank />
-                  }
-              /> */}
+        <StatisticCard
+          title="用户活跃度"
+          chart={
+            <UserActivity />
+          }
+        />
       </ProCard>
     </RcResizeObserver>
   );
 };
 
-export default MyChar;
+export default MyChart;

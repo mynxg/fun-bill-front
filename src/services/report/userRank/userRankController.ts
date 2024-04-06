@@ -138,10 +138,25 @@ export async function queryGenderCountUsingGET(
 }
 //registerCount
 export async function listByQueryRegisterCounttUsingGET(
-  params: UserRankEntityAPI.BaseRequestPageParams,
+  // params: UserRankEntityAPI.BaseRequestPageParams,
   options?: { [key: string]: any },
 ): Promise<UserRankEntityAPI.UserRegisterCountResponse> {
-  return request<UserRankEntityAPI.UserRegisterCountResponse>('/api/user/rank/registerCount', {
+  return request<UserRankEntityAPI.UserRegisterCountResponse>('/api/user/rank/listByQueryregisterCount', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // data: params,
+    ...(options || {}),
+  });
+}
+
+//billCountAndAmount
+export async function listByQueryBillCountAndAmountUsingGET(
+  params: UserRankEntityAPI.BaseRequestPageParams,
+  options?: { [key: string]: any },
+): Promise<UserRankEntityAPI.billCountAndAmountResponse> {
+  return request<UserRankEntityAPI.billCountAndAmountResponse>('/api/user/rank/billCountAndAmount', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

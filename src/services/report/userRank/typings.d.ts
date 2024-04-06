@@ -148,4 +148,20 @@ declare namespace UserRankEntityAPI {
         createTime?: Date;
         registerCount?: number;
     }
+
+     //BillCountAndAmountVO
+     type billCountAndAmountResponse = {
+        data?: BillCountAndAmountVO;
+        total?: number;
+        code?: number;
+        msg?: string;
+    }
+
+    //账单支出、收入总金额
+    type BillCountAndAmountVO = {
+        totalExpensesCount?: number;
+        totalExpensesAmount?: number;
+        totalIncomeCount?: number;
+        totalIncomeAmount?: number;
+    }
 }

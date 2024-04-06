@@ -12,7 +12,8 @@ import {
   queryRegisterCountUsingGET,
   listByQueryActiveCountUsingGET,
   queryGenderCountUsingGET,
-  listByQueryRegisterCounttUsingGET
+  listByQueryRegisterCounttUsingGET,
+  listByQueryBillCountAndAmountUsingGET,
 } from '@/services/report/userRank/userRankController';
 import { size } from 'lodash';
 
@@ -32,6 +33,11 @@ const registerCountResultStr = await queryRegisterCountUsingGET({
   pageSize: 10,
 });
 
+//统计账单支出、收入数量和金额
+const queryBillCountAndAmountResultStr = await listByQueryBillCountAndAmountUsingGET({
+  pageNum: 1,
+  pageSize: 10,
+});
 
 const MyBillAmountRank = () => {
   const [data, setData] = useState<UserRankEntityAPI.UserRankVO[]>([]);
@@ -162,7 +168,7 @@ const MyLoginCountRank = () => {
   );
 };
 
-const MyUser: React.FC = () => {
+const MyUserChart: React.FC = () => {
   const [responsive, setResponsive] = useState(false);
 
   // const [data, setData] = useState<UserRankEntityAPI.BaseResponsePageVO[]>([]);
@@ -265,23 +271,61 @@ const MyUser: React.FC = () => {
             title="账单详情"
             chart={
               <>
-                <ProCard split="vertical">
+                <ProCard split="horizontal">
+                  <ProCard split="vertical">
 
-                  <StatisticCard
-                    statistic={{
-                      title: '支出数量',
-                      value: '12/56',
-                      suffix: '个',
-                    }}
+                    <StatisticCard
+                      statistic={{
+                        title: '账单总数量',
+                        value: Number(queryBillCountAndAmountResultStr.data?.totalExpensesCount ?? 0) + Number(queryBillCountAndAmountResultStr.data?.totalIncomeCount ?? 0),
+                        suffix: '条',
+                      }}
 
-                  />
-                  <StatisticCard
-                    statistic={{
-                      title: '总金额',
-                      value: '134',
-                      suffix: '个',
-                    }}
-                  />
+                    />
+                    <StatisticCard
+                      statistic={{
+                        title: '总金额',
+                        value: Number(queryBillCountAndAmountResultStr.data?.totalExpensesAmount) + Number(queryBillCountAndAmountResultStr.data?.totalIncomeAmount),
+                        suffix: '元',
+                      }}
+                    />
+                  </ProCard>
+                  <ProCard split="vertical">
+
+                    <StatisticCard
+                      statistic={{
+                        title: '支出条数',
+                        value: queryBillCountAndAmountResultStr.data?.totalExpensesCount,
+                        suffix: '条',
+                        description: (
+                          <>
+                            <Statistic
+                              title="支出"
+                              value={queryBillCountAndAmountResultStr.data?.totalExpensesAmount}
+                              suffix="元"
+                            />
+                          </>
+                        )
+                      }}
+
+                    />
+                    <StatisticCard
+                      statistic={{
+                        title: '收入条数',
+                        value: queryBillCountAndAmountResultStr.data?.totalIncomeCount,
+                        suffix: '条',
+                        description: (
+                          <>
+                            <Statistic
+                              title="收入"
+                              value={queryBillCountAndAmountResultStr.data?.totalIncomeAmount}
+                              suffix="元"
+                            />
+                          </>
+                        )
+                      }}
+                    />
+                  </ProCard>
                 </ProCard>
               </>
             }
@@ -325,4 +369,4 @@ const MyUser: React.FC = () => {
   );
 };
 
-export default MyUser;
+export default MyUserChart;
