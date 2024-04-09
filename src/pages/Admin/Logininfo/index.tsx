@@ -50,7 +50,7 @@ const LoginInfoManager: React.FC = () => {
         const res = await listLoginInfoVOByPageUsingGET({
             pageNum: pageNum,
             pageSize: pageSize,
-            infoId: 'infoId',
+            // infoId: 'infoId',
             // userType: 'sys_user',
         })
         setTotal(res?.total || 0)
