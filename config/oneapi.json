@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "quick-layout",
+    "title": "趣记账系统后台",
     "version": "1.0.0"
   },
   "servers": [

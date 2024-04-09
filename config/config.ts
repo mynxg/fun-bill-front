@@ -76,7 +76,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'quick-layout',
+  title: '趣记账系统后台',
   layout: {
     locale: true,
     ...defaultSettings,

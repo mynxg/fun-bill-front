@@ -9,7 +9,7 @@ export async function listBillVOByPageUsingGET(
         headers: {
             'Content-Type': 'application/json',
         },
-        data: params,
+        params: params,
         ...(options || {}),
     });
 }

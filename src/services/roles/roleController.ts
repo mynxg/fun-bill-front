@@ -12,7 +12,7 @@ export async function listRoleVOByPageUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }

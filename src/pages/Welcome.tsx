@@ -162,7 +162,7 @@ const Welcome: React.FC = () => {
               color: token.colorTextHeading,
             }}
           >
-            欢迎使用 quick-layout
+            欢迎使用 趣记账系统后台
           </div>
           <p
             style={{
@@ -174,7 +174,7 @@ const Welcome: React.FC = () => {
               width: '65%',
             }}
           >
-            趣记账系统，是一个基于 Ant Design 设计体系的 React UI 组件库，后台管理。
+            {/* 趣记账系统后台管理。 */}
           </p>
           <Tabs
             activeKey={type}
