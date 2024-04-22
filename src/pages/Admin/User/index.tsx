@@ -125,7 +125,7 @@ const UserManager: React.FC = () => {
     useEffect(() => {
         console.log("useEffect");
         getFormInfo();
-        console.log("构造函数执行完，formValue状态变化后：", formValue)
+        // console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);
 
     //如果网络请求数据还没拿到，就先 加载中  转圈

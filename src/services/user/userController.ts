@@ -12,7 +12,7 @@ export async function listUserVOByPageUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }

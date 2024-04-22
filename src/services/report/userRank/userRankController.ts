@@ -12,7 +12,7 @@ export async function listByPageUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }
@@ -42,7 +42,7 @@ export async function listByPageBillAmountRankUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }
@@ -57,7 +57,7 @@ export async function listByPageIncomeAmountRankUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }
@@ -72,7 +72,7 @@ export async function listByPageExpenseAmountRankUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }
@@ -87,7 +87,7 @@ export async function listByPageLoginCountRankUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }
@@ -103,7 +103,7 @@ export async function queryRegisterCountUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }
@@ -118,7 +118,7 @@ export async function listByQueryActiveCountUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }
@@ -132,7 +132,7 @@ export async function queryGenderCountUsingGET(
     headers: {
       'Content-Type': 'application/json',
     },
-    data: params,
+    params: params,
     ...(options || {}),
   });
 }
