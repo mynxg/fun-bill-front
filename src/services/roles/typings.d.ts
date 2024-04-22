@@ -86,20 +86,16 @@ declare namespace RoleEntityAPI {
         roleId?: number;
         roleName: string;
         roleKey: string;
-       
         roleSort: number;
         status?: string;
         dataScope?: string;
         delFlag?: string;
-        flag?: boolean;
         remark?: string;
         createBy?: string;
         createTime?: date;
         updateBy?: string;
         updateTime?: date;
         params?: { [key: string]: { [key: string]: any } };
-        admin?: boolean;
-       
     };
 
     /**
@@ -120,7 +116,7 @@ declare namespace RoleEntityAPI {
      * @property {Integer} id - 用户ID
      */
     type DeleteRequestParams = {
-        userId?: number;
+        roleId?: number;
     };
     
     /**
@@ -129,17 +125,16 @@ declare namespace RoleEntityAPI {
      * @description 更新角色请求参数
      */
     type UpdateRequestParams = {
-        // admin?: boolean;
-        dataScope?: string;
-        delFlag?: string;
-        flag?: boolean;
-        remark?: string;
         roleId?: number;
         roleKey: string;
         roleName: string;
         roleSort: number;
         status?: string;
-        params?: { [key: string]: { [key: string]: any } };
+        dataScope?: string;
+        flag?: boolean;
+        remark?: string;
+         // delFlag?: string;
+        // params?: { [key: string]: { [key: string]: any } };
     };
 
 

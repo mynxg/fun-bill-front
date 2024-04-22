@@ -24,7 +24,7 @@ const valueEnumBillCategory = {
 }
 
 resultStr.data?.map((item) => {
-    console.log(item)
+    // console.log(item)
 
     valueEnumBillCategory[item.categoryId] = {
         text: item.categoryName,
@@ -36,7 +36,7 @@ const valueEnumBillBook = {
 }
 
 resultBillBookStr.data?.map((item) => {
-    console.log(item)
+    // console.log(item)
 
     valueEnumBillBook[item.bookId] = {
         text: item.bookName,

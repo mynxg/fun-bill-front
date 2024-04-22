@@ -49,7 +49,7 @@ const UserRankManager: React.FC = () => {
             // loginTime:param.loginTime,
         })
         setTotal(res?.total || 0)
-        console.log(res?.data);
+        // console.log(res?.data);
         setFormValue(res?.data || []);
         setIsLoading(false);
     }

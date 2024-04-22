@@ -21,7 +21,7 @@ import {
 } from "@/services/roles/roleController";
 import { useModel } from "@umijs/max";
 
-import { RULECOLUMN, UPDATEROLECOLUMN, ROLEPAGESIZE,ROLESENTITYCOLUMN } from "@/constant/role";
+import { RULECOLUMN, UPDATEROLECOLUMN,ADDENTITYCOLUMN, ROLEPAGESIZE,ROLESENTITYCOLUMN } from "@/constant/role";
 
 
 /**
@@ -53,11 +53,11 @@ const RolesManager: React.FC = () => {
         const res = await listRoleVOByPageUsingGET({
             pageNum: pageNum,
             pageSize: pageSize,
-            userId: "userId",
-            userType: 'sys_user',
+            // userId: "userId",
+            // userType: 'sys_user',
         })
         setTotal(res?.total || 0)
-        console.log(res?.data);
+        // console.log(res?.data);
         setFormValue(res?.data || []);
         setIsLoading(false);
     }
@@ -79,11 +79,15 @@ const RolesManager: React.FC = () => {
     const handleAdd = async (fields: RoleEntityAPI.AddRquestParams) => {
         const hide = message.loading('正在添加');
         try {
-            await addUserByUsingPOST({
+            const resultStr =  await addByUsingPOST({
                 ...fields,
-                userType: 'sys_user',
+                // userType: 'sys_user',
             });
             hide();
+            if (resultStr.code !== 200) {
+                message.error(resultStr.msg);
+                return false;
+            }
             await getFormInfo();
             actionRef?.current?.reload()
             message.success('添加成功');
@@ -106,8 +110,8 @@ const RolesManager: React.FC = () => {
         const hide = message.loading('正在删除');
         if (!selectedRow) return true;
         try {
-            await deleteUserByUsingPOST({
-                userId: selectedRow.userId,
+            await deleteByUsingPOST({
+                roleId: selectedRow.roleId,
             });
             hide();
             await getFormInfo();
@@ -123,7 +127,7 @@ const RolesManager: React.FC = () => {
 
     //初始化
     useEffect(() => {
-        console.log("useEffect");
+        // console.log("useEffect");
         getFormInfo();
         // console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);
@@ -145,8 +149,7 @@ const RolesManager: React.FC = () => {
         }
         const hide = message.loading('更新中');
         try {
-            await updateUserByUsingPOST({
-                userId: currentRow.userId,
+            await updateByUsingPOST({
                 ...fields,
             });
             hide();
@@ -217,6 +220,10 @@ const RolesManager: React.FC = () => {
         ...UPDATEROLECOLUMN,
     ];
 
+    const addColumn: ProColumns<RoleEntityAPI.UpdateRequestParams>[] = [
+        ...ADDENTITYCOLUMN,
+    ];
+
     return (
         <PageContainer>
             <ProTable<RoleEntityAPI.RoleVO, RoleEntityAPI.PageParams>
@@ -280,21 +287,21 @@ const RolesManager: React.FC = () => {
                 }}
                 closable={false}
             >
-                {currentRow?.userName && (
+                {currentRow?.roleName && (
                     <ProDescriptions<RoleEntityAPI.RoleVO>
                         column={2}
-                        title={currentRow?.userName}
+                        title={currentRow?.roleName}
                         request={async () => ({
                             data: currentRow || {},
                         })}
                         params={{
-                            id: currentRow?.userName,
+                            id: currentRow?.roleName,
                         }}
                         columns={columns as ProDescriptionsItemProps<RoleEntityAPI.RoleVO>[]}
                     />
                 )}
             </Drawer>
-            <CreateModal columns={updateColumn} onCancel={() => { handleModalOpen(false) }}
+            <CreateModal columns={addColumn} onCancel={() => { handleModalOpen(false) }}
                 onSubmit={async (values: RoleEntityAPI.UpdateRequestParams) => {
                     await handleAdd(values)
                 }} visible={createModalOpen} file={false} />

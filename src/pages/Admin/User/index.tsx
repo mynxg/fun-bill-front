@@ -53,11 +53,11 @@ const UserManager: React.FC = () => {
         const res = await listUserVOByPageUsingGET({
             pageNum: pageNum,
             pageSize: pageSize,
-            userId: "userId",
-            userType: 'sys_user',
+            // userId: "userId",
+            // userType: 'sys_user',
         })
         setTotal(res?.total || 0)
-        console.log(res?.data);
+        // console.log(res?.data);
         setFormValue(res?.data || []);
         setIsLoading(false);
     }
@@ -123,7 +123,7 @@ const UserManager: React.FC = () => {
 
     //初始化
     useEffect(() => {
-        console.log("useEffect");
+        // console.log("useEffect");
         getFormInfo();
         // console.log("构造函数执行完，formValue状态变化后：", formValue)
     }, []);

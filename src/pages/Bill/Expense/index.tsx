@@ -63,7 +63,7 @@ const BillExpensesManager: React.FC = () => {
             // userType: 'sys_user',
         })
         setTotal(res?.total || 0)
-        console.log(res?.data);
+        // console.log(res?.data);
         setFormValue(res?.data || []);
         setIsLoading(false);
     }

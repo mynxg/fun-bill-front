@@ -28,7 +28,7 @@ declare namespace UserEntityAPI {
         isAsc?: string;
 
         id?: number;
-        userId: string;
+        userId?: string;
         userName?: string;
         userType?: string;
         nickName?: string;
