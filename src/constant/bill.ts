@@ -369,6 +369,8 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         title: '图片地址',
         dataIndex: 'photoUrl',
         hideInTable: false,
+        hideInForm: true,
+        hideInSearch: true,
         valueType: 'text',
     },
     {
@@ -393,6 +395,7 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         title: '修改时间',
         dataIndex: 'updateTime',
         hideInTable: false,
+        hideInSearch: true,
         valueType: 'text',
     },
     {

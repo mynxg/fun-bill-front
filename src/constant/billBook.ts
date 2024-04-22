@@ -68,13 +68,16 @@ export const BASEENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
     {
         title: '图片地址',
         dataIndex: 'photoUrl',
-        hideInTable: false,
+        hideInTable: true,
+        hideInForm: true,
+        hideInSearch: true,
         valueType: 'image',
     },
     {
         title: '创建时间',
         dataIndex: 'createTime',
         valueType: 'dateTime',
+        hideInSearch: true,
         hideInForm: true,
         sorter: (a, b) => a.createTime - b.createTime,
     },
@@ -82,12 +85,14 @@ export const BASEENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         title: '创建人',
         dataIndex: 'createBy',
         hideInTable: false,
+        hideInSearch: true,
         valueType: 'text',
     },
     {
         title: '修改时间',
         dataIndex: 'updateTime',
         hideInTable: false,
+        hideInSearch: true,
         valueType: 'text',
         sorter: (a, b) => a.updateTime - b.updateTime,
     },
@@ -95,6 +100,7 @@ export const BASEENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         title: '修改人',
         dataIndex: 'updateBy',
         hideInTable: false,
+        hideInSearch: true,
         valueType: 'text',
     }
 ]
@@ -143,6 +149,7 @@ export const UPDATECOLUMN: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[] =
         title: '图片地址',
         dataIndex: 'photoUrl',
         hideInTable: true,
+        hideInForm: true,
         valueType: 'text',
     },
     {
@@ -181,6 +188,7 @@ export const ADDCOLUMN: ProColumns<BILLBOOKENTITYAPI.UpdateRequestParams>[] = [
         title: '图片地址',
         dataIndex: 'photoUrl',
         hideInTable: true,
+        hideInForm: true,
         valueType: 'text',
     },
     {
@@ -227,6 +235,7 @@ export const ENTITYCOLUMN: ProColumns<BILLBOOKENTITYAPI.BillBookVO>[] = [
         title: '图片地址',
         dataIndex: 'photoUrl',
         hideInTable: true,
+        hideInForm: true,
         valueType: 'image',
     },
     {
