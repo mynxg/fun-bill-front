@@ -174,4 +174,5 @@ export const request: RequestConfig = {
   // requestInterceptors: [demoResponseInterceptors],
   // 新增自动添加AccessToken的请求前拦截器
   requestInterceptors: [authHeaderInterceptor],
+  baseURL: 'https://fun-bill.lxip.top/',
 };
