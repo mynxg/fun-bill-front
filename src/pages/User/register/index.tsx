@@ -1,6 +1,6 @@
 import { Footer } from '@/components';
 import { getFakeCaptcha } from '@/services/login/login';
-import { register,getCaptchaImage } from '@/services/login/loginApi';
+import { register, getCaptchaImage } from '@/services/login/loginApi';
 import {
   LockOutlined,
   UserOutlined,
@@ -12,7 +12,7 @@ import {
   ProFormText,
 } from '@ant-design/pro-components';
 import { FormattedMessage, Helmet, SelectLang, history, useIntl, useModel } from '@umijs/max';
-import { Alert, Tabs, message,Form,Input } from 'antd';
+import { Alert, Tabs, message, Form, Input } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
@@ -100,40 +100,38 @@ const Register: React.FC = () => {
   const { styles } = useStyles();
   const intl = useIntl();
 
-     // 验证码
-     const [codeUrl, setCodeUrl] = useState('');
-     const [codeCaptcha, setCodeCaptcha] = useState('');
-     const [uuid, setUuid] = useState('');
-    //  const [captchaData, setCaptchaData] = useState('');
-     
-     // 初始化验证码
-     useEffect(() => {
-       refreshCaptcha();
-     }, []);
-   
-     // 刷新验证码
-     const refreshCaptcha = async () => {
-       const result = await getCaptchaImage();
-       setUuid(result.data?.uuid);
-       setCodeUrl("data:image/png;base64," + result.data?.img);
-     };
+  // 验证码
+  const [codeUrl, setCodeUrl] = useState('');
+  const [codeCaptcha, setCodeCaptcha] = useState('');
+  const [uuid, setUuid] = useState('');
+
+  // 初始化验证码
+  useEffect(() => {
+    refreshCaptcha();
+  }, []);
+
+  // 刷新验证码
+  const refreshCaptcha = async () => {
+    const result = await getCaptchaImage();
+    setUuid(result.data?.uuid);
+    setCodeUrl("data:image/png;base64," + result.data?.img);
+  };
 
   const handleSubmit = async (values: LOGINAPI.RegisterParams) => {
     try {
       values.code = codeCaptcha;
       values.uuid = uuid;
-        // console.log('values=' + JSON.stringify(values));
-        // 用户类型
-        values.userType = 'sys_user';
-          if (values.password !== values.passwordAgain) {
-              message.error('两次输入的密码不一致');
-              return;
-          }
-        
-        console.log('values=' + JSON.stringify(values));
-        const msgResult = await register({ ...values });
+      // 用户类型
+      values.userType = 'general_user';
+      if (values.password !== values.passwordAgain) {
+        message.error('两次输入的密码不一致');
+        return;
+      }
 
-        const code = msgResult.code + '';
+      // console.log('values=' + JSON.stringify(values));
+      const msgResult = await register({ ...values });
+
+      const code = msgResult.code + '';
       if (code === '200') {
         const defaultRegisterSuccessMessage = intl.formatMessage({
           id: 'pages.register.success',
@@ -141,7 +139,6 @@ const Register: React.FC = () => {
         });
         message.success(defaultRegisterSuccessMessage);
 
-        // console.log('token=' + msgResult);
 
         // 获取用户信息
         // 如果重定向到了登录页，成功后会默认重定向到首页
@@ -156,7 +153,7 @@ const Register: React.FC = () => {
         });
         message.error(defaultRegisterFailureMessage);
       }
-      console.log(msgResult);
+      // console.log(msgResult);
       // 如果失败去设置用户错误信息
       setUserRegisterState(msgResult);
     } catch (error) {
@@ -164,7 +161,7 @@ const Register: React.FC = () => {
         id: 'pages.register.failure',
         defaultMessage: '注册失败，请重试！',
       });
-      console.log(error);
+      // console.log(error);
       message.error(defaultRegisterFailureMessage);
     }
   };
@@ -192,17 +189,26 @@ const Register: React.FC = () => {
           className='register-form'
           submitter={{
             searchConfig: {
-                submitText: '注册',
+              submitText: '注册',
+             // 按钮颜色修改，为浅绿色，代码如下
+              
+            },
+            submitButtonProps: {
+              style: {
+                backgroundColor: 'lightgreen',
+                width: '100%',
+                height: '50px',
+              },
             },
           }}
           contentStyle={{
             minWidth: 280,
             maxWidth: '75vw',
           }}
-        //   logo={<img alt="logo" src="/logo.svg" />}
+          //   logo={<img alt="logo" src="/logo.svg" />}
 
           title="用户注册"
-        //   subTitle={intl.formatMessage({ id: 'pages.register.registerAccount'})}
+          //   subTitle={intl.formatMessage({ id: 'pages.register.registerAccount'})}
           initialValues={{
             autoLogin: false,
           }}
@@ -223,13 +229,13 @@ const Register: React.FC = () => {
             onChange={setType}
             centered
             items={[
-            //   {
-            //     key: 'account',
-            //     label: intl.formatMessage({
-            //       id: 'pages.login.accountLogin.tab',
-            //       defaultMessage: '账户密码登录',
-            //     }),
-            //   },
+              //   {
+              //     key: 'account',
+              //     label: intl.formatMessage({
+              //       id: 'pages.login.accountLogin.tab',
+              //       defaultMessage: '账户密码登录',
+              //     }),
+              //   },
               // {
               //   key: 'mobile',
               //   label: intl.formatMessage({
@@ -240,14 +246,14 @@ const Register: React.FC = () => {
             ]}
           />
 
-        {code === '500'  && (
+          {code === '500' && (
             <RegisterMessage
-                content={intl.formatMessage({
-                    id: msg+"",
-                    defaultMessage: '账户或密码错误(admin/ant.design)',
-                })}
+              content={intl.formatMessage({
+                id: msg + "",
+                defaultMessage: '账户或密码错误(admin/ant.design)',
+              })}
             />
-        )}
+          )}
           {type === 'account' && (
             <>
               <ProFormText
@@ -258,7 +264,7 @@ const Register: React.FC = () => {
                 }}
                 placeholder={intl.formatMessage({
                   id: '请输入用户名',
-                  defaultMessage: '请输入用户名! ',
+                  defaultMessage: '请输入用户名 ',
                 })}
                 rules={[
                   {
@@ -280,7 +286,7 @@ const Register: React.FC = () => {
                 }}
                 placeholder={intl.formatMessage({
                   id: '请输入密码',
-                  defaultMessage: '请输入密码！',
+                  defaultMessage: '请输入密码',
                 })}
                 rules={[
                   {
@@ -288,7 +294,7 @@ const Register: React.FC = () => {
                     message: (
                       <FormattedMessage
                         id="pages.login.password.required"
-                        defaultMessage="请输入密码！"
+                        defaultMessage="请输入密码"
                       />
                     ),
                   },
@@ -304,7 +310,7 @@ const Register: React.FC = () => {
                   id: '请再次输入密码',
                   defaultMessage: '请再次输入密码',
                 })}
-                rules={[                    
+                rules={[
                   {
                     required: true,
                     message: (
@@ -316,36 +322,36 @@ const Register: React.FC = () => {
                   },
                 ]}
               />
-              <Form.Item  
-                  name="code"
-                  rules={[
-                    {
-                      required: false,
-                      message: '请输入验证码',
-                    },
-                  ]}
+              <Form.Item
+                name="code"
+                rules={[
+                  {
+                    required: false,
+                    message: '请输入验证码',
+                  },
+                ]}
               >
-              <Input
-                name='code'
-                size="large"
-                autoComplete="off"
-                placeholder="请输入验证码"
-                prefix={<LockOutlined />}
-                style={{ width: '63%', marginRight: '10px'}}
-                onChange={codeCaptcha => setCodeCaptcha(codeCaptcha.target.value)}
-              />
-               <img
-              style={{ cursor: 'pointer' ,marginLeft: '10px',borderRadius: '5%'}}
-              width={100}
-              height={40}
-              src={codeUrl}
-              onClick={refreshCaptcha}
-              alt="验证码"
-              />
-            </Form.Item >  
+                <Input
+                  name='code'
+                  size="large"
+                  autoComplete="off"
+                  placeholder="请输入验证码"
+                  prefix={<LockOutlined />}
+                  style={{ width: '63%', marginRight: '10px' }}
+                  onChange={codeCaptcha => setCodeCaptcha(codeCaptcha.target.value)}
+                />
+                <img
+                  style={{ cursor: 'pointer', marginLeft: '10px', borderRadius: '5%' }}
+                  width={100}
+                  height={40}
+                  src={codeUrl}
+                  onClick={refreshCaptcha}
+                  alt="验证码"
+                />
+              </Form.Item >
             </>
           )}
-          
+
 
           <div
             style={{
@@ -365,7 +371,7 @@ const Register: React.FC = () => {
             >
               <FormattedMessage id="返回登录" defaultMessage="返回登录" />
             </a>
-            
+
           </div>
         </LoginForm>
       </div>

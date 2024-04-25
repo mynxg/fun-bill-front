@@ -1,6 +1,6 @@
 import { Footer } from '@/components';
 import { getFakeCaptcha } from '@/services/login/login';
-import { login,getCaptchaImage } from '@/services/login/loginApi';
+import { login, getCaptchaImage } from '@/services/login/loginApi';
 import {
   AlipayCircleOutlined,
   LockOutlined,
@@ -17,9 +17,9 @@ import {
   ProForm,
 } from '@ant-design/pro-components';
 import { FormattedMessage, Helmet, SelectLang, history, useIntl, useModel } from '@umijs/max';
-import { Alert, Tabs, message,Form,Input } from 'antd';
+import { Alert, Tabs, message, Form, Input, ConfigProvider } from 'antd';
 import { createStyles } from 'antd-style';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
 
@@ -58,8 +58,11 @@ const useStyles = createStyles(({ token }) => {
         "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
       backgroundSize: '100% 100%',
     },
+
   };
 });
+
+
 
 const ActionIcons = () => {
   const { styles } = useStyles();
@@ -117,23 +120,23 @@ const Login: React.FC = () => {
     }
   };
 
-   // 验证码
-   const [codeUrl, setCodeUrl] = useState('');
-   const [codeCaptcha, setCodeCaptcha] = useState('');
-   const [uuid, setUuid] = useState('');
+  // 验证码
+  const [codeUrl, setCodeUrl] = useState('');
+  const [codeCaptcha, setCodeCaptcha] = useState('');
+  const [uuid, setUuid] = useState('');
   //  const [captchaData, setCaptchaData] = useState('');
-   
-   // 初始化验证码
-   useEffect(() => {
-     refreshCaptcha();
-   }, []);
- 
-   // 刷新验证码
-   const refreshCaptcha = async () => {
-     const result = await getCaptchaImage();
-     setUuid(result.data?.uuid);
-     setCodeUrl("data:image/png;base64," + result.data?.img);
-   };
+
+  // 初始化验证码
+  useEffect(() => {
+    refreshCaptcha();
+  }, []);
+
+  // 刷新验证码
+  const refreshCaptcha = async () => {
+    const result = await getCaptchaImage();
+    setUuid(result.data?.uuid);
+    setCodeUrl("data:image/png;base64," + result.data?.img);
+  };
 
   const handleSubmit = async (values: LOGINAPI.LoginParams) => {
     try {
@@ -166,11 +169,11 @@ const Login: React.FC = () => {
       } else if (code === '500') {
         const defaultLoginFailureMessage = intl.formatMessage({
           id: '登录失败，请重试！',
-          defaultMessage: ''+msgResult.msg,
+          defaultMessage: '' + msgResult.msg,
         });
         message.error(defaultLoginFailureMessage);
       }
-      console.log(msgResult);
+      // console.log(msgResult);
       // 如果失败去设置用户错误信息
       setUserLoginState(msgResult);
     } catch (error) {
@@ -178,7 +181,7 @@ const Login: React.FC = () => {
         id: 'pages.login.failure',
         defaultMessage: '登录失败，请重试！',
       });
-      console.log(error);
+      // console.log(error);
       message.error(defaultLoginFailureMessage);
     }
   };
@@ -202,120 +205,151 @@ const Login: React.FC = () => {
           padding: '32px 0',
         }}
       >
-        <LoginForm
-          contentStyle={{
-            minWidth: 280,
-            maxWidth: '75vw',
-          }}
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="趣记账系统后台"
-          subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
-          initialValues={{
-            autoLogin: true,
-          }}
-          actions={[
-            // <FormattedMessage
-            //   key="loginWith"
-            //   id="pages.login.loginWith"
-            //   defaultMessage="其他登录方式"
-            // />,
-            // <ActionIcons key="icons" />,
-          <a 
-            style={{
-              float: 'right',
-              cursor: 'pointer',
-            }}
-            onClick={() => {
-              history.push('/user/register');
-            }}
-           >
-            <FormattedMessage
-              id="pages.register.registerAccount"
-              defaultMessage="注册用户"
-            />
-            </a> ,
-          ]}
-          onFinish={async (values) => {
-            await handleSubmit(values as LOGINAPI.LoginParams);
+        <ConfigProvider
+          theme={{
+            components: {
+              Tabs: {
+                itemActiveColor: 'lightgreen',
+                itemSelectedColor: 'lightgreen',
+                itemHoverColor: 'lightgreen',
+                itemColor: 'lightgreen',
+                inkBarColor: 'lightgreen',
+              },
+            },
           }}
         >
-          <Tabs
-            activeKey={type}
-            onChange={setType}
-            centered
-            items={[
-              {
-                key: 'account',
-                label: intl.formatMessage({
-                  id: 'pages.login.accountLogin.tab',
-                  defaultMessage: '账户密码登录',
-                }),
+          <LoginForm
+            contentStyle={{
+              minWidth: 280,
+              maxWidth: '75vw',
+            }}
+            logo={<img alt="logo" src="/logo.svg" />}
+            title="趣记账前台"
+            subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
+            submitter={{
+              searchConfig: {
+                submitText: '登录',
               },
-              // {
-              //   key: 'mobile',
-              //   label: intl.formatMessage({
-              //     id: 'pages.login.phoneLogin.tab',
-              //     defaultMessage: '手机号登录',
-              //   }),
-              // },
+              submitButtonProps: {
+                style: {
+                  backgroundColor: 'lightgreen',
+                  width: '100%',
+                  height: '50px',
+                },
+              },
+            }}
+            initialValues={{
+              autoLogin: true,
+            }}
+            actions={[
+              // <FormattedMessage
+              //   key="loginWith"
+              //   id="pages.login.loginWith"
+              //   defaultMessage="其他登录方式"
+              // />,
+              // <ActionIcons key="icons" />,
+              <a
+                style={{
+                  float: 'right',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  history.push('/user/register');
+                }}
+              >
+                <FormattedMessage
+                  id="pages.register.registerAccount"
+                  defaultMessage="注册用户"
+                />
+              </a>,
             ]}
-          />
+            onFinish={async (values) => {
+              await handleSubmit(values as LOGINAPI.LoginParams);
+            }}
+          >
 
-          {code === '500' && loginType === 'account' && (
-            <LoginMessage
-              content={intl.formatMessage({
-                id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '账户或密码错误(admin/ant.design)',
-              })}
+
+            <Tabs
+              activeKey={type}
+              onChange={setType}
+              centered
+
+              items={[
+                {
+                  key: 'account',
+                  label: intl.formatMessage({
+                    id: 'pages.login.accountLogin.tab',
+                    defaultMessage: '账户密码登录',
+                  }),
+                },
+
+                // {
+                //   key: 'mobile',
+                //   label: intl.formatMessage({
+                //     id: 'pages.login.phoneLogin.tab',
+                //     defaultMessage: '手机号登录',
+                //   }),
+                // },
+              ]}
             />
-          )}
-          {type === 'account' && (
-            <>
-              <ProFormText
-                name="username"
-                fieldProps={{
-                  size: 'large',
-                  prefix: <UserOutlined />,
-                }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.username.placeholder',
-                  defaultMessage: '用户名: admin or user',
+
+
+
+            {code === '500' && loginType === 'account' && (
+              <LoginMessage
+                content={intl.formatMessage({
+                  id: 'pages.login.accountLogin.errorMessage',
+                  defaultMessage: '账户或密码错误(admin/ant.design)',
                 })}
-                rules={[
-                  {
-                    required: true,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.username.required"
-                        defaultMessage="请输入用户名!"
-                      />
-                    ),
-                  },
-                ]}
               />
-              <ProFormText.Password
-                name="password"
-                fieldProps={{
-                  size: 'large',
-                  prefix: <LockOutlined />,
-                }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.password.placeholder',
-                  defaultMessage: '密码: ant.design',
-                })}
-                rules={[
-                  {
-                    required: true,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.password.required"
-                        defaultMessage="请输入密码！"
-                      />
-                    ),
-                  },
-                ]}
-              />
-              <Form.Item  
+            )}
+            {type === 'account' && (
+              <>
+                <ProFormText
+                  name="username"
+                  fieldProps={{
+                    size: 'large',
+                    prefix: <UserOutlined />,
+                  }}
+                  placeholder={intl.formatMessage({
+                    id: 'pages.login.username.placeholder',
+                    defaultMessage: '用户名: admin or user',
+                  })}
+                  rules={[
+                    {
+                      required: true,
+                      message: (
+                        <FormattedMessage
+                          id="pages.login.username.required"
+                          defaultMessage="请输入用户名!"
+                        />
+                      ),
+                    },
+                  ]}
+                />
+                <ProFormText.Password
+                  name="password"
+                  fieldProps={{
+                    size: 'large',
+                    prefix: <LockOutlined />,
+                  }}
+                  placeholder={intl.formatMessage({
+                    id: 'pages.login.password.placeholder',
+                    defaultMessage: '密码: ant.design',
+                  })}
+                  rules={[
+                    {
+                      required: true,
+                      message: (
+                        <FormattedMessage
+                          id="pages.login.password.required"
+                          defaultMessage="请输入密码！"
+                        />
+                      ),
+                    },
+                  ]}
+                />
+                <Form.Item
                   name="code"
                   rules={[
                     {
@@ -323,30 +357,31 @@ const Login: React.FC = () => {
                       message: '请输入验证码',
                     },
                   ]}
-              >
-              <Input
-                name='code'
-                size="large"
-                autoComplete="off"
-                placeholder="请输入验证码"
-                prefix={<LockOutlined />}
-                style={{ width: '63%', marginRight: '10px'}}
-                onChange={codeCaptcha => setCodeCaptcha(codeCaptcha.target.value)}
-              />
-               <img
-              style={{ cursor: 'pointer' ,marginLeft: '10px',borderRadius: '5%'}}
-              width={100}
-              height={40}
-              src={codeUrl}
-              onClick={refreshCaptcha}
-              alt="验证码"
-              />
-            </Form.Item >           
-            </>
-          )}
+                >
+                  <Input
+                    name='code'
+                    size="large"
+                    autoComplete="off"
+                    placeholder="请输入验证码"
+                    prefix={<LockOutlined />}
+                    style={{ width: '63%', marginRight: '10px' }}
+                    onChange={codeCaptcha => setCodeCaptcha(codeCaptcha.target.value)}
+                  />
+                  <img
+                    style={{ cursor: 'pointer', marginLeft: '10px', borderRadius: '5%' }}
+                    width={100}
+                    height={40}
+                    src={codeUrl}
+                    onClick={refreshCaptcha}
+                    alt="验证码"
+                  />
+                </Form.Item >
 
-          {/* {code === '500' && loginType === 'mobile' && <LoginMessage content="验证码错误" />} */}
-          {/* {type === 'mobile' && (
+              </>
+            )}
+
+            {/* {code === '500' && loginType === 'mobile' && <LoginMessage content="验证码错误" />} */}
+            {/* {type === 'mobile' && (
             <>
               <ProFormText
                 fieldProps={{
@@ -427,12 +462,12 @@ const Login: React.FC = () => {
               />
             </>
           )} */}
-          <div
-            style={{
-              marginBottom: 24,
-            }}
-          >
-            <ProFormCheckbox noStyle name="autoLogin">
+            <div
+              style={{
+                marginBottom: 24,
+              }}
+            >
+              {/* <ProFormCheckbox noStyle name="autoLogin">
               <FormattedMessage id="pages.login.rememberMePassword" defaultMessage="记住我" />
             </ProFormCheckbox>
             <a
@@ -442,9 +477,10 @@ const Login: React.FC = () => {
             >
               <FormattedMessage id="pages.login.forgotPassword" defaultMessage="忘记密码" />
             </a>
-            
-          </div>
-        </LoginForm>
+             */}
+            </div>
+          </LoginForm>
+        </ConfigProvider>
       </div>
       <Footer />
     </div>
