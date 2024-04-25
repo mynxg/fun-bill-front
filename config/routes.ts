@@ -65,7 +65,7 @@ export default [
   {
     path: '/usercenter',
     name: 'user', // 用户中心
-    icon: 'crown',
+    icon: 'user',
     access: 'canAdmin',
     routes: [
       {
@@ -118,7 +118,7 @@ export default [
   {
     path: '/bill',
     name: 'bill', // 账单管理
-    icon: 'crown',
+    icon: 'creditCard',
     // access: 'canAdmin',
     routes: [
       {
@@ -150,7 +150,7 @@ export default [
   {
     path: '/monitor',
     name: 'logininfo', // 日志中心
-    icon: 'crown',
+    icon: 'cloud',
     // access: 'canAdmin',
     routes: [
       {
