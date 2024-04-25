@@ -220,12 +220,12 @@ export const UPDATECOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         valueType: 'text',
         valueEnum: valueEnumBillCategory,
     },
-    {
-        title: '图片地址',
-        dataIndex: 'photoUrl',
-        hideInTable: false,
-        valueType: 'text',
-    },
+    // {
+    //     title: '图片地址',
+    //     dataIndex: 'photoUrl',
+    //     hideInTable: false,
+    //     valueType: 'text',
+    // },
     {
         title: '账单创建时间',
         dataIndex: 'billTime',
@@ -286,12 +286,12 @@ export const ADDCOLUMN: ProColumns<BILLENTITYAPI.UpdateRequestParams>[] = [
         valueType: 'text',
         valueEnum: valueEnumBillCategory,
     },
-    {
-        title: '图片地址',
-        dataIndex: 'photoUrl',
-        hideInTable: false,
-        valueType: 'text',
-    },
+    // {
+    //     title: '图片地址',
+    //     dataIndex: 'photoUrl',
+    //     hideInTable: false,
+    //     valueType: 'text',
+    // },
     {
         title: '账单创建时间',
         dataIndex: 'billTime',
@@ -365,14 +365,14 @@ export const ENTITYCOLUMN: ProColumns<BILLENTITYAPI.BillVO>[] = [
         valueType: 'text',
         valueEnum: valueEnumBillCategory,
     },
-    {
-        title: '图片地址',
-        dataIndex: 'photoUrl',
-        hideInTable: false,
-        hideInForm: true,
-        hideInSearch: true,
-        valueType: 'text',
-    },
+    // {
+    //     title: '图片地址',
+    //     dataIndex: 'photoUrl',
+    //     hideInTable: false,
+    //     hideInForm: true,
+    //     hideInSearch: true,
+    //     valueType: 'text',
+    // },
     {
         title: '账单创建时间',
         dataIndex: 'billTime',
