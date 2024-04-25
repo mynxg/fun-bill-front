@@ -2,6 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "趣记账系统后台",
+    "description": "",
     "version": "1.0.0"
   },
   "servers": [
@@ -12,47 +13,38 @@
       "url": "https://localhost:8000/"
     }
   ],
-  "paths": {
-    "/api/currentUser": {
-      "get": {
-        "tags": ["api"],
-        "description": "获取当前的用户",
-        "operationId": "currentUser",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CurrentUser"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-swagger-router-controller": "api"
+  "tags": [
+    {
+      "name": "登录"
     },
-    "/api/login/captcha": {
+    {
+      "name": "用户管理"
+    },
+    {
+      "name": "个人信息"
+    },
+    {
+      "name": "登录日志管理"
+    },
+    {
+      "name": "账单管理"
+    }
+  ],
+  "paths": {
+    "/api/login/account": {
       "post": {
-        "description": "发送验证码",
-        "operationId": "getFakeCaptcha",
-        "tags": ["login"],
+        "summary": "生产测试登录",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "登录"
+        ],
         "parameters": [
           {
-            "name": "phone",
-            "in": "query",
-            "description": "手机号",
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
             "schema": {
               "type": "string"
             }
@@ -60,436 +52,1575 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "成功",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FakeCaptcha"
+                  "type": "object",
+                  "properties": {}
                 }
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
-    "/api/login/outLogin": {
+    "/register": {
       "post": {
-        "description": "登录接口",
-        "operationId": "outLogin",
-        "tags": ["login"],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
+        "summary": "注册",
+        "deprecated": false,
+        "description": "{\n    \"username\": \"nxgtest03\",\n    \"password\": \"123456\",\n    \"code\": \"\",\n    \"uuid\": \"12312323131321\",\n    \"userType\": \"sys_user\"\n}",
+        "tags": [
+          "登录"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
             }
           }
-        }
-      },
-      "x-swagger-router-controller": "api"
-    },
-    "/api/login/account": {
-      "post": {
-        "tags": ["login"],
-        "description": "登录接口",
-        "operationId": "login",
+        ],
         "requestBody": {
-          "description": "登录系统",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginParams"
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "username": "nxgtest03",
+                "password": "123456",
+                "code": "",
+                "uuid": "12312323131321",
+                "userType": "sys_user"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "成功",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LoginResult"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "type": "object",
+                  "properties": {}
                 }
               }
             }
           }
         },
-        "x-codegen-request-body-name": "body"
-      },
-      "x-swagger-router-controller": "api"
-    },
-    "/api/notices": {
-      "summary": "getNotices",
-      "description": "NoticeIconItem",
-      "get": {
-        "tags": ["api"],
-        "operationId": "getNotices",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NoticeIconList"
-                }
-              }
-            }
-          }
-        }
+        "security": []
       }
     },
-    "/api/rule": {
+    "/api/currentUser": {
       "get": {
-        "tags": ["rule"],
-        "description": "获取规则列表",
-        "operationId": "rule",
+        "summary": "获取当前用户信息",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "登录"
+        ],
         "parameters": [
           {
-            "name": "current",
-            "in": "query",
-            "description": "当前的页码",
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
             "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "页面的容量",
-            "schema": {
-              "type": "number"
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "成功",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RuleList"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "type": "object",
+                  "properties": {}
                 }
               }
             }
           }
-        }
-      },
-      "post": {
-        "tags": ["rule"],
-        "description": "新建规则",
-        "operationId": "addRule",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RuleListItem"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["rule"],
-        "description": "新建规则",
-        "operationId": "updateRule",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RuleListItem"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["rule"],
-        "description": "删除规则",
-        "operationId": "removeRule",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "x-swagger-router-controller": "api"
+        },
+        "security": []
+      }
     },
-    "/swagger": {
-      "x-swagger-pipe": "swagger_raw"
+    "/api/captcha/captchaImage": {
+      "get": {
+        "summary": "生产验证码",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "登录"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/user/list": {
+      "get": {
+        "summary": "用户列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "用户管理"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/monitor/logininfor/list": {
+      "get": {
+        "summary": "登录日志列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "登录日志管理"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/bill/expenses/list": {
+      "get": {
+        "summary": "支出列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "账单管理"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/bill/income/list": {
+      "get": {
+        "summary": "收入列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "账单管理"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/bill/book/list": {
+      "get": {
+        "summary": "账本列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "账单管理"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/profile/updatePwd": {
+      "put": {
+        "summary": "updatePwd",
+        "deprecated": false,
+        "description": "",
+        "operationId": "updatePwd",
+        "tags": [
+          "个人信息"
+        ],
+        "parameters": [
+          {
+            "name": "oldPassword",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "newPassword",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseVoid"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/profile/update": {
+      "post": {
+        "summary": "updateProfile",
+        "deprecated": false,
+        "description": "",
+        "operationId": "updateProfile",
+        "tags": [
+          "个人信息"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SysUserEntity"
+              },
+              "example": {
+                "userId": 1760964384316305400,
+                "userName": "string",
+                "nickName": "nxg",
+                "userType": "sys_user",
+                "sex": "1",
+                "email": "163@163.com",
+                "phoneNumber": "16607259654",
+                "avatar": "",
+                "password": "",
+                "remark": "hello world",
+                "roleId": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseVoid"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/profile/avatar": {
+      "post": {
+        "summary": "avatar",
+        "deprecated": false,
+        "description": "",
+        "operationId": "avatar",
+        "tags": [
+          "个人信息"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatarfile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "avatarfile"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMapStringObject"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/profile": {
+      "get": {
+        "summary": "profile",
+        "deprecated": false,
+        "description": "",
+        "operationId": "profile",
+        "tags": [
+          "个人信息"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "example": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJzeXNfdXNlcjoxNzYwOTY0Mzg0MzE2MzA1NDEwIiwicm5TdHIiOiJnbDFYUDJWYkExYnVISW1lNUs3SWZ2ZEVSMXlXR0swNyIsInVzZXJJZCI6MTc2MDk2NDM4NDMxNjMwNTQxMH0.9YRymyTkA6H7LPQ8bTxV3lZMArRwkY_r7yd9lNUo8F4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMapStringObject"
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
     }
   },
   "components": {
     "schemas": {
-      "CurrentUser": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "userid": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "signature": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "group": {
-            "type": "string"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "key": {
-                  "type": "string"
-                },
-                "label": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "notifyCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "unreadCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "country": {
-            "type": "string"
-          },
-          "access": {
-            "type": "string"
-          },
-          "geographic": {
-            "type": "object",
-            "properties": {
-              "province": {
-                "type": "object",
-                "properties": {
-                  "label": {
-                    "type": "string"
-                  },
-                  "key": {
-                    "type": "string"
-                  }
-                }
-              },
-              "city": {
-                "type": "object",
-                "properties": {
-                  "label": {
-                    "type": "string"
-                  },
-                  "key": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "address": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          }
-        }
-      },
-      "LoginResult": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "currentAuthority": {
-            "type": "string"
-          }
-        }
-      },
-      "PageParams": {
-        "type": "object",
-        "properties": {
-          "current": {
-            "type": "number"
-          },
-          "pageSize": {
-            "type": "number"
-          }
-        }
-      },
-      "RuleListItem": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "disabled": {
-            "type": "boolean"
-          },
-          "href": {
-            "type": "string"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "owner": {
-            "type": "string"
-          },
-          "desc": {
-            "type": "string"
-          },
-          "callNo": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "datetime"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "datetime"
-          },
-          "progress": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "RuleList": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RuleListItem"
-            }
-          },
-          "total": {
-            "type": "integer",
-            "description": "列表的内容总数",
-            "format": "int32"
-          },
-          "success": {
-            "type": "boolean"
-          }
-        }
-      },
-      "FakeCaptcha": {
+      "ResponseHashMapStringString": {
         "type": "object",
         "properties": {
           "code": {
             "type": "integer",
             "format": "int32"
           },
-          "status": {
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "properties": {}
+          }
+        },
+        "description": ""
+      },
+      "ResponseListHashMapStringString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "properties": {}
+            }
+          }
+        },
+        "description": ""
+      },
+      "ResponseList用户排行榜": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E7%94%A8%E6%88%B7%E6%8E%92%E8%A1%8C%E6%A6%9C"
+            }
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfo用户排行榜": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E7%94%A8%E6%88%B7%E6%8E%92%E8%A1%8C%E6%A6%9C"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
             "type": "string"
           }
-        }
+        },
+        "description": ""
       },
-      "LoginParams": {
+      "用户排行榜": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string",
+            "format": "string"
+          },
+          "nickName": {
+            "type": "string",
+            "format": "string"
+          },
+          "totalIncome": {
+            "type": "number",
+            "format": "number"
+          },
+          "totalExpense": {
+            "type": "number",
+            "format": "number"
+          },
+          "expenseCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "incomeCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "billAmount": {
+            "type": "number",
+            "format": "number"
+          },
+          "billCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "loginTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "loginCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfoSysConfigEntity": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysConfigEntity"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "SysConfigEntity": {
+        "required": [
+          "configKey",
+          "configName",
+          "configValue"
+        ],
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          },
+          "configId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "configName": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "configKey": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "configValue": {
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "configType": {
+            "type": "string",
+            "format": "string"
+          },
+          "remark": {
+            "type": "string",
+            "format": "string"
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfoSysRoleEntity": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysRoleEntity"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "ResponseList账本表": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E8%B4%A6%E6%9C%AC%E8%A1%A8"
+            }
+          }
+        },
+        "description": ""
+      },
+      "ResponseList账单分类": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E8%B4%A6%E5%8D%95%E5%88%86%E7%B1%BB"
+            }
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfo账单分类": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E8%B4%A6%E5%8D%95%E5%88%86%E7%B1%BB"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "UserRequestBody": {
+        "type": "object",
+        "properties": {
+          "oldPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          },
+          "newPasswordAgain": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfo账本类型表": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E8%B4%A6%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%A1%A8"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfo收入表": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E6%94%B6%E5%85%A5%E8%A1%A8"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "收入表": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          },
+          "billId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "bookId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "number"
+          },
+          "remark": {
+            "type": "string",
+            "format": "string"
+          },
+          "billTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "photoUrl": {
+            "type": "string",
+            "format": "string"
+          },
+          "delFlag": {
+            "type": "string",
+            "format": "string"
+          },
+          "billCategory": {
+            "$ref": "#/components/schemas/%E8%B4%A6%E5%8D%95%E5%88%86%E7%B1%BB"
+          },
+          "billBookCategory": {
+            "$ref": "#/components/schemas/%E8%B4%A6%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%A1%A8"
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfo账本表": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E8%B4%A6%E6%9C%AC%E8%A1%A8"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "账本表": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          },
+          "bookId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "bookCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "bookName": {
+            "type": "string",
+            "format": "string"
+          },
+          "photoUrl": {
+            "type": "string",
+            "format": "string"
+          },
+          "delFlag": {
+            "type": "string",
+            "format": "string"
+          },
+          "remark": {
+            "type": "string",
+            "format": "string"
+          },
+          "billBookCategory": {
+            "$ref": "#/components/schemas/%E8%B4%A6%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%A1%A8"
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfo支出表": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E6%94%AF%E5%87%BA%E8%A1%A8"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "账本类型表": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          },
+          "bookCategoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "bookCategoryName": {
+            "type": "string",
+            "format": "string"
+          },
+          "remark": {
+            "type": "string",
+            "format": "string"
+          },
+          "delFlag": {
+            "type": "string",
+            "format": "string"
+          },
+          "defaultType": {
+            "type": "string",
+            "format": "string"
+          }
+        },
+        "description": ""
+      },
+      "账单分类": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryName": {
+            "type": "string",
+            "format": "string"
+          },
+          "remark": {
+            "type": "string",
+            "format": "string"
+          },
+          "delFlag": {
+            "type": "string",
+            "format": "string"
+          },
+          "defaultType": {
+            "type": "string",
+            "format": "string"
+          }
+        },
+        "description": ""
+      },
+      "支出表": {
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          },
+          "billId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "bookId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "number"
+          },
+          "remark": {
+            "type": "string",
+            "format": "string"
+          },
+          "photoUrl": {
+            "type": "string",
+            "format": "string"
+          },
+          "billTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "delFlag": {
+            "type": "string",
+            "format": "string"
+          },
+          "billCategory": {
+            "$ref": "#/components/schemas/%E8%B4%A6%E5%8D%95%E5%88%86%E7%B1%BB"
+          },
+          "billBookCategory": {
+            "$ref": "#/components/schemas/%E8%B4%A6%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%A1%A8"
+          },
+          "billCategorys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E8%B4%A6%E5%8D%95%E5%88%86%E7%B1%BB"
+            },
+            "format": "array"
+          },
+          "billBookCategorys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/%E8%B4%A6%E6%9C%AC%E7%B1%BB%E5%9E%8B%E8%A1%A8"
+            },
+            "format": "array"
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfoSysUserEntity": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysUserEntity"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "SysUserEntity": {
+        "required": [
+          "nickName",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userName": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "nickName": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "userType": {
+            "type": "string",
+            "format": "string"
+          },
+          "sex": {
+            "type": "string",
+            "format": "string"
+          },
+          "email": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "format": "string"
+          },
+          "avatar": {
+            "type": "string",
+            "format": "string"
+          },
+          "password": {
+            "type": "string",
+            "writeOnly": true,
+            "format": "string"
+          },
+          "status": {
+            "type": "string",
+            "format": "string"
+          },
+          "delFlag": {
+            "type": "string",
+            "format": "string"
+          },
+          "loginIp": {
+            "type": "string",
+            "format": "string"
+          },
+          "loginTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "remark": {
+            "type": "string",
+            "format": "string"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysRoleEntity"
+            },
+            "format": "array"
+          },
+          "roleIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "format": "array"
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "admin": {
+            "type": "boolean",
+            "format": "boolean"
+          }
+        },
+        "description": ""
+      },
+      "SysRoleEntity": {
+        "required": [
+          "roleKey",
+          "roleName",
+          "roleSort"
+        ],
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string",
+            "format": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "roleName": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "roleKey": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "roleSort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dataScope": {
+            "type": "string",
+            "format": "string"
+          },
+          "status": {
+            "type": "string",
+            "format": "string"
+          },
+          "delFlag": {
+            "type": "string",
+            "format": "string"
+          },
+          "remark": {
+            "type": "string",
+            "format": "string"
+          },
+          "flag": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "admin": {
+            "type": "boolean",
+            "format": "boolean"
+          }
+        },
+        "description": ""
+      },
+      "TableDataInfoSysLoginInfoEntity": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysLoginInfoEntity"
+            }
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "PageQuery": {
+        "type": "object",
+        "properties": {
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageNum": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderByColumn": {
+            "type": "string",
+            "format": "string"
+          },
+          "isAsc": {
+            "type": "string",
+            "format": "string"
+          }
+        },
+        "description": ""
+      },
+      "EmailLoginBody": {
+        "required": [
+          "email",
+          "emailCode"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "emailCode": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "ResponseMapStringObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "properties": {}
+          }
+        },
+        "description": ""
+      },
+      "LoginBody": {
+        "required": [
+          "password",
+          "username"
+        ],
         "type": "object",
         "properties": {
           "username": {
@@ -498,96 +1629,192 @@
           "password": {
             "type": "string"
           },
-          "autoLogin": {
-            "type": "boolean"
+          "code": {
+            "type": "string"
           },
-          "type": {
+          "uuid": {
             "type": "string"
           }
-        }
+        },
+        "description": ""
       },
-      "ErrorResponse": {
-        "required": ["errorCode"],
+      "SysLoginInfoEntity": {
         "type": "object",
         "properties": {
-          "errorCode": {
-            "type": "string",
-            "description": "业务约定的错误码"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "业务上的错误信息"
-          },
-          "success": {
-            "type": "boolean",
-            "description": "业务上的请求是否成功"
-          }
-        }
-      },
-      "NoticeIconList": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NoticeIconItem"
-            }
-          },
-          "total": {
+          "infoId": {
             "type": "integer",
-            "description": "列表的内容总数",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string",
+            "format": "string"
+          },
+          "status": {
+            "type": "string",
+            "format": "string"
+          },
+          "ipAddr": {
+            "type": "string",
+            "format": "string"
+          },
+          "loginLocation": {
+            "type": "string",
+            "format": "string"
+          },
+          "browser": {
+            "type": "string",
+            "format": "string"
+          },
+          "os": {
+            "type": "string",
+            "format": "string"
+          },
+          "msg": {
+            "type": "string",
+            "format": "string"
+          },
+          "loginTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            },
+            "format": "object",
+            "properties": {}
+          }
+        },
+        "description": ""
+      },
+      "ResponseVoid": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
             "format": "int32"
           },
-          "success": {
-            "type": "boolean"
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
           }
-        }
+        },
+        "description": ""
       },
-      "NoticeIconItemType": {
-        "title": "NoticeIconItemType",
-        "description": "已读未读列表的枚举",
-        "type": "string",
-        "properties": {},
-        "enum": ["notification", "message", "event"]
-      },
-      "NoticeIconItem": {
+      "RegisterBody": {
+        "required": [
+          "password",
+          "username"
+        ],
         "type": "object",
         "properties": {
-          "id": {
+          "username": {
             "type": "string"
           },
-          "extra": {
-            "type": "string",
-            "format": "any"
+          "password": {
+            "type": "string"
           },
-          "key": { "type": "string" },
-          "read": {
-            "type": "boolean"
+          "code": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "SysUserResponseDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "userType": {
+            "type": "string"
+          },
+          "sex": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "photoNumber": {
+            "type": "string"
           },
           "avatar": {
-            "type": "string"
-          },
-          "title": {
             "type": "string"
           },
           "status": {
             "type": "string"
           },
-          "datetime": {
-            "type": "string",
-            "format": "date"
-          },
-          "description": {
+          "delFlag": {
             "type": "string"
           },
-          "type": {
-            "extensions": {
-              "x-is-enum": true
-            },
-            "$ref": "#/components/schemas/NoticeIconItemType"
+          "loginIp": {
+            "type": "string"
+          },
+          "loginTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createBy": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "remark": {
+            "type": "string"
           }
-        }
+        },
+        "description": ""
+      },
+      "ResponseSysUserResponseDTO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SysUserResponseDTO"
+          }
+        },
+        "description": ""
       }
-    }
-  }
+    },
+    "securitySchemes": {}
+  },
+  "servers": []
 }
