@@ -64,8 +64,8 @@ export const BASEENTITYCOLUMN: ProColumns<UserEntityAPI.UserVO>[] = [
         text: '系统用户',
         status: 'Success',
       },
-      'sys_pc': {
-        text: '用户',
+      'general_user': {
+        text: '普通用户',
         status: 'Success',
       },
     },
