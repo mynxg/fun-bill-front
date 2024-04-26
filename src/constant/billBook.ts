@@ -12,8 +12,8 @@ import { listByPageUsingGET } from "@/services/billBookCategory/billBookCategory
 
 //获取账本分类列表
 const resultStr = await listByPageUsingGET({
-    pageNum: 1,
-    pageSize: 10,
+    // pageNum: 1,
+    // pageSize: 10,
 });
 
 //账本分类枚举

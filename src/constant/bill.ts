@@ -11,13 +11,13 @@ import { listByPageUsingGET } from '@/services/billCategory/billCategoryControll
 import { listByPageUsingGET as listByPageBillBookUsingGET } from '@/services/billBook/billBookController';
 
 const resultStr = await listByPageUsingGET({
-    pageNum: 1,
-    pageSize: 10,
+    // pageNum: 1,
+    // pageSize: 10,
 })
 
 const resultBillBookStr = await listByPageBillBookUsingGET({
-    pageNum: 1,
-    pageSize: 10,
+    // pageNum: 1,
+    // pageSize: 10,
 })
 
 const valueEnumBillCategory = {
