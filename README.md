@@ -1,6 +1,7 @@
 # fun-bill-front
 
-毕设前端 后台
+毕设前端 后台 
+> 这 dev-col-design 分支后续不会增加新功能，只会修复bug
 
 ## 技术栈
 前端		
